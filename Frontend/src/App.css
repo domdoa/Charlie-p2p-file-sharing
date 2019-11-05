@@ -1,0 +1,13 @@
+.frontpage {
+  position: relative;
+  background-color: steelblue;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-top: -24px;
+  margin-bottom: -50px;
+}
+
+.frontpage-inner {
+  padding-top: 80px;
+}
