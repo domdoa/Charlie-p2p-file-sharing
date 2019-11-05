@@ -1,0 +1,972 @@
+18:52:33 [main]      [DEBUG] NetworkUtils -Found free port 4622.
+18:52:33 [main]      [INFO ] PeerCreator -Status of external address search: Discover status:  ++lo( /127.0.0.1,/0:0:0:0:0:0:0:1), ++eth0( /fe80:0:0:0:645a:ba2e:c80f:9153%eth0), ++net0(), ++net1(), ++eth1(), ++eth2(), ++net2(), ++eth3(), ++net3(), ++net4(), ++eth4(), ++net5(), ++net6(), ++ppp0(), ++eth5( /fe80:0:0:0:9c3e:2bea:b2b:c0b5%eth5), ++wlan0(), ++eth6(), ++wlan1( /fe80:0:0:0:51a1:6d33:d6a9:6670%wlan1), ++wlan2( /fe80:0:0:0:1caf:e06a:4a41:61fa%wlan2), ++wlan3(), ++wlan4(), ++wlan5( /192.168.43.252,/fe80:0:0:0:d8b3:d872:ed81:e3d1%wlan5), ++wlan6(), ++eth7(), ++eth8(), ++eth9(), ++eth10(), ++eth11(), ++eth12(), ++eth13(), ++eth14(), ++wlan7(), ++wlan8(), ++wlan9(), ++wlan10(), ++wlan11(), ++wlan12(), ++wlan13(), ++wlan14(), ++eth15(), ++eth16(), ++eth17(), ++eth18(), ++eth19(), ++eth20(), ++wlan15(), ++wlan16(), ++wlan17(), ++wlan18(), ++wlan19(), ++wlan20(), ++wlan21(), ++wlan22().
+18:52:33 [main]      [INFO ] PeerCreator -Visible address to other peers: paddr[0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:52:33 [main]      [DEBUG] InternalLoggerFactory -Using SLF4J as the default logging framework
+18:52:33 [main]      [DEBUG] MultithreadEventLoopGroup --Dio.netty.eventLoopThreads: 8
+18:52:33 [main]      [DEBUG] NioEventLoop --Dio.netty.noKeySetOptimization: false
+18:52:33 [main]      [DEBUG] NioEventLoop --Dio.netty.selectorAutoRebuildThreshold: 512
+18:52:33 [main]      [DEBUG] PlatformDependent -Platform: Windows
+18:52:33 [main]      [DEBUG] PlatformDependent0 --Dio.netty.noUnsafe: false
+18:52:33 [main]      [DEBUG] PlatformDependent0 -Java version: 8
+18:52:33 [main]      [DEBUG] PlatformDependent0 -sun.misc.Unsafe.theUnsafe: available
+18:52:33 [main]      [DEBUG] PlatformDependent0 -sun.misc.Unsafe.copyMemory: available
+18:52:33 [main]      [DEBUG] PlatformDependent0 -java.nio.Buffer.address: available
+18:52:33 [main]      [DEBUG] PlatformDependent0 -direct buffer constructor: available
+18:52:33 [main]      [DEBUG] PlatformDependent0 -java.nio.Bits.unaligned: available, true
+18:52:33 [main]      [DEBUG] PlatformDependent0 -jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
+18:52:33 [main]      [DEBUG] PlatformDependent0 -java.nio.DirectByteBuffer.<init>(long, int): available
+18:52:33 [main]      [DEBUG] PlatformDependent -sun.misc.Unsafe: available
+18:52:33 [main]      [DEBUG] PlatformDependent --Dio.netty.tmpdir: C:\Users\iulian\AppData\Local\Temp (java.io.tmpdir)
+18:52:33 [main]      [DEBUG] PlatformDependent --Dio.netty.bitMode: 64 (sun.arch.data.model)
+18:52:33 [main]      [DEBUG] PlatformDependent --Dio.netty.maxDirectMemory: 3808428032 bytes
+18:52:33 [main]      [DEBUG] PlatformDependent --Dio.netty.uninitializedArrayAllocationThreshold: -1
+18:52:33 [main]      [DEBUG] CleanerJava6 -java.nio.ByteBuffer.cleaner(): available
+18:52:33 [main]      [DEBUG] PlatformDependent --Dio.netty.noPreferDirect: false
+18:52:33 [main]      [DEBUG] PlatformDependent -org.jctools-core.MpscChunkedArrayQueue: available
+18:52:33 [main]      [DEBUG] InternalThreadLocalMap --Dio.netty.threadLocalMap.stringBuilder.initialSize: 1024
+18:52:33 [main]      [DEBUG] InternalThreadLocalMap --Dio.netty.threadLocalMap.stringBuilder.maxSize: 4096
+18:52:33 [main]      [DEBUG] ResourceLeakDetector --Dio.netty.leakDetection.level: simple
+18:52:33 [main]      [DEBUG] ResourceLeakDetector --Dio.netty.leakDetection.targetRecords: 4
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.numHeapArenas: 8
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.numDirectArenas: 8
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.pageSize: 8192
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.maxOrder: 11
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.chunkSize: 16777216
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.tinyCacheSize: 512
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.smallCacheSize: 256
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.normalCacheSize: 64
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.maxCachedBufferCapacity: 32768
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.cacheTrimInterval: 8192
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.useCacheForAllThreads: true
+18:52:33 [main]      [DEBUG] PooledByteBufAllocator --Dio.netty.allocator.maxCachedByteBuffersPerChunk: 1023
+18:52:33 [pool-4-thre[DEBUG] DefaultChannelId --Dio.netty.processId: 9456 (auto-detected)
+18:52:33 [pool-4-thre[DEBUG] NetUtil --Djava.net.preferIPv4Stack: true
+18:52:33 [pool-4-thre[DEBUG] NetUtil --Djava.net.preferIPv6Addresses: false
+18:52:33 [pool-4-thre[DEBUG] NetUtil -Loopback interface: lo (Software Loopback Interface 1, 127.0.0.1)
+18:52:33 [pool-4-thre[DEBUG] NetUtil -Failed to get SOMAXCONN from sysctl and file \proc\sys\net\core\somaxconn. Default: 200
+18:52:33 [pool-4-thre[DEBUG] DefaultChannelId --Dio.netty.machineId: 0c:9d:92:ff:fe:b7:0f:81 (auto-detected)
+18:52:33 [pool-4-thre[DEBUG] ByteBufUtil --Dio.netty.allocator.type: pooled
+18:52:33 [pool-4-thre[DEBUG] ByteBufUtil --Dio.netty.threadLocalDirectBufferSize: 0
+18:52:33 [pool-4-thre[DEBUG] ByteBufUtil --Dio.netty.maxThreadLocalCharBufferSize: 16384
+18:52:33 [pool-4-thre[INFO ] ChannelServer -Listening TCP on socket 0.0.0.0/0.0.0.0:4622
+18:52:33 [pool-4-thre[INFO ] ChannelServer -Listening UDP on socket 0.0.0.0/0.0.0.0:4622
+18:52:33 [main]      [DEBUG] DispatchHandler -registering 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 for 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 with [6]
+18:52:33 [main]      [DEBUG] DispatchHandler -registering 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 for 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 with [5]
+18:52:33 [main]      [DEBUG] DispatchHandler -registering 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 for 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 with [7]
+18:52:33 [main]      [DEBUG] DispatchHandler -registering 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 for 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 with [12]
+18:52:33 [main]      [DEBUG] DispatchHandler -registering 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 for 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 with [25]
+18:52:33 [main]      [DEBUG] DispatchHandler -registering 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 for 0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2 with [1, 2, 3, 4, 11, 14, 27, 13, 16, 19, 20, 23, 26]
+18:52:33 [main]      [DEBUG] Connection -Peer successfully created and connected.
+18:52:33 [pool-5-thre[DEBUG] ConcurrentCacheMap -Get not found. Key: 0x.
+18:52:33 [pool-5-thre[DEBUG] Sender -about to connect to paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) with channel [id: 0x5541e7d7], ff=false
+18:52:33 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Future (compl/canc):true/false, FAILED, No future set beforehand, probably an early shutdown / timeout, or use setFailedLater() or setResponseLater()
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:901)
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:890)
+	at net.tomp2p.futures.BaseFutureImpl.callOperationComplete(BaseFutureImpl.java:328)
+	at net.tomp2p.futures.BaseFutureImpl.notifyListeners(BaseFutureImpl.java:361)
+	at net.tomp2p.futures.BaseFutureImpl.failed(BaseFutureImpl.java:232)
+	at net.tomp2p.futures.FutureResponse.responseNow(FutureResponse.java:143)
+	at net.tomp2p.connection.ChannelCreator$2$1.run(ChannelCreator.java:274)
+	at net.tomp2p.connection.ChannelCreator$2.operationComplete(ChannelCreator.java:279)
+	at net.tomp2p.connection.ChannelCreator$2.operationComplete(ChannelCreator.java:254)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:529)
+	at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:101)
+	at io.netty.channel.DefaultChannelPromise.trySuccess(DefaultChannelPromise.java:84)
+	at io.netty.channel.AbstractChannel$CloseFuture.setClosed(AbstractChannel.java:1183)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.doClose0(AbstractChannel.java:769)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:745)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:616)
+	at io.netty.channel.DefaultChannelPipeline$HeadContext.close(DefaultChannelPipeline.java:1350)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeClose(AbstractChannelHandlerContext.java:611)
+	at io.netty.channel.AbstractChannelHandlerContext.close(AbstractChannelHandlerContext.java:595)
+	at io.netty.channel.ChannelDuplexHandler.close(ChannelDuplexHandler.java:73)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeClose(AbstractChannelHandlerContext.java:611)
+	at io.netty.channel.AbstractChannelHandlerContext.close(AbstractChannelHandlerContext.java:595)
+	at io.netty.channel.ChannelDuplexHandler.close(ChannelDuplexHandler.java:73)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeClose(AbstractChannelHandlerContext.java:611)
+	at io.netty.channel.AbstractChannelHandlerContext.close(AbstractChannelHandlerContext.java:595)
+	at io.netty.channel.ChannelOutboundHandlerAdapter.close(ChannelOutboundHandlerAdapter.java:71)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeClose(AbstractChannelHandlerContext.java:611)
+	at io.netty.channel.AbstractChannelHandlerContext.close(AbstractChannelHandlerContext.java:595)
+	at io.netty.channel.AbstractChannelHandlerContext.close(AbstractChannelHandlerContext.java:452)
+	at io.netty.channel.DefaultChannelPipeline.close(DefaultChannelPipeline.java:968)
+	at io.netty.channel.AbstractChannel.close(AbstractChannel.java:243)
+	at io.netty.channel.ChannelFutureListener$2.operationComplete(ChannelFutureListener.java:56)
+	at io.netty.channel.ChannelFutureListener$2.operationComplete(ChannelFutureListener.java:52)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:533)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:114)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:52:33 [main]      [WARN ] Connection -Discovery failed: Future (compl/canc):true/false, FAILED, FutureDiscover (1): We need at least the TCP connection <-> Future (compl/canc):true/false, FAILED, No future set beforehand, probably an early shutdown / timeout, or use setFailedLater() or setResponseLater().
+18:52:33 [NETTY-TOMP2[DEBUG] Sender -Channel creation failed
+io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketException: Network is unreachable: no further information
+	... 11 common frames omitted
+18:52:33 [NETTY-TOMP2[WARN ] Sender -Channel creation failed to [id: 0x5541e7d7] for msgid=1287917834,t=REQUEST_2,c=PING,tcp,s=paddr[0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false)
+18:52:33 [pool-5-thre[DEBUG] ConcurrentCacheMap -Get not found. Key: 0x.
+18:52:33 [pool-5-thre[DEBUG] Sender -about to connect to paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) with channel [id: 0x7d498cb1], ff=false
+18:52:33 [NETTY-TOMP2[DEBUG] Sender -Channel creation failed
+io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketException: Network is unreachable: no further information
+	... 11 common frames omitted
+18:52:33 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Future (compl/canc):true/false, FAILED, Channel creation failed [id: 0x7d498cb1]/io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:901)
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:890)
+	at net.tomp2p.futures.BaseFutureImpl.callOperationComplete(BaseFutureImpl.java:328)
+	at net.tomp2p.futures.BaseFutureImpl.notifyListeners(BaseFutureImpl.java:361)
+	at net.tomp2p.futures.BaseFutureImpl.failed(BaseFutureImpl.java:232)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:796)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:787)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:533)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:114)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:52:33 [main]      [WARN ] Connection -Bootstrapping failed: Future (compl/canc):true/false, FAILED, Could not reach anyone with bootstrap.
+18:52:33 [NETTY-TOMP2[WARN ] Sender -Channel creation failed to [id: 0x7d498cb1] for msgid=-1061038755,t=REQUEST_1,c=PING,tcp,s=paddr[0x621cbd54eae77a078e6174ef9be13ffa0b0b07c2[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false)
+18:52:33 [main]      [DEBUG] PeerCreator -Shutting down...
+18:52:33 [main]      [DEBUG] PeerCreator -Shutting down client...
+18:52:33 [main]      [DEBUG] ChannelServer -shutdown servers
+18:52:33 [NETTY-TOMP2[DEBUG] ChannelServer -shutdown TCP server
+18:52:33 [NETTY-TOMP2[DEBUG] ChannelServer -shutdown TCP channels
+18:52:33 [globalEvent[DEBUG] PeerCreator -Client / WorkerGroup shut down.
+18:52:33 [globalEvent[DEBUG] PeerCreator -Client / BossGroup shut down.
+18:52:46 [main]      [DEBUG] NetworkUtils -Found free port 4622.
+18:52:46 [main]      [INFO ] PeerCreator -Status of external address search: Discover status:  ++lo( /127.0.0.1,/0:0:0:0:0:0:0:1), ++eth0( /fe80:0:0:0:645a:ba2e:c80f:9153%eth0), ++net0(), ++net1(), ++eth1(), ++eth2(), ++net2(), ++eth3(), ++net3(), ++net4(), ++eth4(), ++net5(), ++net6(), ++ppp0(), ++eth5( /fe80:0:0:0:9c3e:2bea:b2b:c0b5%eth5), ++wlan0(), ++eth6(), ++wlan1( /fe80:0:0:0:51a1:6d33:d6a9:6670%wlan1), ++wlan2( /fe80:0:0:0:1caf:e06a:4a41:61fa%wlan2), ++wlan3(), ++wlan4(), ++wlan5( /192.168.43.252,/fe80:0:0:0:d8b3:d872:ed81:e3d1%wlan5), ++wlan6(), ++eth7(), ++eth8(), ++eth9(), ++eth10(), ++eth11(), ++eth12(), ++eth13(), ++eth14(), ++wlan7(), ++wlan8(), ++wlan9(), ++wlan10(), ++wlan11(), ++wlan12(), ++wlan13(), ++wlan14(), ++eth15(), ++eth16(), ++eth17(), ++eth18(), ++eth19(), ++eth20(), ++wlan15(), ++wlan16(), ++wlan17(), ++wlan18(), ++wlan19(), ++wlan20(), ++wlan21(), ++wlan22().
+18:52:46 [main]      [INFO ] PeerCreator -Visible address to other peers: paddr[0x2d256c785e93c6acd2b232f56ea71c4f67180354[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:52:46 [pool-9-thre[INFO ] ChannelServer -Listening TCP on socket 0.0.0.0/0.0.0.0:4622
+18:52:46 [pool-9-thre[INFO ] ChannelServer -Listening UDP on socket 0.0.0.0/0.0.0.0:4622
+18:52:46 [main]      [DEBUG] DispatchHandler -registering 0x2d256c785e93c6acd2b232f56ea71c4f67180354 for 0x2d256c785e93c6acd2b232f56ea71c4f67180354 with [6]
+18:52:46 [main]      [DEBUG] DispatchHandler -registering 0x2d256c785e93c6acd2b232f56ea71c4f67180354 for 0x2d256c785e93c6acd2b232f56ea71c4f67180354 with [5]
+18:52:46 [main]      [DEBUG] DispatchHandler -registering 0x2d256c785e93c6acd2b232f56ea71c4f67180354 for 0x2d256c785e93c6acd2b232f56ea71c4f67180354 with [7]
+18:52:46 [main]      [DEBUG] DispatchHandler -registering 0x2d256c785e93c6acd2b232f56ea71c4f67180354 for 0x2d256c785e93c6acd2b232f56ea71c4f67180354 with [12]
+18:52:46 [main]      [DEBUG] DispatchHandler -registering 0x2d256c785e93c6acd2b232f56ea71c4f67180354 for 0x2d256c785e93c6acd2b232f56ea71c4f67180354 with [25]
+18:52:46 [main]      [DEBUG] DispatchHandler -registering 0x2d256c785e93c6acd2b232f56ea71c4f67180354 for 0x2d256c785e93c6acd2b232f56ea71c4f67180354 with [1, 2, 3, 4, 11, 14, 27, 13, 16, 19, 20, 23, 26]
+18:52:46 [main]      [DEBUG] Connection -Peer successfully created and connected.
+18:52:46 [pool-10-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0x.
+18:52:46 [pool-10-thr[DEBUG] Sender -about to connect to paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) with channel [id: 0x4db76607], ff=false
+18:52:46 [NETTY-TOMP2[DEBUG] Sender -Channel creation failed
+io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketException: Network is unreachable: no further information
+	... 11 common frames omitted
+18:52:46 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Future (compl/canc):true/false, FAILED, Channel creation failed [id: 0x4db76607]/io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:901)
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:890)
+	at net.tomp2p.futures.BaseFutureImpl.callOperationComplete(BaseFutureImpl.java:328)
+	at net.tomp2p.futures.BaseFutureImpl.notifyListeners(BaseFutureImpl.java:361)
+	at net.tomp2p.futures.BaseFutureImpl.failed(BaseFutureImpl.java:232)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:796)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:787)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:533)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:114)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:52:46 [main]      [WARN ] Connection -Discovery failed: Future (compl/canc):true/false, FAILED, FutureDiscover (1): We need at least the TCP connection <-> Future (compl/canc):true/false, FAILED, Channel creation failed [id: 0x4db76607]/io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622.
+18:52:46 [NETTY-TOMP2[WARN ] Sender -Channel creation failed to [id: 0x4db76607] for msgid=1407151706,t=REQUEST_2,c=PING,tcp,s=paddr[0x2d256c785e93c6acd2b232f56ea71c4f67180354[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false)
+18:52:46 [pool-10-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0x.
+18:52:46 [pool-10-thr[DEBUG] Sender -about to connect to paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) with channel [id: 0x13e0038d], ff=false
+18:52:46 [NETTY-TOMP2[DEBUG] Sender -Channel creation failed
+io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketException: Network is unreachable: no further information
+	... 11 common frames omitted
+18:52:46 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Future (compl/canc):true/false, FAILED, Channel creation failed [id: 0x13e0038d]/io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:901)
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:890)
+	at net.tomp2p.futures.BaseFutureImpl.callOperationComplete(BaseFutureImpl.java:328)
+	at net.tomp2p.futures.BaseFutureImpl.notifyListeners(BaseFutureImpl.java:361)
+	at net.tomp2p.futures.BaseFutureImpl.failed(BaseFutureImpl.java:232)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:796)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:787)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:533)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:114)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:52:46 [NETTY-TOMP2[WARN ] Sender -Channel creation failed to [id: 0x13e0038d] for msgid=2087936564,t=REQUEST_1,c=PING,tcp,s=paddr[0x2d256c785e93c6acd2b232f56ea71c4f67180354[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false)
+18:52:46 [main]      [WARN ] Connection -Bootstrapping failed: Future (compl/canc):true/false, FAILED, Could not reach anyone with bootstrap.
+18:52:46 [main]      [DEBUG] PeerCreator -Shutting down...
+18:52:46 [main]      [DEBUG] PeerCreator -Shutting down client...
+18:52:46 [main]      [DEBUG] ChannelServer -shutdown servers
+18:52:46 [NETTY-TOMP2[DEBUG] ChannelServer -shutdown TCP server
+18:52:46 [NETTY-TOMP2[DEBUG] ChannelServer -shutdown TCP channels
+18:52:46 [globalEvent[DEBUG] PeerCreator -Client / WorkerGroup shut down.
+18:52:46 [globalEvent[DEBUG] PeerCreator -Client / BossGroup shut down.
+18:53:14 [main]      [DEBUG] NetworkUtils -Found free port 4622.
+18:53:14 [main]      [INFO ] PeerCreator -Status of external address search: Discover status:  ++lo( /127.0.0.1,/0:0:0:0:0:0:0:1), ++eth0( /fe80:0:0:0:645a:ba2e:c80f:9153%eth0), ++net0(), ++net1(), ++eth1(), ++eth2(), ++net2(), ++eth3(), ++net3(), ++net4(), ++eth4(), ++net5(), ++net6(), ++ppp0(), ++eth5( /fe80:0:0:0:9c3e:2bea:b2b:c0b5%eth5), ++wlan0(), ++eth6(), ++wlan1( /fe80:0:0:0:51a1:6d33:d6a9:6670%wlan1), ++wlan2( /fe80:0:0:0:1caf:e06a:4a41:61fa%wlan2), ++wlan3(), ++wlan4(), ++wlan5( /192.168.43.252,/fe80:0:0:0:d8b3:d872:ed81:e3d1%wlan5), ++wlan6(), ++eth7(), ++eth8(), ++eth9(), ++eth10(), ++eth11(), ++eth12(), ++eth13(), ++eth14(), ++wlan7(), ++wlan8(), ++wlan9(), ++wlan10(), ++wlan11(), ++wlan12(), ++wlan13(), ++wlan14(), ++eth15(), ++eth16(), ++eth17(), ++eth18(), ++eth19(), ++eth20(), ++wlan15(), ++wlan16(), ++wlan17(), ++wlan18(), ++wlan19(), ++wlan20(), ++wlan21(), ++wlan22().
+18:53:14 [main]      [INFO ] PeerCreator -Visible address to other peers: paddr[0xbe2ae08587f0356828143d9189a87507a2566c3a[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:53:14 [pool-14-thr[INFO ] ChannelServer -Listening TCP on socket 0.0.0.0/0.0.0.0:4622
+18:53:14 [pool-14-thr[INFO ] ChannelServer -Listening UDP on socket 0.0.0.0/0.0.0.0:4622
+18:53:14 [main]      [DEBUG] DispatchHandler -registering 0xbe2ae08587f0356828143d9189a87507a2566c3a for 0xbe2ae08587f0356828143d9189a87507a2566c3a with [6]
+18:53:14 [main]      [DEBUG] DispatchHandler -registering 0xbe2ae08587f0356828143d9189a87507a2566c3a for 0xbe2ae08587f0356828143d9189a87507a2566c3a with [5]
+18:53:14 [main]      [DEBUG] DispatchHandler -registering 0xbe2ae08587f0356828143d9189a87507a2566c3a for 0xbe2ae08587f0356828143d9189a87507a2566c3a with [7]
+18:53:14 [main]      [DEBUG] DispatchHandler -registering 0xbe2ae08587f0356828143d9189a87507a2566c3a for 0xbe2ae08587f0356828143d9189a87507a2566c3a with [12]
+18:53:14 [main]      [DEBUG] DispatchHandler -registering 0xbe2ae08587f0356828143d9189a87507a2566c3a for 0xbe2ae08587f0356828143d9189a87507a2566c3a with [25]
+18:53:14 [main]      [DEBUG] DispatchHandler -registering 0xbe2ae08587f0356828143d9189a87507a2566c3a for 0xbe2ae08587f0356828143d9189a87507a2566c3a with [1, 2, 3, 4, 11, 14, 27, 13, 16, 19, 20, 23, 26]
+18:53:14 [main]      [DEBUG] Connection -Peer successfully created and connected.
+18:53:14 [pool-15-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0x.
+18:53:14 [pool-15-thr[DEBUG] Sender -about to connect to paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) with channel [id: 0x69d713e3], ff=false
+18:53:14 [NETTY-TOMP2[DEBUG] Sender -Channel creation failed
+io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketException: Network is unreachable: no further information
+	... 11 common frames omitted
+18:53:14 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Future (compl/canc):true/false, FAILED, Channel creation failed [id: 0x69d713e3]/io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:901)
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:890)
+	at net.tomp2p.futures.BaseFutureImpl.callOperationComplete(BaseFutureImpl.java:328)
+	at net.tomp2p.futures.BaseFutureImpl.notifyListeners(BaseFutureImpl.java:361)
+	at net.tomp2p.futures.BaseFutureImpl.failed(BaseFutureImpl.java:232)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:796)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:787)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:533)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:114)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:53:14 [main]      [WARN ] Connection -Discovery failed: Future (compl/canc):true/false, FAILED, FutureDiscover (1): We need at least the TCP connection <-> Future (compl/canc):true/false, FAILED, Channel creation failed [id: 0x69d713e3]/io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622.
+18:53:14 [NETTY-TOMP2[WARN ] Sender -Channel creation failed to [id: 0x69d713e3] for msgid=-1359400455,t=REQUEST_2,c=PING,tcp,s=paddr[0xbe2ae08587f0356828143d9189a87507a2566c3a[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false)
+18:53:14 [pool-15-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0x.
+18:53:14 [pool-15-thr[DEBUG] Sender -about to connect to paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) with channel [id: 0x894a3626], ff=false
+18:53:14 [NETTY-TOMP2[DEBUG] Sender -Channel creation failed
+io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.SocketException: Network is unreachable: no further information
+	... 11 common frames omitted
+18:53:14 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Future (compl/canc):true/false, FAILED, Channel creation failed [id: 0x894a3626]/io.netty.channel.AbstractChannel$AnnotatedSocketException: Network is unreachable: no further information: /fe80:0:0:0:d8c1:9e34:3df9:276f%12:4622
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:901)
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:890)
+	at net.tomp2p.futures.BaseFutureImpl.callOperationComplete(BaseFutureImpl.java:328)
+	at net.tomp2p.futures.BaseFutureImpl.notifyListeners(BaseFutureImpl.java:361)
+	at net.tomp2p.futures.BaseFutureImpl.failed(BaseFutureImpl.java:232)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:796)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:787)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:533)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:114)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:53:14 [main]      [WARN ] Connection -Bootstrapping failed: Future (compl/canc):true/false, FAILED, Could not reach anyone with bootstrap.
+18:53:14 [NETTY-TOMP2[WARN ] Sender -Channel creation failed to [id: 0x894a3626] for msgid=1888792447,t=REQUEST_1,c=PING,tcp,s=paddr[0xbe2ae08587f0356828143d9189a87507a2566c3a[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/fe80:0:0:0:d8c1:9e34:3df9:276f%12,4622]]/relay(false)/slow(false)
+18:53:14 [main]      [DEBUG] PeerCreator -Shutting down...
+18:53:14 [main]      [DEBUG] PeerCreator -Shutting down client...
+18:53:14 [main]      [DEBUG] ChannelServer -shutdown servers
+18:53:14 [NETTY-TOMP2[DEBUG] ChannelServer -shutdown TCP channels
+18:53:14 [NETTY-TOMP2[DEBUG] ChannelServer -shutdown TCP server
+18:53:14 [globalEvent[DEBUG] PeerCreator -Client / WorkerGroup shut down.
+18:53:14 [globalEvent[DEBUG] PeerCreator -Client / BossGroup shut down.
+18:54:26 [main]      [DEBUG] NetworkUtils -Found free port 4622.
+18:54:26 [main]      [INFO ] PeerCreator -Status of external address search: Discover status:  ++lo( /127.0.0.1,/0:0:0:0:0:0:0:1), ++eth0( /fe80:0:0:0:645a:ba2e:c80f:9153%eth0), ++net0(), ++net1(), ++eth1(), ++eth2(), ++net2(), ++eth3(), ++net3(), ++net4(), ++eth4(), ++net5(), ++net6(), ++ppp0(), ++eth5( /fe80:0:0:0:9c3e:2bea:b2b:c0b5%eth5), ++wlan0(), ++eth6(), ++wlan1( /fe80:0:0:0:51a1:6d33:d6a9:6670%wlan1), ++wlan2( /fe80:0:0:0:1caf:e06a:4a41:61fa%wlan2), ++wlan3(), ++wlan4(), ++wlan5( /192.168.43.252,/fe80:0:0:0:d8b3:d872:ed81:e3d1%wlan5), ++wlan6(), ++eth7(), ++eth8(), ++eth9(), ++eth10(), ++eth11(), ++eth12(), ++eth13(), ++eth14(), ++wlan7(), ++wlan8(), ++wlan9(), ++wlan10(), ++wlan11(), ++wlan12(), ++wlan13(), ++wlan14(), ++eth15(), ++eth16(), ++eth17(), ++eth18(), ++eth19(), ++eth20(), ++wlan15(), ++wlan16(), ++wlan17(), ++wlan18(), ++wlan19(), ++wlan20(), ++wlan21(), ++wlan22().
+18:54:26 [main]      [INFO ] PeerCreator -Visible address to other peers: paddr[0x6f5032a818651cc427e40142357b5e5fec6562bd[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:54:26 [pool-19-thr[INFO ] ChannelServer -Listening TCP on socket 0.0.0.0/0.0.0.0:4622
+18:54:26 [pool-19-thr[INFO ] ChannelServer -Listening UDP on socket 0.0.0.0/0.0.0.0:4622
+18:54:26 [main]      [DEBUG] DispatchHandler -registering 0x6f5032a818651cc427e40142357b5e5fec6562bd for 0x6f5032a818651cc427e40142357b5e5fec6562bd with [6]
+18:54:26 [main]      [DEBUG] DispatchHandler -registering 0x6f5032a818651cc427e40142357b5e5fec6562bd for 0x6f5032a818651cc427e40142357b5e5fec6562bd with [5]
+18:54:26 [main]      [DEBUG] DispatchHandler -registering 0x6f5032a818651cc427e40142357b5e5fec6562bd for 0x6f5032a818651cc427e40142357b5e5fec6562bd with [7]
+18:54:26 [main]      [DEBUG] DispatchHandler -registering 0x6f5032a818651cc427e40142357b5e5fec6562bd for 0x6f5032a818651cc427e40142357b5e5fec6562bd with [12]
+18:54:26 [main]      [DEBUG] DispatchHandler -registering 0x6f5032a818651cc427e40142357b5e5fec6562bd for 0x6f5032a818651cc427e40142357b5e5fec6562bd with [25]
+18:54:26 [main]      [DEBUG] DispatchHandler -registering 0x6f5032a818651cc427e40142357b5e5fec6562bd for 0x6f5032a818651cc427e40142357b5e5fec6562bd with [1, 2, 3, 4, 11, 14, 27, 13, 16, 19, 20, 23, 26]
+18:54:26 [main]      [DEBUG] Connection -Peer successfully created and connected.
+18:54:26 [pool-20-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0x.
+18:54:26 [pool-20-thr[DEBUG] Sender -about to connect to paddr[0x[/fe80:0:0:0:5115:b297:6b0b:7319%eth0,4622]]/relay(false)/slow(false) with channel [id: 0xd2a17b1d], ff=false
+18:54:26 [NETTY-TOMP2[DEBUG] Sender -Channel creation failed
+io.netty.channel.AbstractChannel$AnnotatedNoRouteToHostException: No route to host: no further information: /fe80:0:0:0:5115:b297:6b0b:7319%eth0:4622
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.NoRouteToHostException: No route to host: no further information
+	... 11 common frames omitted
+18:54:26 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/fe80:0:0:0:5115:b297:6b0b:7319%eth0,4622]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Future (compl/canc):true/false, FAILED, Channel creation failed [id: 0xd2a17b1d]/io.netty.channel.AbstractChannel$AnnotatedNoRouteToHostException: No route to host: no further information: /fe80:0:0:0:5115:b297:6b0b:7319%eth0:4622
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:901)
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:890)
+	at net.tomp2p.futures.BaseFutureImpl.callOperationComplete(BaseFutureImpl.java:328)
+	at net.tomp2p.futures.BaseFutureImpl.notifyListeners(BaseFutureImpl.java:361)
+	at net.tomp2p.futures.BaseFutureImpl.failed(BaseFutureImpl.java:232)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:796)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:787)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:533)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:114)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:54:26 [main]      [WARN ] Connection -Discovery failed: Future (compl/canc):true/false, FAILED, FutureDiscover (1): We need at least the TCP connection <-> Future (compl/canc):true/false, FAILED, Channel creation failed [id: 0xd2a17b1d]/io.netty.channel.AbstractChannel$AnnotatedNoRouteToHostException: No route to host: no further information: /fe80:0:0:0:5115:b297:6b0b:7319%eth0:4622.
+18:54:26 [NETTY-TOMP2[WARN ] Sender -Channel creation failed to [id: 0xd2a17b1d] for msgid=1997691597,t=REQUEST_2,c=PING,tcp,s=paddr[0x6f5032a818651cc427e40142357b5e5fec6562bd[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/fe80:0:0:0:5115:b297:6b0b:7319%eth0,4622]]/relay(false)/slow(false)
+18:54:26 [pool-20-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0x.
+18:54:26 [pool-20-thr[DEBUG] Sender -about to connect to paddr[0x[/fe80:0:0:0:5115:b297:6b0b:7319%eth0,4622]]/relay(false)/slow(false) with channel [id: 0x5462d0a0], ff=false
+18:54:26 [NETTY-TOMP2[DEBUG] Sender -Channel creation failed
+io.netty.channel.AbstractChannel$AnnotatedNoRouteToHostException: No route to host: no further information: /fe80:0:0:0:5115:b297:6b0b:7319%eth0:4622
+	at sun.nio.ch.SocketChannelImpl.checkConnect(Native Method)
+	at sun.nio.ch.SocketChannelImpl.finishConnect(SocketChannelImpl.java:717)
+	at io.netty.channel.socket.nio.NioSocketChannel.doFinishConnect(NioSocketChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:340)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+Caused by: java.net.NoRouteToHostException: No route to host: no further information
+	... 11 common frames omitted
+18:54:26 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/fe80:0:0:0:5115:b297:6b0b:7319%eth0,4622]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Future (compl/canc):true/false, FAILED, Channel creation failed [id: 0x5462d0a0]/io.netty.channel.AbstractChannel$AnnotatedNoRouteToHostException: No route to host: no further information: /fe80:0:0:0:5115:b297:6b0b:7319%eth0:4622
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:901)
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:890)
+	at net.tomp2p.futures.BaseFutureImpl.callOperationComplete(BaseFutureImpl.java:328)
+	at net.tomp2p.futures.BaseFutureImpl.notifyListeners(BaseFutureImpl.java:361)
+	at net.tomp2p.futures.BaseFutureImpl.failed(BaseFutureImpl.java:232)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:796)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:787)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setFailure0(DefaultPromise.java:533)
+	at io.netty.util.concurrent.DefaultPromise.tryFailure(DefaultPromise.java:114)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:327)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:343)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:54:26 [main]      [WARN ] Connection -Bootstrapping failed: Future (compl/canc):true/false, FAILED, Could not reach anyone with bootstrap.
+18:54:26 [NETTY-TOMP2[WARN ] Sender -Channel creation failed to [id: 0x5462d0a0] for msgid=-248217687,t=REQUEST_1,c=PING,tcp,s=paddr[0x6f5032a818651cc427e40142357b5e5fec6562bd[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/fe80:0:0:0:5115:b297:6b0b:7319%eth0,4622]]/relay(false)/slow(false)
+18:54:26 [main]      [DEBUG] PeerCreator -Shutting down...
+18:54:26 [main]      [DEBUG] PeerCreator -Shutting down client...
+18:54:26 [main]      [DEBUG] ChannelServer -shutdown servers
+18:54:26 [NETTY-TOMP2[DEBUG] ChannelServer -shutdown TCP server
+18:54:26 [NETTY-TOMP2[DEBUG] ChannelServer -shutdown TCP channels
+18:54:26 [globalEvent[DEBUG] PeerCreator -Client / WorkerGroup shut down.
+18:54:26 [globalEvent[DEBUG] PeerCreator -Client / BossGroup shut down.
+18:57:52 [main]      [DEBUG] NetworkUtils -Found free port 4622.
+18:57:52 [main]      [INFO ] PeerCreator -Status of external address search: Discover status:  ++lo( /127.0.0.1,/0:0:0:0:0:0:0:1), ++eth0( /fe80:0:0:0:645a:ba2e:c80f:9153%eth0), ++net0(), ++net1(), ++eth1(), ++eth2(), ++net2(), ++eth3(), ++net3(), ++net4(), ++eth4(), ++net5(), ++net6(), ++ppp0(), ++eth5( /fe80:0:0:0:9c3e:2bea:b2b:c0b5%eth5), ++wlan0(), ++eth6(), ++wlan1( /fe80:0:0:0:51a1:6d33:d6a9:6670%wlan1), ++wlan2( /fe80:0:0:0:1caf:e06a:4a41:61fa%wlan2), ++wlan3(), ++wlan4(), ++wlan5( /192.168.43.252,/fe80:0:0:0:d8b3:d872:ed81:e3d1%wlan5), ++wlan6(), ++eth7(), ++eth8(), ++eth9(), ++eth10(), ++eth11(), ++eth12(), ++eth13(), ++eth14(), ++wlan7(), ++wlan8(), ++wlan9(), ++wlan10(), ++wlan11(), ++wlan12(), ++wlan13(), ++wlan14(), ++eth15(), ++eth16(), ++eth17(), ++eth18(), ++eth19(), ++eth20(), ++wlan15(), ++wlan16(), ++wlan17(), ++wlan18(), ++wlan19(), ++wlan20(), ++wlan21(), ++wlan22().
+18:57:52 [main]      [INFO ] PeerCreator -Visible address to other peers: paddr[0x8d0355e9a4d3609c303e83590281f6d80d2c8438[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:57:53 [pool-24-thr[INFO ] ChannelServer -Listening TCP on socket 0.0.0.0/0.0.0.0:4622
+18:57:53 [pool-24-thr[INFO ] ChannelServer -Listening UDP on socket 0.0.0.0/0.0.0.0:4622
+18:57:53 [main]      [DEBUG] DispatchHandler -registering 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 for 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 with [6]
+18:57:53 [main]      [DEBUG] DispatchHandler -registering 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 for 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 with [5]
+18:57:53 [main]      [DEBUG] DispatchHandler -registering 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 for 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 with [7]
+18:57:53 [main]      [DEBUG] DispatchHandler -registering 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 for 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 with [12]
+18:57:53 [main]      [DEBUG] DispatchHandler -registering 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 for 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 with [25]
+18:57:53 [main]      [DEBUG] DispatchHandler -registering 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 for 0x8d0355e9a4d3609c303e83590281f6d80d2c8438 with [1, 2, 3, 4, 11, 14, 27, 13, 16, 19, 20, 23, 26]
+18:57:53 [main]      [DEBUG] Connection -Peer successfully created and connected.
+18:57:53 [pool-25-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0x.
+18:57:53 [pool-25-thr[DEBUG] Sender -about to connect to paddr[0x[/0:0:0:0:0:0:0:1,4622]]/relay(false)/slow(false) with channel [id: 0xa6b85726], ff=false
+18:57:53 [NETTY-TOMP2[DEBUG] Encoder -message for outbound msgid=-1214599626,t=REQUEST_2,c=PING,tcp,s=paddr[0x8d0355e9a4d3609c303e83590281f6d80d2c8438[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/0:0:0:0:0:0:0:1,4622]]/relay(false)/slow(false)
+18:57:53 [NETTY-TOMP2[DEBUG] AbstractByteBuf --Dio.netty.buffer.checkAccessible: true
+18:57:53 [NETTY-TOMP2[DEBUG] AbstractByteBuf --Dio.netty.buffer.checkBounds: true
+18:57:53 [NETTY-TOMP2[DEBUG] ResourceLeakDetectorFactory -Loaded default ResourceLeakDetector: io.netty.util.ResourceLeakDetector@788c85eb
+18:57:53 [NETTY-TOMP2[DEBUG] Encoder -wrote in encoder for SET_NEIGHBORS 31
+18:57:53 [NETTY-TOMP2[DEBUG] Encoder -message encoded msgid=-1214599626,t=REQUEST_2,c=PING,tcp,s=paddr[0x8d0355e9a4d3609c303e83590281f6d80d2c8438[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/0:0:0:0:0:0:0:1,4622]]/relay(false)/slow(false)
+18:57:53 [NETTY-TOMP2[DEBUG] TomP2POutbound -Send TCP message msgid=-1214599626,t=REQUEST_2,c=PING,tcp,s=paddr[0x8d0355e9a4d3609c303e83590281f6d80d2c8438[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/0:0:0:0:0:0:0:1,4622]]/relay(false)/slow(false) to null.
+18:57:53 [NETTY-TOMP2[ERROR] TomP2POutbound -Exception in encoding when started.
+java.lang.AbstractMethodError: io.netty.buffer.ByteBuf.touch(Ljava/lang/Object;)Lio/netty/buffer/ByteBuf;
+	at io.netty.buffer.ByteBuf.touch(ByteBuf.java:248)
+	at io.netty.util.ReferenceCountUtil.touch(ReferenceCountUtil.java:77)
+	at io.netty.channel.DefaultChannelPipeline.touch(DefaultChannelPipeline.java:116)
+	at io.netty.channel.AbstractChannelHandlerContext.write(AbstractChannelHandlerContext.java:774)
+	at io.netty.channel.AbstractChannelHandlerContext.writeAndFlush(AbstractChannelHandlerContext.java:747)
+	at net.tomp2p.message.TomP2POutbound.write(TomP2POutbound.java:82)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:706)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:753)
+	at io.netty.channel.AbstractChannelHandlerContext.write(AbstractChannelHandlerContext.java:778)
+	at io.netty.channel.AbstractChannelHandlerContext.writeAndFlush(AbstractChannelHandlerContext.java:747)
+	at io.netty.channel.AbstractChannelHandlerContext.writeAndFlush(AbstractChannelHandlerContext.java:801)
+	at io.netty.channel.DefaultChannelPipeline.writeAndFlush(DefaultChannelPipeline.java:1036)
+	at io.netty.channel.AbstractChannel.writeAndFlush(AbstractChannel.java:305)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:792)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:787)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:529)
+	at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:101)
+	at io.netty.channel.DefaultChannelPromise.trySuccess(DefaultChannelPromise.java:84)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:306)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:341)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:57:58 [NETTY-TOMP2[WARN ] TimeoutFactory -Channel timeout for channel Server [id: 0xc3371d71, L:/0:0:0:0:0:0:0:1:4622 - R:/0:0:0:0:0:0:0:1:49224].
+18:57:58 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/0:0:0:0:0:0:0:1,-1]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Timeout!
+	at net.tomp2p.connection.TimeoutFactory$TimeHandler.userEventTriggered(TimeoutFactory.java:159)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:326)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:312)
+	at io.netty.channel.AbstractChannelHandlerContext.fireUserEventTriggered(AbstractChannelHandlerContext.java:304)
+	at net.tomp2p.connection.IdleStateHandlerTomP2P.channelIdle(IdleStateHandlerTomP2P.java:188)
+	at net.tomp2p.connection.IdleStateHandlerTomP2P.access$400(IdleStateHandlerTomP2P.java:15)
+	at net.tomp2p.connection.IdleStateHandlerTomP2P$AllIdleTimeoutTask.run(IdleStateHandlerTomP2P.java:175)
+	at io.netty.util.concurrent.PromiseTask$RunnableAdapter.call(PromiseTask.java:38)
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:127)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:404)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:495)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:57:58 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/0:0:0:0:0:0:0:1,4622]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Future (compl/canc):true/false, FAILED, No future set beforehand, probably an early shutdown / timeout, or use setFailedLater() or setResponseLater()
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:901)
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:890)
+	at net.tomp2p.futures.BaseFutureImpl.callOperationComplete(BaseFutureImpl.java:328)
+	at net.tomp2p.futures.BaseFutureImpl.notifyListeners(BaseFutureImpl.java:361)
+	at net.tomp2p.futures.BaseFutureImpl.failed(BaseFutureImpl.java:232)
+	at net.tomp2p.futures.FutureResponse.responseNow(FutureResponse.java:143)
+	at net.tomp2p.connection.ChannelCreator$2$1.run(ChannelCreator.java:274)
+	at net.tomp2p.connection.ChannelCreator$2.operationComplete(ChannelCreator.java:279)
+	at net.tomp2p.connection.ChannelCreator$2.operationComplete(ChannelCreator.java:254)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:529)
+	at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:101)
+	at io.netty.channel.DefaultChannelPromise.trySuccess(DefaultChannelPromise.java:84)
+	at io.netty.channel.AbstractChannel$CloseFuture.setClosed(AbstractChannel.java:1183)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.doClose0(AbstractChannel.java:769)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:745)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:616)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.closeOnRead(AbstractNioByteChannel.java:105)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.handleReadException(AbstractNioByteChannel.java:127)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:174)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:57:58 [main]      [WARN ] Connection -Discovery failed: Future (compl/canc):true/false, FAILED, FutureDiscover (1): We need at least the TCP connection <-> Future (compl/canc):true/false, FAILED, No future set beforehand, probably an early shutdown / timeout, or use setFailedLater() or setResponseLater().
+18:57:58 [pool-25-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0x.
+18:57:58 [pool-25-thr[DEBUG] Sender -about to connect to paddr[0x[/0:0:0:0:0:0:0:1,4622]]/relay(false)/slow(false) with channel [id: 0x23cee0fa], ff=false
+18:57:58 [NETTY-TOMP2[DEBUG] Encoder -message for outbound msgid=1792482963,t=REQUEST_1,c=PING,tcp,s=paddr[0x8d0355e9a4d3609c303e83590281f6d80d2c8438[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/0:0:0:0:0:0:0:1,4622]]/relay(false)/slow(false)
+18:57:58 [NETTY-TOMP2[DEBUG] Encoder -message encoded msgid=1792482963,t=REQUEST_1,c=PING,tcp,s=paddr[0x8d0355e9a4d3609c303e83590281f6d80d2c8438[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/0:0:0:0:0:0:0:1,4622]]/relay(false)/slow(false)
+18:57:58 [NETTY-TOMP2[DEBUG] TomP2POutbound -Send TCP message msgid=1792482963,t=REQUEST_1,c=PING,tcp,s=paddr[0x8d0355e9a4d3609c303e83590281f6d80d2c8438[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0x[/0:0:0:0:0:0:0:1,4622]]/relay(false)/slow(false) to null.
+18:57:58 [NETTY-TOMP2[ERROR] TomP2POutbound -Exception in encoding when started.
+java.lang.AbstractMethodError: io.netty.buffer.ByteBuf.touch(Ljava/lang/Object;)Lio/netty/buffer/ByteBuf;
+	at io.netty.buffer.ByteBuf.touch(ByteBuf.java:248)
+	at io.netty.util.ReferenceCountUtil.touch(ReferenceCountUtil.java:77)
+	at io.netty.channel.DefaultChannelPipeline.touch(DefaultChannelPipeline.java:116)
+	at io.netty.channel.AbstractChannelHandlerContext.write(AbstractChannelHandlerContext.java:774)
+	at io.netty.channel.AbstractChannelHandlerContext.writeAndFlush(AbstractChannelHandlerContext.java:747)
+	at net.tomp2p.message.TomP2POutbound.write(TomP2POutbound.java:82)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeWrite0(AbstractChannelHandlerContext.java:706)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeWriteAndFlush(AbstractChannelHandlerContext.java:753)
+	at io.netty.channel.AbstractChannelHandlerContext.write(AbstractChannelHandlerContext.java:778)
+	at io.netty.channel.AbstractChannelHandlerContext.writeAndFlush(AbstractChannelHandlerContext.java:747)
+	at io.netty.channel.AbstractChannelHandlerContext.writeAndFlush(AbstractChannelHandlerContext.java:801)
+	at io.netty.channel.DefaultChannelPipeline.writeAndFlush(DefaultChannelPipeline.java:1036)
+	at io.netty.channel.AbstractChannel.writeAndFlush(AbstractChannel.java:305)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:792)
+	at net.tomp2p.connection.Sender$7.operationComplete(Sender.java:787)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:529)
+	at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:101)
+	at io.netty.channel.DefaultChannelPromise.trySuccess(DefaultChannelPromise.java:84)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.fulfillConnectPromise(AbstractNioChannel.java:306)
+	at io.netty.channel.nio.AbstractNioChannel$AbstractNioUnsafe.finishConnect(AbstractNioChannel.java:341)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:665)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:58:03 [NETTY-TOMP2[WARN ] TimeoutFactory -Channel timeout for channel Server [id: 0xd3a90afc, L:/0:0:0:0:0:0:0:1:4622 - R:/0:0:0:0:0:0:0:1:49225].
+18:58:03 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/0:0:0:0:0:0:0:1,-1]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Timeout!
+	at net.tomp2p.connection.TimeoutFactory$TimeHandler.userEventTriggered(TimeoutFactory.java:159)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:326)
+	at io.netty.channel.AbstractChannelHandlerContext.invokeUserEventTriggered(AbstractChannelHandlerContext.java:312)
+	at io.netty.channel.AbstractChannelHandlerContext.fireUserEventTriggered(AbstractChannelHandlerContext.java:304)
+	at net.tomp2p.connection.IdleStateHandlerTomP2P.channelIdle(IdleStateHandlerTomP2P.java:188)
+	at net.tomp2p.connection.IdleStateHandlerTomP2P.access$400(IdleStateHandlerTomP2P.java:15)
+	at net.tomp2p.connection.IdleStateHandlerTomP2P$AllIdleTimeoutTask.run(IdleStateHandlerTomP2P.java:175)
+	at io.netty.util.concurrent.PromiseTask$RunnableAdapter.call(PromiseTask.java:38)
+	at io.netty.util.concurrent.ScheduledFutureTask.run(ScheduledFutureTask.java:127)
+	at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+	at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:404)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:495)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:58:03 [NETTY-TOMP2[DEBUG] PeerMap -Peer paddr[0x[/0:0:0:0:0:0:0:1,4622]]/relay(false)/slow(false) is offline with reason {}.
+net.tomp2p.connection.PeerException: Future (compl/canc):true/false, FAILED, No future set beforehand, probably an early shutdown / timeout, or use setFailedLater() or setResponseLater()
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:901)
+	at net.tomp2p.connection.Sender$12.operationComplete(Sender.java:890)
+	at net.tomp2p.futures.BaseFutureImpl.callOperationComplete(BaseFutureImpl.java:328)
+	at net.tomp2p.futures.BaseFutureImpl.notifyListeners(BaseFutureImpl.java:361)
+	at net.tomp2p.futures.BaseFutureImpl.failed(BaseFutureImpl.java:232)
+	at net.tomp2p.futures.FutureResponse.responseNow(FutureResponse.java:143)
+	at net.tomp2p.connection.ChannelCreator$2$1.run(ChannelCreator.java:274)
+	at net.tomp2p.connection.ChannelCreator$2.operationComplete(ChannelCreator.java:279)
+	at net.tomp2p.connection.ChannelCreator$2.operationComplete(ChannelCreator.java:254)
+	at io.netty.util.concurrent.DefaultPromise.notifyListener0(DefaultPromise.java:502)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners0(DefaultPromise.java:495)
+	at io.netty.util.concurrent.DefaultPromise.notifyListenersNow(DefaultPromise.java:474)
+	at io.netty.util.concurrent.DefaultPromise.notifyListeners(DefaultPromise.java:415)
+	at io.netty.util.concurrent.DefaultPromise.setValue0(DefaultPromise.java:540)
+	at io.netty.util.concurrent.DefaultPromise.setSuccess0(DefaultPromise.java:529)
+	at io.netty.util.concurrent.DefaultPromise.trySuccess(DefaultPromise.java:101)
+	at io.netty.channel.DefaultChannelPromise.trySuccess(DefaultChannelPromise.java:84)
+	at io.netty.channel.AbstractChannel$CloseFuture.setClosed(AbstractChannel.java:1183)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.doClose0(AbstractChannel.java:769)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:745)
+	at io.netty.channel.AbstractChannel$AbstractUnsafe.close(AbstractChannel.java:616)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.closeOnRead(AbstractNioByteChannel.java:105)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.handleReadException(AbstractNioByteChannel.java:127)
+	at io.netty.channel.nio.AbstractNioByteChannel$NioByteUnsafe.read(AbstractNioByteChannel.java:174)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKey(NioEventLoop.java:677)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeysOptimized(NioEventLoop.java:612)
+	at io.netty.channel.nio.NioEventLoop.processSelectedKeys(NioEventLoop.java:529)
+	at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:491)
+	at io.netty.util.concurrent.SingleThreadEventExecutor$5.run(SingleThreadEventExecutor.java:905)
+	at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+	at java.lang.Thread.run(Thread.java:748)
+18:58:03 [main]      [WARN ] Connection -Bootstrapping failed: Future (compl/canc):true/false, FAILED, Could not reach anyone with bootstrap.
+18:58:03 [main]      [DEBUG] PeerCreator -Shutting down...
+18:58:03 [main]      [DEBUG] PeerCreator -Shutting down client...
+18:58:03 [main]      [DEBUG] ChannelServer -shutdown servers
+18:58:03 [NETTY-TOMP2[DEBUG] ChannelServer -shutdown TCP channels
+18:58:03 [NETTY-TOMP2[DEBUG] ChannelServer -shutdown TCP server
+18:58:03 [globalEvent[DEBUG] PeerCreator -Client / WorkerGroup shut down.
+18:58:03 [globalEvent[DEBUG] PeerCreator -Client / BossGroup shut down.
+18:58:12 [main]      [DEBUG] NetworkUtils -Found free port 4622.
+18:58:12 [main]      [INFO ] PeerCreator -Status of external address search: Discover status:  ++lo( /127.0.0.1,/0:0:0:0:0:0:0:1), ++eth0( /fe80:0:0:0:645a:ba2e:c80f:9153%eth0), ++net0(), ++net1(), ++eth1(), ++eth2(), ++net2(), ++eth3(), ++net3(), ++net4(), ++eth4(), ++net5(), ++net6(), ++ppp0(), ++eth5( /fe80:0:0:0:9c3e:2bea:b2b:c0b5%eth5), ++wlan0(), ++eth6(), ++wlan1( /fe80:0:0:0:51a1:6d33:d6a9:6670%wlan1), ++wlan2( /fe80:0:0:0:1caf:e06a:4a41:61fa%wlan2), ++wlan3(), ++wlan4(), ++wlan5( /192.168.43.252,/fe80:0:0:0:d8b3:d872:ed81:e3d1%wlan5), ++wlan6(), ++eth7(), ++eth8(), ++eth9(), ++eth10(), ++eth11(), ++eth12(), ++eth13(), ++eth14(), ++wlan7(), ++wlan8(), ++wlan9(), ++wlan10(), ++wlan11(), ++wlan12(), ++wlan13(), ++wlan14(), ++eth15(), ++eth16(), ++eth17(), ++eth18(), ++eth19(), ++eth20(), ++wlan15(), ++wlan16(), ++wlan17(), ++wlan18(), ++wlan19(), ++wlan20(), ++wlan21(), ++wlan22().
+18:58:12 [main]      [INFO ] PeerCreator -Visible address to other peers: paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:12 [pool-29-thr[INFO ] ChannelServer -Listening TCP on socket 0.0.0.0/0.0.0.0:4622
+18:58:12 [pool-29-thr[INFO ] ChannelServer -Listening UDP on socket 0.0.0.0/0.0.0.0:4622
+18:58:12 [main]      [DEBUG] DispatchHandler -registering 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 for 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 with [6]
+18:58:12 [main]      [DEBUG] DispatchHandler -registering 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 for 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 with [5]
+18:58:12 [main]      [DEBUG] DispatchHandler -registering 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 for 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 with [7]
+18:58:12 [main]      [DEBUG] DispatchHandler -registering 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 for 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 with [12]
+18:58:12 [main]      [DEBUG] DispatchHandler -registering 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 for 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 with [25]
+18:58:12 [main]      [DEBUG] DispatchHandler -registering 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 for 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 with [1, 2, 3, 4, 11, 14, 27, 13, 16, 19, 20, 23, 26]
+18:58:12 [main]      [DEBUG] Connection -Peer successfully created and connected.
+18:58:22 [main]      [DEBUG] DataManager -Get. location key = '5' content key = 'USER_LOCATIONS' 
+18:58:22 [main]      [DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:22 [main]      [DEBUG] DistributedHashTable -found direct hits for get: []
+18:58:22 [main]      [DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:22 [main]      [DEBUG] Sender -Handle message that is intended for the sender itself msgid=-59408258,t=REQUEST_2,c=GET,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:22 [main]      [DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:22 [main]      [DEBUG] StorageRPC -handleGet msgid=-59408258,t=REQUEST_2,c=GET,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:22 [main]      [DEBUG] StorageRPC -response for storage request: msgid=-59408258,t=OK,c=GET,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:22 [main]      [DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:22 [main]      [DEBUG] DistributedHashTable -set data from paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:22 [main]      [DEBUG] FutureGetListener -Got null. 'location key = '5' content key = 'USER_LOCATIONS' '
+18:58:22 [main]      [DEBUG] ProcessComponent -Executing 'Register Process'.
+18:58:22 [main]      [DEBUG] ProcessComponent -Executing 'org.hive2hive.core.processes.register.CheckIsUserRegisteredStep'.
+18:58:22 [main]      [DEBUG] DataManager -Get. location key = '5' content key = 'USER_LOCATIONS' 
+18:58:22 [main]      [DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:22 [pool-30-thr[DEBUG] DistributedHashTable -found direct hits for get: []
+18:58:22 [pool-30-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:22 [pool-30-thr[DEBUG] Sender -Handle message that is intended for the sender itself msgid=-1900413811,t=REQUEST_2,c=GET,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:22 [pool-30-thr[DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:22 [pool-30-thr[DEBUG] StorageRPC -handleGet msgid=-1900413811,t=REQUEST_2,c=GET,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:22 [pool-30-thr[DEBUG] StorageRPC -response for storage request: msgid=-1900413811,t=OK,c=GET,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:22 [pool-30-thr[DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:22 [pool-30-thr[DEBUG] DistributedHashTable -set data from paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:22 [pool-30-thr[DEBUG] FutureGetListener -Got null. 'location key = '5' content key = 'USER_LOCATIONS' '
+18:58:22 [main]      [DEBUG] ProcessComponent -Executing 'org.hive2hive.core.processes.register.UserProfileCreationStep'.
+18:58:23 [main]      [DEBUG] ProcessComponent -Executing 'Async[org.hive2hive.core.processes.register.PutUserProfileStep]'.
+18:58:23 [main]      [DEBUG] ProcessComponent -Executing 'Async[org.hive2hive.core.processes.register.PutLocationsStep]'.
+18:58:23 [async execu[DEBUG] ProcessComponent -Executing 'org.hive2hive.core.processes.register.PutUserProfileStep'.
+18:58:23 [async execu[DEBUG] PutUserProfileStep -Start encrypting the user profile of the new user 5
+18:58:23 [main]      [DEBUG] ProcessComponent -Executing 'Async[org.hive2hive.core.processes.register.PutPublicKeyStep]'.
+18:58:23 [async execu[DEBUG] ProcessComponent -Executing 'org.hive2hive.core.processes.register.PutLocationsStep'.
+18:58:23 [async execu[DEBUG] DataManager -Put. content = 'Locations' location key = '5' content key = 'USER_LOCATIONS' version key = '1' based on key = '0' ttl = '63072000' protected = 'true' 
+18:58:23 [async execu[DEBUG] ProcessComponent -Executing 'org.hive2hive.core.processes.register.PutPublicKeyStep'.
+18:58:23 [async execu[DEBUG] DataManager -Put. content = 'UserPublicKey' location key = '5' content key = 'USER_PUBLIC_KEY' ttl = '63072000' protected = 'true' 
+18:58:23 [async execu[DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:23 [async execu[DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:23 [async execu[DEBUG] DistributedHashTable -storing lkey=0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 on [paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)]
+18:58:23 [async execu[DEBUG] DistributedHashTable -storing lkey=0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 on [paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)]
+18:58:23 [async execu[DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:23 [async execu[DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:23 [async execu[DEBUG] Sender -Handle message that is intended for the sender itself msgid=88140943,t=REQUEST_1,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:23 [async execu[DEBUG] Sender -Handle message that is intended for the sender itself msgid=-650605475,t=REQUEST_1,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:23 [async execu[DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:23 [async execu[DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:23 [async execu[DEBUG] StorageRPC -handlePut msgid=88140943,t=REQUEST_1,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:23 [async execu[DEBUG] StorageRPC -handlePut msgid=-650605475,t=REQUEST_1,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:23 [async execu[DEBUG] StorageMemory -domain [0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4,0x] not protected
+18:58:23 [async execu[DEBUG] StorageMemory -domain [0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4,0x] not protected
+18:58:23 [async execu[DEBUG] StorageLayer -no domain protection requested -1570993786 for domain [0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4,0x]
+18:58:23 [async execu[DEBUG] StorageLayer -no domain protection requested -1570993786 for domain [0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4,0x]
+18:58:23 [async execu[DEBUG] StorageMemory -Update 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 is responsible for key 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4.
+18:58:23 [async execu[DEBUG] StorageMemory -Update 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 is responsible for key 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4.
+18:58:23 [async execu[DEBUG] Replication -I paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) am now responsible for key 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4.
+18:58:23 [async execu[DEBUG] IndirectReplication -I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) now responsible for 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4
+18:58:23 [async execu[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+18:58:23 [async execu[DEBUG] StorageRPC -response for storage request: msgid=-650605475,t=OK,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:23 [async execu[DEBUG] StorageRPC -response for storage request: msgid=88140943,t=OK,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:23 [async execu[DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:23 [async execu[DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:24 [async execu[DEBUG] PutUserProfileStep -User profile successfully encrypted. Start putting it...
+18:58:24 [async execu[DEBUG] DataManager -Put. content = 'EncryptedNetworkContent' location key = '888E29C8C7AAA045DB2701499C6E65808B692F6BDCD63EC2' content key = 'USER_PROFILE' version key = '1' based on key = '0' ttl = '63072000' protected = 'true' 
+18:58:24 [async execu[DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -storing lkey=0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 on [paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)]
+18:58:24 [pool-30-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:24 [pool-30-thr[DEBUG] Sender -Handle message that is intended for the sender itself msgid=-1529038775,t=REQUEST_1,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -handlePut msgid=-1529038775,t=REQUEST_1,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] StorageMemory -domain [0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5,0x] not protected
+18:58:24 [pool-30-thr[DEBUG] StorageLayer -no domain protection requested -1570993786 for domain [0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5,0x]
+18:58:24 [pool-30-thr[DEBUG] StorageMemory -Update 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 is responsible for key 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5.
+18:58:24 [pool-30-thr[DEBUG] Replication -I paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) am now responsible for key 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5.
+18:58:24 [pool-30-thr[DEBUG] IndirectReplication -I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) now responsible for 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5
+18:58:24 [pool-30-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -response for storage request: msgid=-1529038775,t=OK,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:24 [main]      [DEBUG] ProcessComponent -Executing 'Login Process'.
+18:58:24 [main]      [DEBUG] ProcessComponent -Executing 'org.hive2hive.core.processes.login.SessionCreationStep'.
+18:58:24 [UP queue]  [DEBUG] DataManager -Get digest (latest). location key = '888E29C8C7AAA045DB2701499C6E65808B692F6BDCD63EC2' content key = 'USER_PROFILE' 
+18:58:24 [UP queue]  [DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:24 [UP queue]  [DEBUG] DistributedHashTable -found direct hits for digest: []
+18:58:24 [UP queue]  [DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:24 [UP queue]  [DEBUG] Sender -Handle message that is intended for the sender itself msgid=-1492446172,t=REQUEST_2,c=DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [UP queue]  [DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:24 [UP queue]  [DEBUG] StorageRPC -handleDigest msgid=-1492446172,t=REQUEST_2,c=DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [UP queue]  [DEBUG] StorageRPC -response for storage request: msgid=-1492446172,t=OK,c=DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [UP queue]  [DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:24 [UP queue]  [DEBUG] DistributedHashTable -set data from paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [UP queue]  [DEBUG] FutureDigestListener -Got digest. location key = '888E29C8C7AAA045DB2701499C6E65808B692F6BDCD63EC2' content key = 'USER_PROFILE' 
+18:58:24 [UP queue]  [DEBUG] DataManager -Get latest version. location key = '888E29C8C7AAA045DB2701499C6E65808B692F6BDCD63EC2' content key = 'USER_PROFILE' 
+18:58:24 [UP queue]  [DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -found direct hits for get: []
+18:58:24 [pool-30-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:24 [pool-30-thr[DEBUG] Sender -Handle message that is intended for the sender itself msgid=-1869363417,t=REQUEST_1,c=GET_LATEST_WITH_DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -handleGetLatest msgid=-1869363417,t=REQUEST_1,c=GET_LATEST_WITH_DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -response for storage request: msgid=-1869363417,t=OK,c=GET_LATEST_WITH_DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -set data from paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [main]      [ERROR] FileUtil -Cannot deserialize meta data. Reason: File 'C:\Users\iulian\AppData\Local\Temp\H2H-Cache\h2h.conf' does not exist
+18:58:24 [main]      [DEBUG] ProcessComponent -Executing 'org.hive2hive.core.processes.login.GetLocationsStep'.
+18:58:24 [main]      [DEBUG] DataManager -Get digest (latest). location key = '5' content key = 'USER_LOCATIONS' 
+18:58:24 [main]      [DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -found direct hits for digest: []
+18:58:24 [pool-30-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:24 [pool-30-thr[DEBUG] Sender -Handle message that is intended for the sender itself msgid=667125607,t=REQUEST_2,c=DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -handleDigest msgid=667125607,t=REQUEST_2,c=DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -response for storage request: msgid=667125607,t=OK,c=DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -set data from paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] FutureDigestListener -Got digest. location key = '5' content key = 'USER_LOCATIONS' 
+18:58:24 [main]      [DEBUG] DataManager -Get latest version. location key = '5' content key = 'USER_LOCATIONS' 
+18:58:24 [main]      [DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -found direct hits for get: []
+18:58:24 [pool-30-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:24 [pool-30-thr[DEBUG] Sender -Handle message that is intended for the sender itself msgid=-1520134415,t=REQUEST_1,c=GET_LATEST_WITH_DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -handleGetLatest msgid=-1520134415,t=REQUEST_1,c=GET_LATEST_WITH_DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -response for storage request: msgid=-1520134415,t=OK,c=GET_LATEST_WITH_DIGEST,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -set data from paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [main]      [DEBUG] ProcessComponent -Executing 'org.hive2hive.core.processes.login.ContactOtherClientsStep'.
+18:58:24 [main]      [DEBUG] ContactOtherClientsStep -Waiting for at most 10000ms for the response of other clients
+18:58:24 [main]      [DEBUG] ContactOtherClientsStep -Adding own peeraddress to locations file: paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [main]      [DEBUG] ContactOtherClientsStep -Current locations: Locations [userId=5, addresses=[paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false), ]]
+18:58:24 [main]      [DEBUG] ContactOtherClientsStep -Node is master and needs to handle possible User Profile Tasks.
+18:58:24 [main]      [DEBUG] ProcessComponent -Executing 'org.hive2hive.core.processes.login.PutLocationsStep'.
+18:58:24 [main]      [DEBUG] DataManager -Put. content = 'Locations' location key = '5' content key = 'USER_LOCATIONS' version key = '2' based on key = '1' ttl = '63072000' protected = 'true' prepareFlag = 'true'
+18:58:24 [main]      [DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -storing lkey=0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 on [paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)]
+18:58:24 [pool-30-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:24 [pool-30-thr[DEBUG] Sender -Handle message that is intended for the sender itself msgid=522191394,t=REQUEST_1,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -handlePut msgid=522191394,t=REQUEST_1,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] StorageMemory -domain [0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4,0x] not protected
+18:58:24 [pool-30-thr[DEBUG] StorageLayer -no domain protection requested -1570993786 for domain [0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4,0x]
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -response for storage request: msgid=522191394,t=OK,c=PUT,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:24 [pool-30-thr[DEBUG] DataManager -Confirm. content = 'Locations' location key = '5' content key = 'USER_LOCATIONS' version key = '2' based on key = '1' ttl = '63072000' protected = 'true' prepareFlag = 'true'
+18:58:24 [pool-30-thr[DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -storing lkey=0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 on [paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)]
+18:58:24 [pool-30-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:24 [pool-30-thr[DEBUG] Sender -Handle message that is intended for the sender itself msgid=1887694646,t=REQUEST_1,c=PUT_CONFIRM,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -handlePutConfirm msgid=1887694646,t=REQUEST_1,c=PUT_CONFIRM,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -Received put confirmation.
+18:58:24 [pool-30-thr[DEBUG] StorageMemory -Update 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36 is responsible for key 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4.
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -response for storage request: msgid=1887694646,t=OK,c=PUT_CONFIRM,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:24 [main]      [DEBUG] ProcessComponent -Executing 'User Profile Task Process'.
+18:58:24 [main]      [DEBUG] ProcessComponent -Executing 'org.hive2hive.core.processes.common.userprofiletask.GetUserProfileTaskStep'.
+18:58:24 [main]      [DEBUG] GetUserProfileTaskStep -Get the next user profile task of user '5'.
+18:58:24 [main]      [DEBUG] Reservation -Reservation UDP=2, TCP=4
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -found direct hits for get: []
+18:58:24 [pool-30-thr[DEBUG] ConcurrentCacheMap -Get not found. Key: 0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36.
+18:58:24 [pool-30-thr[DEBUG] Sender -Handle message that is intended for the sender itself msgid=-2056858850,t=REQUEST_1,c=GET,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] PeerMap -Peer paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false) is online. Reporter was paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false).
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -handleGet msgid=-2056858850,t=REQUEST_1,c=GET,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] StorageRPC -response for storage request: msgid=-2056858850,t=OK,c=GET,tcp,s=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false),r=paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -fork/join status: 1/1 (3)
+18:58:24 [pool-30-thr[DEBUG] DistributedHashTable -set data from paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)
+18:58:24 [pool-30-thr[DEBUG] FutureGetListener -Got null. 'location key = '5' domain key = 'USER-PROFILE-TASK' content key = '0x' '
+18:58:24 [main]      [WARN ] GetUserProfileTaskStep -Did not get an user profile task. User ID = '5'.
+18:58:24 [main]      [DEBUG] ProcessComponent -Executing 'org.hive2hive.core.processes.userprofiletask.HandleUserProfileTaskStep'.
+18:58:24 [main]      [DEBUG] HandleUserProfileTaskStep -No more user profile tasks in queue. Stopping handling. User ID = '5'.
+18:58:33 [main]      [DEBUG] NetworkUtils -Found free port 4623.
+18:58:33 [main]      [INFO ] PeerCreator -Status of external address search: Discover status:  ++lo( /127.0.0.1,/0:0:0:0:0:0:0:1), ++eth0( /fe80:0:0:0:645a:ba2e:c80f:9153%eth0), ++net0(), ++net1(), ++eth1(), ++eth2(), ++net2(), ++eth3(), ++net3(), ++net4(), ++eth4(), ++net5(), ++net6(), ++ppp0(), ++eth5( /fe80:0:0:0:9c3e:2bea:b2b:c0b5%eth5), ++wlan0(), ++eth6(), ++wlan1( /fe80:0:0:0:51a1:6d33:d6a9:6670%wlan1), ++wlan2( /fe80:0:0:0:1caf:e06a:4a41:61fa%wlan2), ++wlan3(), ++wlan4(), ++wlan5( /192.168.43.252,/fe80:0:0:0:d8b3:d872:ed81:e3d1%wlan5), ++wlan6(), ++eth7(), ++eth8(), ++eth9(), ++eth10(), ++eth11(), ++eth12(), ++eth13(), ++eth14(), ++wlan7(), ++wlan8(), ++wlan9(), ++wlan10(), ++wlan11(), ++wlan12(), ++wlan13(), ++wlan14(), ++eth15(), ++eth16(), ++eth17(), ++eth18(), ++eth19(), ++eth20(), ++wlan15(), ++wlan16(), ++wlan17(), ++wlan18(), ++wlan19(), ++wlan20(), ++wlan21(), ++wlan22().
+18:58:33 [main]      [INFO ] PeerCreator -Visible address to other peers: paddr[0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24[/192.168.43.252,4623]]/relay(false)/slow(false)
+18:58:33 [pool-37-thr[INFO ] ChannelServer -Listening TCP on socket 0.0.0.0/0.0.0.0:4623
+18:58:33 [pool-37-thr[INFO ] ChannelServer -Listening UDP on socket 0.0.0.0/0.0.0.0:4623
+18:58:33 [main]      [DEBUG] DispatchHandler -registering 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 for 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 with [6]
+18:58:33 [main]      [DEBUG] DispatchHandler -registering 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 for 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 with [5]
+18:58:33 [main]      [DEBUG] DispatchHandler -registering 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 for 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 with [7]
+18:58:33 [main]      [DEBUG] DispatchHandler -registering 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 for 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 with [12]
+18:58:33 [main]      [DEBUG] DispatchHandler -registering 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 for 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 with [25]
+18:58:33 [main]      [DEBUG] DispatchHandler -registering 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 for 0xcf5d3d0589d724cf3d0d4bb5c46c7929dbd7de24 with [1, 2, 3, 4, 11, 14, 27, 13, 16, 19, 20, 23, 26]
+18:58:33 [main]      [DEBUG] Connection -Peer successfully created and connected.
+18:58:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+18:58:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+18:59:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+18:59:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+18:59:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+18:59:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:00:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:00:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:00:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:00:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:01:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:01:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:01:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:01:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:01:47 [main]      [DEBUG] NetworkUtils -Found free port 4624.
+19:01:47 [main]      [INFO ] PeerCreator -Status of external address search: Discover status:  ++lo( /127.0.0.1,/0:0:0:0:0:0:0:1), ++eth0( /fe80:0:0:0:645a:ba2e:c80f:9153%eth0), ++net0(), ++net1(), ++eth1(), ++eth2(), ++net2(), ++eth3(), ++net3(), ++net4(), ++eth4(), ++net5(), ++net6(), ++ppp0(), ++eth5( /fe80:0:0:0:9c3e:2bea:b2b:c0b5%eth5), ++wlan0(), ++eth6(), ++wlan1( /fe80:0:0:0:51a1:6d33:d6a9:6670%wlan1), ++wlan2( /fe80:0:0:0:1caf:e06a:4a41:61fa%wlan2), ++wlan3(), ++wlan4(), ++wlan5( /192.168.43.252,/fe80:0:0:0:d8b3:d872:ed81:e3d1%wlan5), ++wlan6(), ++eth7(), ++eth8(), ++eth9(), ++eth10(), ++eth11(), ++eth12(), ++eth13(), ++eth14(), ++wlan7(), ++wlan8(), ++wlan9(), ++wlan10(), ++wlan11(), ++wlan12(), ++wlan13(), ++wlan14(), ++eth15(), ++eth16(), ++eth17(), ++eth18(), ++eth19(), ++eth20(), ++wlan15(), ++wlan16(), ++wlan17(), ++wlan18(), ++wlan19(), ++wlan20(), ++wlan21(), ++wlan22().
+19:01:47 [main]      [INFO ] PeerCreator -Visible address to other peers: paddr[0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d[/192.168.43.252,4624]]/relay(false)/slow(false)
+19:01:47 [pool-42-thr[INFO ] ChannelServer -Listening TCP on socket 0.0.0.0/0.0.0.0:4624
+19:01:47 [pool-42-thr[INFO ] ChannelServer -Listening UDP on socket 0.0.0.0/0.0.0.0:4624
+19:01:47 [main]      [DEBUG] DispatchHandler -registering 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d for 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d with [6]
+19:01:47 [main]      [DEBUG] DispatchHandler -registering 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d for 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d with [5]
+19:01:47 [main]      [DEBUG] DispatchHandler -registering 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d for 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d with [7]
+19:01:47 [main]      [DEBUG] DispatchHandler -registering 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d for 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d with [12]
+19:01:47 [main]      [DEBUG] DispatchHandler -registering 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d for 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d with [25]
+19:01:47 [main]      [DEBUG] DispatchHandler -registering 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d for 0x24b8ef39a7bd0fd645b3e006a3654728aaec2a0d with [1, 2, 3, 4, 11, 14, 27, 13, 16, 19, 20, 23, 26]
+19:01:47 [main]      [DEBUG] Connection -Peer successfully created and connected.
+19:02:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:02:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:02:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:02:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:03:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:03:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:03:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:03:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:04:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:04:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:04:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:04:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:05:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:05:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:05:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:05:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:06:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:06:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:06:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:06:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:07:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:07:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:07:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:07:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:08:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:08:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:08:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:08:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:09:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:09:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:09:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:09:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:10:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:10:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:10:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:10:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:11:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:11:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:11:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:11:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:12:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:12:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:12:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:12:42 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
+19:13:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0x4e1b08199d8d6e97e7dfed21a44a889d6bebc0a5 to []
+19:13:12 [pool-29-thr[DEBUG] IndirectReplication -[storage refresh] I (paddr[0xf5b08aba0f1f6ab8528c45be43c5d20e51b55b36[/192.168.43.252,4622]]/relay(false)/slow(false)) restore 0xac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 to []
