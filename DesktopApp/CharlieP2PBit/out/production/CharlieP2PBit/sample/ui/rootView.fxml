@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Text?>
+
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.RootController">
+  <content>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="409.0" prefWidth="599.0">
+         <children>
+            <TableView fx:id="downloadTable" layoutX="52.0" layoutY="52.0" prefHeight="217.0" prefWidth="503.0">
+              <columns>
+                <TableColumn fx:id="downloadFile" prefWidth="123.0" text="File name" />
+                <TableColumn fx:id="downloadSize" prefWidth="53.0" text="Size" />
+                  <TableColumn fx:id="downloadProgress" prefWidth="74.0" text="Progress" />
+                  <TableColumn fx:id="downloadSpeed" prefWidth="77.0" text="Speed" />
+                  <TableColumn fx:id="downloadPeers" prefWidth="98.0" text="Available peers" />
+              </columns>
+            </TableView>
+            <Label layoutX="52.0" layoutY="14.0" prefHeight="17.0" prefWidth="142.0" text="Downloaded files">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="52.0" layoutY="282.0" text="Uploaded files">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="uploadTable" layoutX="52.0" layoutY="318.0" prefHeight="200.0" prefWidth="408.0">
+              <columns>
+                <TableColumn fx:id="uploadFile" prefWidth="75.0" text="File name" />
+                <TableColumn fx:id="uploadSize" prefWidth="75.0" text="Size" />
+                <TableColumn fx:id="uploadDate" prefWidth="75.0" text="Date" />
+                  <TableColumn fx:id="uploadNumberOfDownloads" prefWidth="75.0" text="Nr. downloads" />
+              </columns>
+            </TableView>
+         </children></AnchorPane>
+  </content>
+</ScrollPane>
