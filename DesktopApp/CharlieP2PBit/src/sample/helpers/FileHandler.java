@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class FileHandler {
 
-    public static Map<String, String> metaDatas = new HashMap<String, String>();
+    public static Map<String, String> metaDatas = new HashMap<>();
 
     public FileHandler() {
         metaDatas.put("path", System.getProperty("user.dir") + "//metadata.ser");
