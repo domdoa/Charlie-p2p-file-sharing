@@ -1,7 +1,7 @@
 package com.filesharing.iot.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.filesharing.iot.models.UserModel;
+import com.filesharing.iot.models.User;
 import com.filesharing.iot.security.configs.JwtConfig;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -38,7 +38,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         try {
 
             // 1. Get credentials from request
-            UserModel creds = new ObjectMapper().readValue(req.getInputStream(), UserModel.class);
+            User creds = new ObjectMapper().readValue(req.getInputStream(), User.class);
 
             // 2. Create auth object (contains credentials) which will be used by auth manager
             UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

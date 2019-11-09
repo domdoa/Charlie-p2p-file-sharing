@@ -1,10 +1,11 @@
 package com.filesharing.iot.models;
 
+import java.util.List;
+
 public class Peer {
-//    private String KademliaId;
     private String ipAddress;
     private int port;
-    private ConnectionType connectionType;
-    private UserModel userModel;
+    private List<File> fileList;
+    private User user;
 
 }
