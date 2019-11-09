@@ -12,21 +12,19 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-public class UserModel {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(unique = true, nullable = false, name = "user_id")
-    private long user_id;
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    private Long user_id;
     @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    //TODO: finish models
+    List<Group> groups;
+
+    //TODO: file indexes a
 //    private List<File> fileIndexes;
 
 }

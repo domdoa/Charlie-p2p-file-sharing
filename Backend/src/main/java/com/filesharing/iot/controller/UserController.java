@@ -1,6 +1,6 @@
 package com.filesharing.iot.controller;
 
-import com.filesharing.iot.models.UserModel;
+import com.filesharing.iot.models.User;
 import com.filesharing.iot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,17 +19,17 @@ public class UserController {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @PostMapping("/sign-up")
-    public ResponseEntity signUp(@RequestBody UserModel userModel) {
-        userModel.setPassword(bCryptPasswordEncoder.encode(userModel.getPassword()));
-        if (userRepository.findByEmail(userModel.getEmail()) != null) {
+    public ResponseEntity signUp(@RequestBody User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        if (userRepository.findByEmail(user.getEmail()) != null) {
             return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON_UTF8).body("{\"" + "Error" + "\":\"" + "Invalid username" + "\"}");
         }
-        userRepository.save(userModel);
+        userRepository.save(user);
         return ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8).body("{\"" + "Success" + "\":\"" + "Registered successfully" + "\"}");
     }
 
     @GetMapping("/findByEmail")
-    public ResponseEntity<UserModel> findByEmail(@RequestParam String email) {
+    public ResponseEntity<User> findByEmail(@RequestParam String email) {
         return new ResponseEntity<>(userRepository.findByEmail(email), HttpStatus.OK);
     }
 

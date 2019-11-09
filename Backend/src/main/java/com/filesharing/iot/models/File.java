@@ -8,9 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class File {
-    private String fileId;
-    private String fileName;
-    private String filePath;
-    private String fileSize;
-
+    private String id;
+    private String name;
+    private String ext;
+    private String md5Sign;
+    private String size;
+    private User user;
 }
