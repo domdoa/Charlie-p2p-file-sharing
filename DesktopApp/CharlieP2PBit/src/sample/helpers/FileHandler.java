@@ -9,14 +9,14 @@ import java.util.Map;
 
 public class FileHandler {
 
-    public static Map<String, String> metaDatas = new HashMap<String, String>();
+    public static Map<String, String> metaDatas = new HashMap<>();
 
     public FileHandler() {
         metaDatas.put("path", System.getProperty("user.dir") + "//metadata.ser");
         // TODO: Remove it later
-        metaDatas.put("cucc", "valami1");
-        metaDatas.put("cucc1", "valami2");
-        metaDatas.put("cucc2", "valami3");
+        metaDatas.put("BASE_URL1", "http://example.com");
+        metaDatas.put("BASE_URL2", "http://example.com");
+        metaDatas.put("BASE_URL3", "http://example.com");
     }
 
     public void writeToFile() {
