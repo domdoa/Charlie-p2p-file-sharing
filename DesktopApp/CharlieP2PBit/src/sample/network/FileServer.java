@@ -6,18 +6,45 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class FileServer {
+public class FileServer implements Runnable {
 
     private ServerSocket serverSocket;
 
+    @Override
+    public void run() {
+        try{
+            start(0);   // this start a new serversocket on a randomly allocated port
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public void start(int port) throws Exception {
-        serverSocket = new ServerSocket(port);
-        while (true)
-            new EchoClientHandler(serverSocket.accept()).start();
+        try{
+            serverSocket = new ServerSocket(port);
+            System.out.println("Server listening on the port: "+ serverSocket.getLocalPort());
+            // TODO: Notify the backend that this peer become available
+            new ServerConnection().notifyActualPeerIsOnline(serverSocket.getLocalPort());
+
+            while (true)
+                new EchoClientHandler(serverSocket.accept()).start();
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            stop();
+        }
     }
 
     public void stop() throws Exception {
-        serverSocket.close();
+        try{
+            serverSocket.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public ServerSocket getServerSocket() {
+        return serverSocket;
     }
 
     private static class EchoClientHandler extends Thread {

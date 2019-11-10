@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.helpers.FileHandler;
+import sample.network.FileServer;
+import sample.network.ServerConnection;
 
 import java.util.HashMap;
 
@@ -21,8 +23,9 @@ public class Main extends Application {
         // TODO: Deserialize metadatas from the file
         HashMap<String,String> metadatas = new FileHandler().readFromFile();
 
-        // TODO: Notify the backend that this peer become available
-
+        // TODO: Start the local fileserver to serve those peers who want to download
+        FileServer fileServer = new FileServer();
+        new Thread(fileServer).start();
     }
 
 
@@ -30,9 +33,9 @@ public class Main extends Application {
     public void stop() throws Exception {
         super.stop();
         // TODO: Serialize actualmetadatas to file with custom FileHandler class
-
+        new FileHandler().writeToFile();
         // TODO: Notify the backend that this peer is not available anymore
-
+        new ServerConnection().notifyActualPeerIsOffline();
     }
 
     public static void main(String[] args) {
