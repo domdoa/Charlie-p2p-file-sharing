@@ -7,7 +7,7 @@ public class FileMetadata {
     private String groupId; // if null, then the file is public
     private String fileName;
     private String extension;
-    private int size;
+    private long size;
     private String MD5Signature;
 
     public FileMetadata() {}
@@ -61,11 +61,11 @@ public class FileMetadata {
         this.extension = extension;
     }
 
-    public int getSize() {
+    public long getSize() {
         return size;
     }
 
-    public void setSize(int size) {
+    public void setSize(long size) {
         this.size = size;
     }
 

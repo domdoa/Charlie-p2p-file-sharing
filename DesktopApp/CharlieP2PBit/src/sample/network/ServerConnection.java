@@ -1,10 +1,9 @@
 package sample.network;
 
-import sample.helpers.FileHandler;
+import sample.helpers.FileSerializer;
 import sample.models.Peer;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,7 +17,7 @@ public class ServerConnection {
 
     public ServerConnection(){
         List<String> urls = new ArrayList<>();
-        for (Map.Entry<String , String> entry : FileHandler.metaDatas.entrySet()) {
+        for (Map.Entry<String , String> entry : FileSerializer.metaDatas.entrySet()) {
             if(entry.getKey().contains("BASE_URL"))
                 urls.add(entry.getValue());
         }
@@ -26,7 +25,45 @@ public class ServerConnection {
     }
 
     public List<Peer> getAvailableSeeders(String filename, String md5Signature){
-        return null;
+        HttpURLConnection con = null;
+        List<Peer> availablePeers = null;
+        try{
+            URL url = new URL(BASE_URL.get(0) + "peers/getAvailableSeeders");
+            con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("Content-Type", "application/json");
+            con.setDoOutput(true);
+            DataOutputStream out = new DataOutputStream(con.getOutputStream());
+            out.writeBytes(ParameterStringBuilder.getParamsString(
+                    new HashMap<String, String>() {{put("filename", filename); put("signature", md5Signature);}}
+            ));
+            out.flush();
+            out.close();
+            con.setConnectTimeout(10000);
+            int status = con.getResponseCode();
+
+            BufferedReader in = null;
+            if (status == 200){
+                in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                // TODO: Create a list of peers from the response, it is just a string...
+                StringBuffer content = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
+                }
+                in.close();
+            }
+            else {
+                in = new BufferedReader(new InputStreamReader(con.getErrorStream()));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            if (con != null){
+                con.disconnect();
+            }
+        }
+        return availablePeers;
     }
 
 
@@ -64,8 +101,9 @@ public class ServerConnection {
         try{
             URL url = new URL(BASE_URL.get(0)+ "/peers/notifyActualPeerIsOffline");
             con = buildHttpConnectionForNotify(url);
-            con.getResponseCode();   // If success is required, then check for the response is 200
-            con.disconnect();
+            if(con != null){
+                con.getResponseCode();   // If success is required, then check for the response is 200
+            }
         }catch (Exception e){
             e.printStackTrace();
         }

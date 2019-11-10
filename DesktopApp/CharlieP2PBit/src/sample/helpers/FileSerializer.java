@@ -7,11 +7,11 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-public class FileHandler {
+public class FileSerializer {
 
     public static Map<String, String> metaDatas = new HashMap<>();
 
-    public FileHandler() {
+    public FileSerializer() {
         metaDatas.put("path", System.getProperty("user.dir") + "//metadata.ser");
         // TODO: Remove it later
         metaDatas.put("BASE_URL1", "http://example.com");
