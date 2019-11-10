@@ -1,5 +1,6 @@
 package com.filesharing.iot.controller;
 
+import com.filesharing.iot.models.Group;
 import com.filesharing.iot.models.User;
 import com.filesharing.iot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -31,6 +34,11 @@ public class UserController {
     @GetMapping("/findByEmail")
     public ResponseEntity<User> findByEmail(@RequestParam String email) {
         return new ResponseEntity<>(userRepository.findByEmail(email), HttpStatus.OK);
+    }
+
+    @GetMapping("/getGroupsForUser")
+    public ResponseEntity<List<Group>> getGroupsForUser(@RequestParam long user_id) {
+        return new ResponseEntity<>(userRepository.findByUserId(user_id).getGroups(), HttpStatus.OK);
     }
 
 

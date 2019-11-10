@@ -22,9 +22,12 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+            name = "User_Groups",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "group_id")}
+    )
     List<Group> groups;
-
-    //TODO: file indexes a
-//    private List<File> fileIndexes;
 
 }

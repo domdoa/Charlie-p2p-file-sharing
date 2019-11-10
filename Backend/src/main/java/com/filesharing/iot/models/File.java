@@ -8,10 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class File {
-    private String id;
+    private long id;
+    private long user_id;
     private String name;
     private String ext;
     private String md5Sign;
     private String size;
-    private User user;
 }
