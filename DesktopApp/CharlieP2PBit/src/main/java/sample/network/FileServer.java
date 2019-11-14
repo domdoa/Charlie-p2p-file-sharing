@@ -1,6 +1,10 @@
 package sample.network;
 
+import com.sun.xml.internal.bind.v2.util.ByteArrayOutputStreamEx;
+import sample.helpers.FileProviderForPeers;
+
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
@@ -31,17 +35,25 @@ public class FileServer {
 
         public void run() {
             try {
-                out = new PrintWriter(clientSocket.getOutputStream(), true);
+                ByteArrayOutputStream out = (ByteArrayOutputStream) clientSocket.getOutputStream();
                 in = new BufferedReader(
                         new InputStreamReader(clientSocket.getInputStream()));
 
                 String inputLine;
                 while ((inputLine = in.readLine()) != null) {
-                    if (".".equals(inputLine)) {
-                        out.println("bye");
-                        break;
+                    if (inputLine.contains("DOWNLOAD")) {
+                        String[] parts = inputLine.split(" ");
+                        // TODO: send byte array
+                        FileProviderForPeers fileProviderForPeers = new FileProviderForPeers();
+                        byte[] bytes = fileProviderForPeers.ReadSpecificPositionOfFile("test", Integer.parseInt(parts[1]));
+                        out.write(bytes);
+                        out.flush();
                     }
-                    out.println(inputLine);
+                    else {
+                        FileProviderForPeers fileProviderForPeers = new FileProviderForPeers();
+                        fileProviderForPeers.writeSpecificPositionOfFile("test", 30,inputLine.getBytes() ,true, FileProviderForPeers.DOWNLOAD_UNIT);
+                    }
+                    //out.println(inputLine);
                 }
 
                 in.close();
