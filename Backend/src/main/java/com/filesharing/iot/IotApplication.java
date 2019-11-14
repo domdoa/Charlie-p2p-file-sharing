@@ -2,21 +2,18 @@ package com.filesharing.iot;
 
 import com.filesharing.iot.Chord.Chord;
 import com.filesharing.iot.Chord.Query;
-import com.filesharing.iot.controller.FileController;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import javax.swing.*;
-import java.io.IOException;
 import java.util.Arrays;
 
 
 @SpringBootApplication
 public class IotApplication {
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(IotApplication.class, args);
         if(args.length > 1){
             if(args[0].toUpperCase().equals("CHORD")){
@@ -28,7 +25,6 @@ public class IotApplication {
                 }
             }
         }
-
 
 
     }
