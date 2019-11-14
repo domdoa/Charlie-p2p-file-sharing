@@ -31,7 +31,7 @@ public class Query {
 
 			// successfully constructed socket address of the node we are 
 			// trying to contact, check if it's alive
-			String response = Helper.sendRequest(localAddress, "KEEP");
+			String response = Helper.sendRequestAndReceiveResponse(localAddress, "KEEP");
 
 			// if it's dead, exit
 			if (response == null || !response.equals("ALIVE"))  {
