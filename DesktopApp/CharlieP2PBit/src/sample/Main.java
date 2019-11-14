@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import sample.helpers.FileSerializer;
 import sample.network.FileServer;
+import sample.network.PeerSocket;
 import sample.network.ServerConnection;
 
 import java.util.HashMap;
@@ -26,6 +27,9 @@ public class Main extends Application {
         // TODO: Start the local fileserver to serve those peers who want to download
         FileServer fileServer = new FileServer();
         new Thread(fileServer).start();
+
+        PeerSocket socket = new PeerSocket();
+
     }
 
 

@@ -16,7 +16,7 @@ import java.nio.channels.FileChannel;
  */
 public class FileProviderForPeers {
 
-    private static int DOWNLOAD_UNIT = 2048;
+    public static int DOWNLOAD_UNIT = 2048;
 
     public FileProviderForPeers(){}
 
@@ -48,7 +48,8 @@ public class FileProviderForPeers {
         return null;
     }
 
-    public  void writeSpecificPositionOfFile(String fileName, int segment, boolean exist, long size){
+    public  void writeSpecificPositionOfFile(String fileName, int segment, byte[] bytes,boolean exist, long size){
         // TODO: If the file not exist then create a new file and allocate 'size' space for that, then write the specific positions
+
     }
 }
