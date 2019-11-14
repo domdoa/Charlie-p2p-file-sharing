@@ -36,10 +36,10 @@ public class UserController {
         return new ResponseEntity<>(userRepository.findByEmail(email), HttpStatus.OK);
     }
 
-//    @GetMapping("/getGroupsForUser")
-//    public ResponseEntity<List<Group>> getGroupsForUser(@RequestParam long user_id) {
-//        return new ResponseEntity<>(userRepository.findByUserId(user_id).getGroups(), HttpStatus.OK);
-//    }
+    @GetMapping("/getGroupsForUser")
+    public ResponseEntity<List<Group>> getGroupsForUser(@RequestParam long user_id) {
+        return new ResponseEntity<>(userRepository.findByUserId(user_id).getGroups(), HttpStatus.OK);
+    }
 
 
 }

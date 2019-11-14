@@ -32,7 +32,7 @@ public class Peer extends User {
                 .orElse(null);
         if(f != null){
             f.setName(file.getName());
-            f.setExtension(file.getExtension());
+            f.setExt(file.getExt());
             f.setMd5Sign(file.getMd5Sign());
             f.setSize(file.getSize());
         }

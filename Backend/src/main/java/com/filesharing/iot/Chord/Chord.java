@@ -1,13 +1,8 @@
 package com.filesharing.iot.Chord;
 
-import com.filesharing.iot.models.File;
-
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -23,9 +18,7 @@ public class Chord {
 	private static InetSocketAddress m_contact;
 	private static Helper m_helper;
 
-
-
-	public static void main (String[] args) throws IOException {
+	public static void main (String[] args) {
 		
 		m_helper = new Helper();
 		
@@ -50,7 +43,6 @@ public class Chord {
 		
 		// join, contact is another node
 		else if (args.length == 3) {
-			//create inet socket address, connect to my neighbour in join
 			m_contact = Helper.createSocketAddress(args[1]+":"+args[2]);
 			if (m_contact == null) {
 				System.out.println("Cannot find address you are trying to contact. Now exit.");
@@ -88,16 +80,6 @@ public class Chord {
 				System.out.println("Leaving the ring...");
 				System.exit(0);
 				
-			}
-			else if(command.startsWith("download")){
-				List<InetSocketAddress> peersAddresses = new ArrayList<>();
-				File fileData = new File();
-				InetAddress addr = InetAddress.getByName("192.168.252.43");;
-				String path = "C:\\Users\\iulian\\asd.txt";
-
-				InetSocketAddress inetSocketAddress = new InetSocketAddress(addr,8001);
-				peersAddresses.add(inetSocketAddress);
-				m_node.downloadFromMultiplePeers(peersAddresses,fileData,path);
 			}
 			else if (command.startsWith("info")) {
 				m_node.printDataStructure();

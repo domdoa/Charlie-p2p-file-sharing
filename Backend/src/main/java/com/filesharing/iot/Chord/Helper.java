@@ -193,7 +193,7 @@ public class Helper {
 		}
 
 		// send request to server
-		String response = sendRequestAndReceiveResponse(server, req);
+		String response = sendRequest(server, req);
 
 		// if response is null, return null
 		if (response == null) {
@@ -221,7 +221,7 @@ public class Helper {
 	 * (2) cannot open socket or write request to it
 	 * (3) response read by inputStreamToString() is null
 	 */
-	public static String sendRequestAndReceiveResponse(InetSocketAddress server, String req) {
+	public static String sendRequest(InetSocketAddress server, String req) {
 
 		// invalid input
 		if (server == null || req == null)
