@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {isLoggedIn, logOut} from "../utils/Authorization";
 
 const Navbar = () => {
   const [user, setUser] = useState({});
 
   const onLogout = () => {
     setUser({});
+    logOut();
     // Logout
   };
 
-  let isAuthenticated = false;
-  if(user){
-    isAuthenticated = true;
-  }
+  let isAuthenticated = isLoggedIn();
 
   const authLinks = (
     <ul className="navbar-nav ml-auto">

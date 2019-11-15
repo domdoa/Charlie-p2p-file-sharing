@@ -27,6 +27,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils
                 .commaSeparatedStringToAuthorityList("ROLE_" + "USER");
 
-        return new org.springframework.security.core.userdetails.User(applicationUser.getEmail(), applicationUser.getPassword(), grantedAuthorities);
+        return new org.springframework.security.core.userdetails.User(applicationUser.getUser_id().toString(), applicationUser.getPassword(), grantedAuthorities);
     }
 }

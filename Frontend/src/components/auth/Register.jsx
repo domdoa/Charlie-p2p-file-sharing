@@ -1,19 +1,30 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import TextFieldGroup from "../common/TextFieldGroup";
+import {registerUser} from "../utils/Authorization";
 
-const Register = () => {
+const Register = (props) => {
   const [newUser, setNewUser] = useState({
     email: '',
     password: ''
   });
 
   const onChange = (e) => {
-    setNewUser({ [e.target.name]: e.target.value });
+      setNewUser({
+          ...newUser,
+          [e.target.name]: e.target.value
+      });
   }
 
   const registerNewUser = (e) => {
     e.preventDefault();
     //registerUser(newUser);
+      let data = {
+          email: newUser.email,
+          password: newUser.password
+      };
+
+      let promise = new Promise((resolve, reject) => registerUser(data, resolve, reject));
+      promise.then(() => props.history.push("/"))
   }
 
   return(
