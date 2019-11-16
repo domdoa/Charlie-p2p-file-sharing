@@ -1,5 +1,8 @@
 package com.filesharing.iot.Chord;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,6 +34,7 @@ import java.util.HashMap;
 public class Helper {
 
 	private static HashMap<Integer, Long> powerOfTwo = null;
+    private static Logger logger = LoggerFactory.getLogger(Helper.class);
 
 	/**
 	 * Constructor
@@ -117,8 +121,8 @@ public class Helper {
 	/**
 	 * Normalization, computer universal id's value relative to local id
 	 * (regard local node as 0)
-	 * @param original: original/universal identifier
-	 * @param n: node's identifier
+	 * @param universal: original/universal identifier
+	 * @param local: node's identifier
 	 * @return relative identifier
 	 */
 	public static long computeRelativeId (long universal, long local) {
@@ -142,7 +146,7 @@ public class Helper {
 
 	/**
 	 * 
-	 * @param Generate a long type number's 8-digit hex string
+	 * @param l Generate a long type number's 8-digit hex string
 	 * @return
 	 */
 	public static String longTo8DigitHex (long l) {
@@ -158,7 +162,7 @@ public class Helper {
 	
 	/**
 	 * Return a node's finger[i].start, universal
-	 * @param node: node's identifier
+	 * @param nodeid: node's identifier
 	 * @param i: finger table index
 	 * @return finger[i].start's identifier
 	 */
@@ -185,7 +189,8 @@ public class Helper {
 	 * (2) response is null (typically cannot send request)
 	 * (3) fail to create address from reponse
 	 */
-	public static InetSocketAddress requestAddress (InetSocketAddress server, String req) {
+	public static ForeignPC requestAddress (ForeignPC server, String req) {
+        //logger.info("requestAddress: " + server + " + request " + req);
 
 		// invalid input, return null
 		if (server == null || req == null) {
@@ -193,36 +198,44 @@ public class Helper {
 		}
 
 		// send request to server
-		String response = sendRequest(server, req);
-
+		String response = sendRequest(server.getInetSocketAddress(), req);
+		String springPort = "";
+        //logger.info("requestAddress response " + response);
 		// if response is null, return null
 		if (response == null) {
 			return null;
 		}
 
-		// or server cannot find anything, return server itself 
+		// or server cannot find anything, return server itself
 		else if (response.startsWith("NOTHING"))
 			return server;
+		else if(response.startsWith("FOUNDSUCC")){
+			springPort = response.split(":")[2];
+			server.setSpringPort(springPort);
+			return server;
+        }
 
 		// server find something, 
 		// using response to create, might fail then and return null
 		else {
-			InetSocketAddress ret = Helper.createSocketAddress(response.split("_")[1]);
-			return ret;
+//			if(response.startsWith("FOUNDSUCC")){
+//				springPort = response.split(":")[2];
+//			}
+			return new ForeignPC(Helper.createSocketAddress(response.split("_")[1]), springPort);
 		}
 	}
 
 	/**
 	 * Send request to server and read response
 	 * @param server
-	 * @param request
+	 * @param req
 	 * @return response, might be null if
 	 * (1) invalid input
 	 * (2) cannot open socket or write request to it
 	 * (3) response read by inputStreamToString() is null
 	 */
 	public static String sendRequest(InetSocketAddress server, String req) {
-
+        //logger.info("Sending request to server: " + server + "With request:"+req);
 		// invalid input
 		if (server == null || req == null)
 			return null;
@@ -236,6 +249,7 @@ public class Helper {
 			PrintStream output = new PrintStream(talkSocket.getOutputStream());
 			output.println(req);
 		} catch (IOException e) {
+		    //logger.error("Failed to open socket connection");
 			//System.out.println("\nCannot send request to "+server.toString()+"\nRequest is: "+req+"\n");
 			return null;
 		}
@@ -252,10 +266,11 @@ public class Helper {
 		try {
 			input = talkSocket.getInputStream();
 		} catch (IOException e) {
-			System.out.println("Cannot get input stream from "+server.toString()+"\nRequest is: "+req+"\n");
+			//logger.error("Cannot get input stream from "+server.toString()+"\nRequest is: "+req+"\n");
 		}
 		String response = Helper.inputStreamToString(input);
 
+		//logger.info("Got response from the server:"+server+" Response is:"+response);
 		// try to close socket
 		try {
 			talkSocket.close();
@@ -268,14 +283,15 @@ public class Helper {
 
 	/**
 	 * Create InetSocketAddress using ip address and port number
-	 * @param addr: socket address string, e.g. 127.0.0.1:8080
-	 * @return created InetSocketAddress object; 
+	 * @param addr : socket address string, e.g. 127.0.0.1:8080
+	 * @return created InetSocketAddress object;
 	 * return null if:
 	 * (1) not valid input 
 	 * (2) cannot find split input into ip and port strings
 	 * (3) fail to parse ip address.
 	 */
 	public static InetSocketAddress createSocketAddress (String addr) {
+
 		
 		// input null, return null
 		if (addr == null) {
