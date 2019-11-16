@@ -34,12 +34,9 @@ public class Talker implements Runnable {
             String request = Helper.inputStreamToString(input);
             String response = processRequest(request);
             if (response != null) {
-                if (response.startsWith("SPRING")) {
-                    //local.getLocalAddress().setSpringPort(response.split(" ")[1]);
-                } else {
-                    output = talkSocket.getOutputStream();
-                    output.write(response.getBytes());
-                }
+                output = talkSocket.getOutputStream();
+                output.write(response.getBytes());
+
 
             }
             input.close();
@@ -61,14 +58,14 @@ public class Talker implements Runnable {
             result = local.closest_preceding_finger(id);
             String ip = result.getInetSocketAddress().getAddress().toString();
             int port = result.getInetSocketAddress().getPort();
-            ret = "MYCLOSEST_" + ip + ":" + port;
+            ret = "MYCLOSEST_" + ip + ":" + port + ":" + result.getSpringPort();
             //logger.info("Process request : " + request + " Return: " + ret);
         } else if (request.startsWith("YOURSUCC")) {
             result = local.getSuccessor();
             if (result != null) {
                 String ip = result.getInetSocketAddress().getAddress().toString();
                 int port = result.getInetSocketAddress().getPort();
-                ret = "MYSUCC_" + ip + ":" + port;
+                ret = "MYSUCC_" + ip + ":" + port + ":" + result.getSpringPort();
                 //logger.info("Process request : " + request + " Return: " + ret);
             } else {
                 ret = "NOTHING";
@@ -78,7 +75,7 @@ public class Talker implements Runnable {
             if (result != null) {
                 String ip = result.getInetSocketAddress().getAddress().toString();
                 int port = result.getInetSocketAddress().getPort();
-                ret = "MYPRE_" + ip + ":" + port;
+                ret = "MYPRE_" + ip + ":" + port + ":" + result.getSpringPort();
                 //logger.info("Process request : " + request + " Return: " + ret);
             } else {
                 ret = "NOTHING";

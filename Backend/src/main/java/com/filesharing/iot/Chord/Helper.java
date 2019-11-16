@@ -202,9 +202,12 @@ public class Helper {
 		String springPort = "";
         //logger.info("requestAddress response " + response);
 		// if response is null, return null
+//		System.out.println("----------------------" + response);
 		if (response == null) {
 			return null;
 		}
+
+
 
 		// or server cannot find anything, return server itself
 		else if (response.startsWith("NOTHING"))
@@ -218,9 +221,9 @@ public class Helper {
 		// server find something, 
 		// using response to create, might fail then and return null
 		else {
-//			if(response.startsWith("FOUNDSUCC")){
-//				springPort = response.split(":")[2];
-//			}
+			if(response.startsWith("MYPRE") || response.startsWith("MYSUCC") || response.startsWith("MYCLOSEST")){
+				springPort = response.split(":")[2];
+			}
 			return new ForeignPC(Helper.createSocketAddress(response.split("_")[1]), springPort);
 		}
 	}

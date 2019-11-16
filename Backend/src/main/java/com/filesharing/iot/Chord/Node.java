@@ -122,7 +122,7 @@ public class Node {
 
 		// if other node found, ask it for its successor
 		if (!pre.equals(localAddress))
-			successor.setInetSocketAddress(Helper.requestAddress(pre, "YOURSUCC").getInetSocketAddress());
+			successor = Helper.requestAddress(pre, "YOURSUCC");
 
 		// if ret is still null, set it as local node, return
 		if (successor == null)
@@ -151,7 +151,7 @@ public class Node {
 			ForeignPC pre_n = n;
 
 			// if current node is local node, find my closest
-			if (n.equals(this.localAddress.getInetSocketAddress())) {
+			if (n.equals(this.localAddress)) {
 				n = this.closest_preceding_finger(findid);
 			}
 
@@ -273,7 +273,6 @@ public class Node {
 	 * @param value
 	 */
 	private void updateIthFinger(int i, ForeignPC value) {
-		//System.out.println("SETTTTTTTTTTTTTTTT FINGERRRRRRRRRRRRRRRR" + value);
 		finger.put(i, value);
 
 		// if the updated one is successor, notify the new successor
