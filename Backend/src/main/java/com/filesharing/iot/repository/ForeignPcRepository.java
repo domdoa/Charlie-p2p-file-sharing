@@ -39,4 +39,7 @@ public class ForeignPcRepository {
         Utils.writeToFile(fileName, foreignPCS);
     }
 
+    public String getFileName() {
+        return fileName;
+    }
 }
