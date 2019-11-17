@@ -1,5 +1,6 @@
 package com.filesharing.iot.Chord;
 
+import com.filesharing.iot.models.ForeignPC;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -212,16 +213,16 @@ public class Helper {
 		// or server cannot find anything, return server itself
 		else if (response.startsWith("NOTHING"))
 			return server;
-		else if(response.startsWith("FOUNDSUCC")){
-			springPort = response.split(":")[2];
-			server.setSpringPort(springPort);
-			return server;
-        }
+//		else if(response.startsWith("FOUNDSUCC") || response.startsWith("MYSUCC") || response.startsWith("MYCLOSEST")){
+//			springPort = response.split(":")[2];
+//			server.setSpringPort(springPort);
+//			return server;
+//        }
 
 		// server find something, 
 		// using response to create, might fail then and return null
 		else {
-			if(response.startsWith("MYPRE") || response.startsWith("MYSUCC") || response.startsWith("MYCLOSEST")){
+			if(response.startsWith("MYPRE") || response.startsWith("MYSUCC") || response.startsWith("MYCLOSEST") || response.startsWith("FOUNDSUCC")){
 				springPort = response.split(":")[2];
 			}
 			return new ForeignPC(Helper.createSocketAddress(response.split("_")[1]), springPort);

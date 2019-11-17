@@ -1,6 +1,7 @@
 package com.filesharing.iot.Chord;
 
-import java.net.InetSocketAddress;
+import com.filesharing.iot.models.ForeignPC;
+
 import java.util.Random;
 
 /**

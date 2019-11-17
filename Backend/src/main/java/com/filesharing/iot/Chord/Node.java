@@ -1,6 +1,10 @@
 package com.filesharing.iot.Chord;
 
-import java.net.InetSocketAddress;
+import com.filesharing.iot.models.ForeignPC;
+import com.filesharing.iot.repository.ForeignPcRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.util.HashMap;
 
 /**
@@ -11,6 +15,8 @@ import java.util.HashMap;
  */
 
 public class Node {
+
+	ForeignPcRepository foreignPcRepository = new ForeignPcRepository();
 
 	private long localId;
 	private ForeignPC localAddress;
@@ -121,8 +127,12 @@ public class Node {
 		ForeignPC pre = find_predecessor(id);
 
 		// if other node found, ask it for its successor
-		if (!pre.equals(localAddress))
-			successor = Helper.requestAddress(pre, "YOURSUCC");
+		if (!pre.equals(localAddress)){
+			ForeignPC successorTemp = Helper.requestAddress(pre, "YOURSUCC");
+			successor.setInetSocketAddress(successorTemp.getInetSocketAddress());
+			successor.setSpringPort(successorTemp.getSpringPort());
+		}
+
 
 		// if ret is still null, set it as local node, return
 		if (successor == null)
@@ -247,6 +257,7 @@ public class Node {
 		// valid index in [1, 32], just update the ith finger
 		if (i > 0 && i <= 32) {
 			updateIthFinger(i, value);
+
 		}
 
 		// caller wants to delete
@@ -275,6 +286,11 @@ public class Node {
 	private void updateIthFinger(int i, ForeignPC value) {
 		finger.put(i, value);
 
+		try {
+			foreignPcRepository.save(value != null ? new ForeignPC(value) : null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		// if the updated one is successor, notify the new successor
 		if (i == 1 && value != null && !value.getInetSocketAddress().equals(localAddress.getInetSocketAddress())) {
 			notify(value);
@@ -326,7 +342,7 @@ public class Node {
 				// if p's predecessor is node is just deleted, 
 				// or itself (nothing found in p), or local address,
 				// p is current node's new successor, break
-				if (p_pre.equals(p) || p_pre.equals(localAddress)|| (successor != null &&  p_pre.getInetSocketAddress().equals(successor.getInetSocketAddress()))) {
+				if (p_pre.equals(p) || p_pre.equals(localAddress)|| p_pre.getInetSocketAddress().equals(successor.getInetSocketAddress())) {
 					break;
 				}
 

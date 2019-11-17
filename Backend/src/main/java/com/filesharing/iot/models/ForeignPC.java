@@ -1,4 +1,4 @@
-package com.filesharing.iot.Chord;
+package com.filesharing.iot.models;
 
 import java.io.Serializable;
 import java.net.InetSocketAddress;
@@ -11,6 +11,11 @@ public class ForeignPC implements Serializable {
     public ForeignPC(InetSocketAddress inetSocketAddress, String springPort) {
         this.inetSocketAddress = inetSocketAddress;
         this.springPort = springPort;
+    }
+
+    public ForeignPC(ForeignPC pc) {
+        this.inetSocketAddress = pc.getInetSocketAddress();
+        this.springPort = pc.getSpringPort();
     }
 
     public InetSocketAddress getInetSocketAddress() {
@@ -47,5 +52,9 @@ public class ForeignPC implements Serializable {
     public String toString() {
         return "socketAddress=" + inetSocketAddress +
                 ", springPort=" + springPort;
+    }
+
+    public String writeToFile() {
+        return inetSocketAddress.getAddress().toString() + ":" + inetSocketAddress.getPort() + ":" + springPort;
     }
 }

@@ -1,7 +1,8 @@
 package com.filesharing.iot.Chord;
 
+import com.filesharing.iot.models.ForeignPC;
+
 import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
@@ -49,9 +50,6 @@ public class Chord {
             if (m_contact == null) {
                 System.out.println("Cannot find address you are trying to contact. Now exit.");
                 return;
-            } else {
-                String request = System.getProperty("server.port") != null ? "SPRING " + System.getProperty("server.port") : "SPRING 8080";
-//                Helper.sendRequest(m_contact.getInetSocketAddress(), request);
             }
         } else {
             System.out.println("Wrong input. Now exit.");

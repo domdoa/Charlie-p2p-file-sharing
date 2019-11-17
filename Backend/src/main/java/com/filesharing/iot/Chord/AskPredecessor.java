@@ -1,6 +1,6 @@
 package com.filesharing.iot.Chord;
 
-import java.net.InetSocketAddress;
+import com.filesharing.iot.models.ForeignPC;
 
 /**
  * Ask predecessor thread that periodically asks for predecessor's keep-alive,

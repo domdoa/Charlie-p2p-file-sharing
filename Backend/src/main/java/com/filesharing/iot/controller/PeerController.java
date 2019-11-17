@@ -2,6 +2,9 @@ package com.filesharing.iot.controller;
 
 import com.filesharing.iot.models.File;
 import com.filesharing.iot.models.Peer;
+import com.filesharing.iot.repository.ForeignPcRepository;
+import com.filesharing.iot.repository.PeerRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,19 +15,36 @@ import java.util.List;
 @RestController
 @RequestMapping("/peers")
 public class PeerController {
+    @Autowired
+    PeerRepository peerRepository;
+    @Autowired
+    ForeignPcRepository foreignPcRepository;
+
     List<Peer> peersList = new ArrayList<>();
 
     @PostMapping
     public ResponseEntity addPeer(@RequestBody Peer peer){
+        peerRepository.save(peer);
+
         peersList.add(peer);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/sad")
+    public void asd(){
+        try {
+            foreignPcRepository.getForeignPCS();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @GetMapping("/files")
     public ResponseEntity<List<File>> getAllFileMetadatas() {
 
         List<File> files = new ArrayList<>();
-        peersList.stream().forEach(el -> files.addAll(el.getFileList()));
+        peerRepository.getPeers().forEach(el -> files.addAll(el.getFileList()));
         return new ResponseEntity<>(files, HttpStatus.OK);
     }
 
@@ -33,7 +53,7 @@ public class PeerController {
         File file = new File();
         List<File> files = new ArrayList<>();
 
-        peersList.stream().forEach(el -> files.addAll(el.getFileList()));
+        peerRepository.getPeers().forEach(el -> files.addAll(el.getFileList()));
         for (File f : files) {
             if (f.getId() == file_id)
                 file = f;
@@ -45,7 +65,7 @@ public class PeerController {
     // C U D files
     @PostMapping("/files")
     public ResponseEntity addFilesToPeer(@RequestBody List<File> files, @RequestParam long peer_id) {
-        Peer peer = peersList.stream()
+        Peer peer = peerRepository.getPeers().stream()
                 .filter(el -> el.getUser_id().equals(peer_id))
                 .findFirst()
                 .orElse(null);
@@ -59,7 +79,7 @@ public class PeerController {
 
     @DeleteMapping("/files")
     public ResponseEntity removeFileFromPeer(@RequestBody File file, @RequestParam long peer_id) {
-        Peer peer = peersList.stream()
+        Peer peer = peerRepository.getPeers().stream()
                 .filter(el -> el.getUser_id().equals(peer_id))
                 .findFirst()
                 .orElse(null);
@@ -73,7 +93,7 @@ public class PeerController {
 
     @PutMapping("/file")
     public ResponseEntity updateFileOfPeer(@RequestBody File file, @RequestBody String fileName, @RequestParam long peer_id) {
-        Peer peer = peersList.stream()
+        Peer peer = peerRepository.getPeers().stream()
                 .filter(el -> el.getUser_id().equals(peer_id))
                 .findFirst()
                 .orElse(null);

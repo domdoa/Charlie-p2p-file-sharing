@@ -1,6 +1,6 @@
 package com.filesharing.iot.Chord;
 
-import java.net.InetSocketAddress;
+import com.filesharing.iot.models.ForeignPC;
 
 /**
  * Stabilize thread that periodically asks successor for its predecessor
