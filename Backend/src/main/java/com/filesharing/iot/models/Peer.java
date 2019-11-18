@@ -2,6 +2,7 @@ package com.filesharing.iot.models;
 
 import lombok.*;
 
+import javax.persistence.Entity;
 import java.util.List;
 import java.util.stream.Collectors;
 

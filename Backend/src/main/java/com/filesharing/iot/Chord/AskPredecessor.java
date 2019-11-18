@@ -1,6 +1,6 @@
 package com.filesharing.iot.Chord;
 
-import java.net.InetSocketAddress;
+import com.filesharing.iot.models.ForeignPC;
 
 /**
  * Ask predecessor thread that periodically asks for predecessor's keep-alive,
@@ -21,9 +21,9 @@ public class AskPredecessor extends Thread {
 	@Override
 	public void run() {
 		while (alive) {
-			InetSocketAddress predecessor = local.getPredecessor();
+			ForeignPC predecessor = local.getPredecessor();
 			if (predecessor != null) {
-				String response = Helper.sendRequest(predecessor, "KEEP");
+				String response = Helper.sendRequest(predecessor.getInetSocketAddress(), "KEEP");
 				if (response == null || !response.equals("ALIVE")) {
 					local.clearPredecessor();	
 				}
