@@ -9,11 +9,16 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class PeerSocket extends Thread {
 
+    public Socket getClientSocket() {
+        return clientSocket;
+    }
+
     private Socket clientSocket;
     private PrintWriter out;
     private DataInputStream in;
     private String message;
     private DownloadManager downloadManager;
+    private static final Object LOCK = new Object();
 
     public PeerSocket(String ip, int port, DownloadManager manager) {
         try{
@@ -50,6 +55,7 @@ public class PeerSocket extends Thread {
 
     public byte[] sendMessage(String msg) throws Exception {
         out.write(msg);
+        out.flush();
         int length = in.readInt();
         byte[] result = null;
         if(length > 0){
@@ -77,7 +83,9 @@ public class PeerSocket extends Thread {
     }
 
     private synchronized void removeReceivedSegmentSafely(int segment){
-        downloadManager.getRemainingSegments().remove(segment);
+        synchronized (LOCK){
+            downloadManager.getRemainingSegments().remove(segment);
+        }
     }
 
 }

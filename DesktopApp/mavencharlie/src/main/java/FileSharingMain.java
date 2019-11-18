@@ -35,7 +35,7 @@ public class FileSharingMain extends Application {
 
         // TODO: Start the local fileserver to serve those peers who want to download
         FileServer fileServer = new FileServer();
-        /*Thread t =*/ new Thread(fileServer).start();
+        /*Thread t =*/  new Thread(fileServer).start();
         //t.start();
 
         // Create a peer which can "download" test.txt from the fileserver
@@ -44,10 +44,10 @@ public class FileSharingMain extends Application {
         file.setExtension("txt");
         file.setSize(3495);
         List<Peer> peers = new ArrayList<>();
-        //peers.add(new Peer(InetAddress.getLocalHost().getHostAddress(),fileServer.getServerSocket().getLocalPort()));
-        //System.out.println("Peer address: " + peers.get(0).getIpAddress());
-        //System.out.println("Peer port: " + peers.get(0).getPort());
-        //new DownloadManager(file,peers).start();
+        peers.add(new Peer(InetAddress.getLocalHost().getHostAddress(),fileServer.getServerSocket().getLocalPort()));
+        System.out.println("Peer address: " + peers.get(0).getIpAddress());
+        System.out.println("Peer port: " + peers.get(0).getPort());
+        new DownloadManager(file,peers).start();
 
     }
 

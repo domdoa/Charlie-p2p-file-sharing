@@ -9,7 +9,7 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class FileServer implements Runnable /*extends Thread */{
+public class FileServer implements Runnable /*extends Thread*/ {
 
     private ServerSocket serverSocket;
 
@@ -24,7 +24,7 @@ public class FileServer implements Runnable /*extends Thread */{
 
     public void start(int port) throws Exception {
         try{
-            serverSocket = new ServerSocket(port, 0, InetAddress.getLocalHost());
+            serverSocket = new ServerSocket(port/*, 0, InetAddress.getLocalHost()*/);
             //System.out.println("FileServer InetAddress: " + serverSocket.getInetAddress().getHostAddress());
             //System.out.println("FileServer LocalSocketAddress: " + serverSocket.getLocalSocketAddress());
             System.out.println("Local address: " + InetAddress.getLocalHost().getHostAddress());
@@ -33,8 +33,9 @@ public class FileServer implements Runnable /*extends Thread */{
             // Notify the backend that this peer become available
             //new ServerConnection().notifyActualPeerIsOnline(InetAddress.getLocalHost().getHostAddress(),serverSocket.getLocalPort());
 
-            while (true)
+            while (true){
                 new EchoClientHandler(serverSocket.accept()).start();
+            }
         } catch (Exception e){
             e.printStackTrace();
         } finally {
@@ -71,6 +72,7 @@ public class FileServer implements Runnable /*extends Thread */{
                         new InputStreamReader(clientSocket.getInputStream()));
 
                 String inputLine;
+                System.out.println("Connected socket: "+ clientSocket.getInetAddress() +"\t" + clientSocket.getPort());
                 while ((inputLine = in.readLine()) != null) {
                     System.out.println("FileServer input message: " + inputLine);
                     if (inputLine.contains("DOWNLOAD")) {

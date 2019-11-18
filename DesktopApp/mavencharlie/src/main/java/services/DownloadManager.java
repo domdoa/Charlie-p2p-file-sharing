@@ -44,12 +44,15 @@ public class DownloadManager extends Thread{
         System.out.println("For "+ fileMetadata.getFileName()+ " there are this many bounds: " + remainingSegments.size());
 
         createFileWithSubdirectoryAndAllocateSpace();
-        for (Peer availablePeer : availablePeers)
+        for (Peer availablePeer : availablePeers){
             sockets.add(new PeerSocket(availablePeer.getIpAddress(), availablePeer.getPort(), this));
+            System.out.println("Peer port: " + availablePeer.getPort());
+        }
         System.out.println("Peer sockets created. Number of peer sockets: " + sockets.size());
-        for (PeerSocket socket: sockets)
+        for (PeerSocket socket: sockets){
             socket.start();
-        System.out.println("Sockets started...");
+            System.out.println("Socket started on:"+ socket.getClientSocket().getInetAddress() + " and port: " + socket.getClientSocket().getPort());
+        }
     }
 
     @Override
