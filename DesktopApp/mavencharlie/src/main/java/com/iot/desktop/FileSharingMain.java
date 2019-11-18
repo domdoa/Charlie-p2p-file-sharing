@@ -1,30 +1,31 @@
-import helpers.PublicIPAddressResolver;
+package com.iot.desktop;
+
+import com.iot.desktop.helpers.PublicIPAddressResolver;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import helpers.FileSerializer;
-import models.FileMetadata;
-import models.Peer;
-import network.FileServer;
-import network.PeerSocket;
-import network.ServerConnection;
-import services.DownloadManager;
+import com.iot.desktop.helpers.FileSerializer;
+import com.iot.desktop.models.FileMetadata;
+import com.iot.desktop.models.Peer;
+import com.iot.desktop.network.FileServer;
+import com.iot.desktop.network.ServerConnection;
+import com.iot.desktop.services.DownloadManager;
 
-import java.io.File;
 import java.net.InetAddress;
-import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class FileSharingMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        FileServer fileServer = new FileServer(); // start thread here so it has time to load
+        Thread t =  new Thread(fileServer);
+        t.start();
+
         Parent root = FXMLLoader.load(getClass().getResource("/rootView.fxml"));
         primaryStage.setTitle("P2PBit");
         primaryStage.setScene(new Scene(root, 600, 550));
@@ -34,9 +35,7 @@ public class FileSharingMain extends Application {
         HashMap<String,String> metadatas = new FileSerializer().readFromFile();
 
         // TODO: Start the local fileserver to serve those peers who want to download
-        FileServer fileServer = new FileServer();
-        /*Thread t =*/  new Thread(fileServer).start();
-        //t.start();
+
 
         // Create a peer which can "download" test.txt from the fileserver
         FileMetadata file = new FileMetadata();

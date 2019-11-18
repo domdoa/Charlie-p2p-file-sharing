@@ -1,4 +1,4 @@
-package helpers;
+package com.iot.desktop.helpers;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

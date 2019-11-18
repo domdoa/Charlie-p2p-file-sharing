@@ -1,9 +1,8 @@
-package network;
+package com.iot.desktop.network;
 
-import helpers.FileProviderForPeers;
-import helpers.PublicIPAddressResolver;
+import com.iot.desktop.helpers.FileProviderForPeers;
+import com.iot.desktop.helpers.PublicIPAddressResolver;
 
-import javax.activation.DataHandler;
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;

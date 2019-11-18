@@ -1,9 +1,8 @@
-package network;
+package com.iot.desktop.network;
 
 
-import helpers.FileSerializer;
-import models.Peer;
-import okhttp3.OkHttpClient;
+import com.iot.desktop.helpers.FileSerializer;
+import com.iot.desktop.models.Peer;
 
 import java.io.*;
 import java.net.HttpURLConnection;

@@ -1,4 +1,4 @@
-package controllers;
+package com.iot.desktop.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

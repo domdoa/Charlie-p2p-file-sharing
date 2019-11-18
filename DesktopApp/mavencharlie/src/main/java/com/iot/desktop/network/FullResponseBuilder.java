@@ -1,4 +1,4 @@
-package network;
+package com.iot.desktop.network;
 
 import java.io.BufferedReader;
 import java.io.IOException;

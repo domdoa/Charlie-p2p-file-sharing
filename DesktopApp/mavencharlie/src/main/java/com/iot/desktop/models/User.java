@@ -1,4 +1,4 @@
-package models;
+package com.iot.desktop.models;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package main;
+package com.iot.desktop.main;
 
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;

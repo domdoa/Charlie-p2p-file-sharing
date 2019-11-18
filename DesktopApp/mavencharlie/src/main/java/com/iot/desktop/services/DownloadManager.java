@@ -1,19 +1,15 @@
-package services;
+package com.iot.desktop.services;
 
-import helpers.FileProviderForPeers;
-import helpers.FileSerializer;
-import models.FileMetadata;
-import models.Peer;
-import network.PeerSocket;
+import com.iot.desktop.helpers.FileProviderForPeers;
+import com.iot.desktop.helpers.FileSerializer;
+import com.iot.desktop.models.FileMetadata;
+import com.iot.desktop.models.Peer;
+import com.iot.desktop.network.PeerSocket;
 
 import java.io.File;
 import java.io.RandomAccessFile;
-import java.net.Socket;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * This class responsible to manage the file downloading request

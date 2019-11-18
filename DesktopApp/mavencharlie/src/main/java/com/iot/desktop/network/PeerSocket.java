@@ -1,7 +1,7 @@
-package network;
+package com.iot.desktop.network;
 
-import helpers.FileProviderForPeers;
-import services.DownloadManager;
+import com.iot.desktop.helpers.FileProviderForPeers;
+import com.iot.desktop.services.DownloadManager;
 
 import java.io.*;
 import java.net.Socket;

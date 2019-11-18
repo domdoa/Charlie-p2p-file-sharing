@@ -1,13 +1,12 @@
-package controllers;
+package com.iot.desktop.controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import models.DownloadFileModel;
+import com.iot.desktop.models.DownloadFileModel;
 
-import java.lang.reflect.Parameter;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
