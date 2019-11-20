@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 // Components
 import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
 import Frontpage from "./components/layout/Frontpage";
 import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
@@ -33,7 +32,6 @@ function App() {
                 <Route path="/files" component={Files}/>
                 <Route component={NotFound}/>
             </Switch>
-            <Footer/>
         </Router>
     );
 }
