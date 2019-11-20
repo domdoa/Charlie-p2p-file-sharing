@@ -15,7 +15,7 @@ public class SchedulerConfig {
 
     @Scheduled(fixedDelay = 3000)
     @SendTo("/topic/messages")
-    public void sendPong() {
+    public void sendMessage() {
         template.convertAndSend("/topic/messages", "message (scheduled)");
     }
 }
