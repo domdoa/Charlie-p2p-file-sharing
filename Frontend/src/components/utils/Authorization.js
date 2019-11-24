@@ -58,6 +58,11 @@ export const logUser = (data, resolve, reject) => {
 
 export const registerUser = (data, resolve, reject) => {
     let url = localhostHttp + REGISTER; // URL
+    if (data.group)
+        url += "?groupName=" + data.group;
+    else
+        url += "?inviteString=" + data.inviteString;
+    console.log(data)
     fetch(url, {
         method: "POST",
         body: JSON.stringify(data),
@@ -66,6 +71,13 @@ export const registerUser = (data, resolve, reject) => {
         }
     })
         .then(res => res.clone().json())
-        .then(response => resolve())
-        .catch(e => {reject()}); // error
+        .then(response => {
+            if( response && (response.Error || response.status) )
+                reject();
+            else
+                resolve(response);
+        })
+        .catch(e => {
+            reject()
+        }); // error
 };
