@@ -1,12 +1,19 @@
 package com.iot.desktop.helpers;
 
+import com.iot.desktop.models.DownloadFileModel;
+import com.iot.desktop.models.UploadFileModel;
+
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FileSerializer {
 
     public static Map<String, String> metaDatas = new HashMap<>();
+    public static List<DownloadFileModel> downloadedFiles = new ArrayList<>();
+    public static List<UploadFileModel> uploadedFiles = new ArrayList<>();
 
     public FileSerializer() {
         metaDatas.put("path", System.getProperty("user.dir") + "//metadata.ser");

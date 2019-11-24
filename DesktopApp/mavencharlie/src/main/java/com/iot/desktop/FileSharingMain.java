@@ -30,6 +30,7 @@ import java.util.Scanner;
 public class FileSharingMain extends Application {
 
     private static String URL = "ws://localhost:8080/desktop";
+    public static int serverSocketPort;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -42,21 +43,11 @@ public class FileSharingMain extends Application {
         primaryStage.setScene(new Scene(root, 600, 550));
         primaryStage.show();
 
-        // TODO: Deserialize metadatas from the file
+        // Deserialize metadatas from the file
         HashMap<String,String> metadatas = new FileSerializer().readFromFile();
 
-        new Thread(new FileSystemWatcher(Paths.get("C:/Users/totha/TEST"), true)).start();
-
-        // Create a peer which can "download" test.txt from the fileserver
-        FileMetadata file = new FileMetadata();
-        file.setFileName("photo");
-        file.setExtension("jpg");
-        file.setSize(1583860);
-        List<Peer> peers = new ArrayList<>();
-        peers.add(new Peer(InetAddress.getLocalHost().getHostAddress(),fileServer.getServerSocket().getLocalPort()));
-        System.out.println("Peer address: " + peers.get(0).getIpAddress());
-        System.out.println("Peer port: " + peers.get(0).getPort());
-        new DownloadManager(file,peers).start();
+        // Observe the default directory for changes
+        //new Thread(new FileSystemWatcher(Paths.get(FileSerializer.metaDatas.get("defaultDir")), true)).start();
 
         Thread t1 = new Thread(new Runnable() {
             @Override
@@ -75,6 +66,8 @@ public class FileSharingMain extends Application {
             }
         });
         t1.start();
+
+        serverSocketPort = fileServer.getServerSocket().getLocalPort();
     }
 
     @Override

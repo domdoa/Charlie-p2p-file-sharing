@@ -4,6 +4,7 @@ import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 
 /**
  * This class is responsible for consume reading and writing for specific positions in a file
@@ -11,7 +12,7 @@ import java.nio.channels.FileChannel;
  */
 public class FileProviderForPeers {
 
-    public static int DOWNLOAD_UNIT = 2048;
+    public static int DOWNLOAD_UNIT = 4096;
 
     public FileProviderForPeers(){}
 
@@ -44,10 +45,10 @@ public class FileProviderForPeers {
     }
 
     //TODO: Pass the metadata also as parameter
-    public  void writeSpecificPositionOfFile(String fileName, int segment, byte[] bytes) throws Exception{
+    public  void writeSpecificPositionOfFile(String fileName, String extension, int segment, byte[] bytes) throws Exception{
         String defaultDir = FileSerializer.metaDatas.getOrDefault("defaultDir" , "");
         if(!defaultDir.equals("")){
-            String fullPath = defaultDir + "/" + fileName + "/" + fileName + ".jpg"; //+ "." + fileMetadata.getExtension()
+            String fullPath = defaultDir + "/" + fileName + "/" + fileName + "." + extension;
             try (RandomAccessFile writer = new RandomAccessFile(fullPath, "rw");
                  FileChannel channel = writer.getChannel()){
                 ByteBuffer buff = ByteBuffer.wrap(bytes);

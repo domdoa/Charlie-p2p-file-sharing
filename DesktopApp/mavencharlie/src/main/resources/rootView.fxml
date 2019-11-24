@@ -35,9 +35,8 @@
             <TableView fx:id="uploadTable" layoutX="52.0" layoutY="318.0" prefHeight="200.0" prefWidth="408.0">
               <columns>
                 <TableColumn fx:id="uploadFile" prefWidth="75.0" text="File name" />
-                <TableColumn fx:id="uploadSize" prefWidth="75.0" text="Size" />
+                <TableColumn fx:id="uploadSize" prefWidth="75.0" text="Size (bytes)" />
                 <TableColumn fx:id="uploadDate" prefWidth="75.0" text="Date" />
-                  <TableColumn fx:id="uploadNumberOfDownloads" prefWidth="75.0" text="Nr. downloads" />
               </columns>
             </TableView>
          </children></AnchorPane>

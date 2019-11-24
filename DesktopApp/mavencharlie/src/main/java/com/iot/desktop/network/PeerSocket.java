@@ -44,7 +44,8 @@ public class PeerSocket extends Thread {
                 byte[] result = sendMessage(message);
                 if(result != null){
                     removeReceivedSegmentSafely(newSegmentIndex);
-                    new FileProviderForPeers().writeSpecificPositionOfFile(downloadManager.getFileMetadata().getFileName(), newSegment, result);
+                    new FileProviderForPeers().writeSpecificPositionOfFile(
+                            downloadManager.getFileMetadata().getFileName(),downloadManager.getFileMetadata().getExtension(), newSegment, result);
                 }
             }catch (Exception e){
                 e.printStackTrace();
@@ -79,10 +80,10 @@ public class PeerSocket extends Thread {
     }
 
     private Integer getNewRandomSegmentIndex() {
-        if(downloadManager.getRemainingSegments().size() > 0)
-            return ThreadLocalRandom.current().nextInt(downloadManager.getRemainingSegments().size() /*-1*/);
-        else
-            return Integer.MIN_VALUE;
+            if(downloadManager.getRemainingSegments().size() > 0)
+                return ThreadLocalRandom.current().nextInt(downloadManager.getRemainingSegments().size() /*-1*/);
+            else
+                return Integer.MIN_VALUE;
     }
 
     private synchronized void removeReceivedSegmentSafely(int segmentIndex){

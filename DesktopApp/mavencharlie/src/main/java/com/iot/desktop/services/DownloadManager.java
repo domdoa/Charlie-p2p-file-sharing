@@ -1,7 +1,10 @@
 package com.iot.desktop.services;
 
+import com.iot.desktop.controllers.RootController;
 import com.iot.desktop.helpers.FileProviderForPeers;
 import com.iot.desktop.helpers.FileSerializer;
+import com.iot.desktop.main.Root;
+import com.iot.desktop.models.DownloadFileModel;
 import com.iot.desktop.models.FileMetadata;
 import com.iot.desktop.models.Peer;
 import com.iot.desktop.network.PeerSocket;
@@ -50,26 +53,51 @@ public class DownloadManager extends Thread{
             socket.start();
             System.out.println("Socket started on:"+ socket.getClientSocket().getInetAddress() + " and port: " + socket.getClientSocket().getPort());
         }
+
+        DownloadFileModel dm = new DownloadFileModel(file.getFileName(), file.getSize(),"0%" ," - " );
+        RootController.downloadedFiles.add(dm);
     }
 
     @Override
     public void run() {
+        long start = System.currentTimeMillis();
+        long arrivedBytesForProgress = 0;
         while (remainingSegments.size() != 0){
             try{
                 Thread.sleep(1000);
-                long sumOfArrivedBytes = 0;
+                long arrivedBytesForSpeed = 0;
                 synchronized (LOCK){
                     for (PeerSocket peerSocket: sockets){
-                        sumOfArrivedBytes += peerSocket.getArrivedBytes();
+                        arrivedBytesForSpeed += peerSocket.getArrivedBytes();
+                        arrivedBytesForProgress += peerSocket.getArrivedBytes();
                         peerSocket.setArrivedBytes(0);
                     }
-                    System.out.println("Download speed: " + (double)(sumOfArrivedBytes / 1000) + "kB/s");
+                    double speed = (double) arrivedBytesForSpeed / 1000;
+                    double progress = (double) arrivedBytesForProgress / fileMetadata.getSize() * 100;
+                    System.out.println("Download speed: " + speed + "kB/s");
+                    for (int i = 0; i < RootController.downloadedFiles.size(); i++){
+                        if (RootController.downloadedFiles.get(i).getFileName().equals(fileMetadata.getFileName())){
+                            DownloadFileModel dm = RootController.downloadedFiles.get(i);
+                            RootController.downloadedFiles.remove(i);
+                            dm.setProgress(String.format("%.2f",progress) + "%");
+                            if(dm.getProgress().equals("100.00%")){
+                                dm.setSpeed(" - ");
+                            }else{
+                                dm.setSpeed(speed + " kB/s");
+                            }
+                            RootController.downloadedFiles.add(i, dm);
+                            break;
+                        }
+                    }
+
                 }
             }catch (Exception e){
                 e.printStackTrace();
             }
         }
         System.out.println("All segments arrived. DownloadManager will be stopped.");
+        System.out.println("Download time: " + (System.currentTimeMillis()-start) + "ms");
+
     }
 
     private void createFileWithSubdirectoryAndAllocateSpace(){
