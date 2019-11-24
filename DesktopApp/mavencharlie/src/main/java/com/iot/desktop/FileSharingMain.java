@@ -55,17 +55,26 @@ public class FileSharingMain extends Application {
         System.out.println("Peer port: " + peers.get(0).getPort());
         new DownloadManager(file,peers).start();
 
-        //Websocket and stom client
-        WebSocketClient client = new StandardWebSocketClient();
-        WebSocketStompClient stompClient = new WebSocketStompClient(client);
-        //Convert to string
-        stompClient.setMessageConverter(new StringMessageConverter());
-        //Used for converting models
-        //stompClient.setMessageConverter(new MappingJackson2MessageConverter());
 
-        StompSessionHandler sessionHandler = new MyStompSessionHandler();
-        stompClient.connect(URL, sessionHandler);;
-        new Scanner(System.in).nextLine(); // Don't close immediately.
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // code goes here.
+                WebSocketClient client = new StandardWebSocketClient();
+                WebSocketStompClient stompClient = new WebSocketStompClient(client);
+                //Convert to string
+                stompClient.setMessageConverter(new StringMessageConverter());
+                //Used for converting models
+                //stompClient.setMessageConverter(new MappingJackson2MessageConverter());
+
+                StompSessionHandler sessionHandler = new MyStompSessionHandler();
+                stompClient.connect(URL, sessionHandler);;
+                new Scanner(System.in).nextLine(); // Don't close immediately.
+            }
+        });
+        t1.start();
+        //Websocket and stom client
+
     }
 
 
