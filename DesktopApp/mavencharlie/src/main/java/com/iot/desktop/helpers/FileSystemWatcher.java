@@ -1,10 +1,15 @@
 package com.iot.desktop.helpers;
 
+import com.iot.desktop.controllers.RootController;
+import com.iot.desktop.models.FileMetadata;
+import com.iot.desktop.models.UploadFileModel;
+import com.iot.desktop.network.ServerServiceImpl;
+
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 import static java.nio.file.StandardWatchEventKinds.*;
@@ -112,7 +117,26 @@ public class FileSystemWatcher implements Runnable {
                 System.out.format("%s: %s\n", event.kind().name(), child);
                 // TODO: Switch case for the kind and send the appropiate request
                 if (ENTRY_CREATE.equals(kind)) {
-                    //new ServerServiceImpl().addFilesToPeer();
+                    boolean unique = true;
+                    File uploaded = child.toFile();
+                    for (int i=0; i< FileSerializer.downloadedFiles.size(); i++){
+                        FileMetadata file =FileSerializer.downloadedFiles.get(i);
+                        if ((file.getFileName()+"."+file.getExtension()).equals(name.toString())){
+                            unique = false;
+                            break;
+                        }
+                    }
+                    String names = name.toString();
+                    String[] nameExt = names.split("\\.");
+                    if (unique && nameExt.length == 2){
+                        FileMetadata fm = new FileMetadata(null, null,null,nameExt[0], nameExt[1], uploaded.length(),null);
+                        FileSerializer.uploadedFiles.add(fm);
+                        UploadFileModel ufm = new UploadFileModel(uploaded.getName(), Long.toString(uploaded.length()), new Date(System.currentTimeMillis()));
+                        RootController.uploadedFiles.add(ufm);
+                    }
+                    // Necessary peer Id somehow get it
+                    com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(0,0, nameExt[0], nameExt[1], null, Long.toString(uploaded.length()));
+                    new ServerServiceImpl().addFilesToPeer(Collections.singletonList(file), 1);
                 } else if (ENTRY_MODIFY.equals(kind)) {
 
                 } else if (ENTRY_DELETE.equals(kind)) {

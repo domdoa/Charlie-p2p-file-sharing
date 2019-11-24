@@ -47,7 +47,7 @@ public class FileSharingMain extends Application {
         HashMap<String,String> metadatas = new FileSerializer().readFromFile();
 
         // Observe the default directory for changes
-        //new Thread(new FileSystemWatcher(Paths.get(FileSerializer.metaDatas.get("defaultDir")), true)).start();
+        new Thread(new FileSystemWatcher(Paths.get(FileSerializer.metaDatas.get("defaultDir")), true)).start();
 
         Thread t1 = new Thread(new Runnable() {
             @Override

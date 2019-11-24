@@ -161,6 +161,7 @@ public class ServerServiceImpl {
             }
             @Override
             public void onFailure(Call call, Throwable throwable) {
+                System.out.println("File upload call failed.");
                 throwable.printStackTrace();
             }
         });

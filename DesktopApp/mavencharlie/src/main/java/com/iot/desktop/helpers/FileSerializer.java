@@ -19,6 +19,7 @@ public class FileSerializer {
     public FileSerializer() {
         metaDatas.put("path", System.getProperty("user.dir") + "//metadata.ser");
         metaDatas.put("defaultDir", System.getProperty("user.dir")+ "/CharlieP2PDownloads");
+        metaDatas.put("BASE_URL", "http://localhost:8080");
         createDefaultDirectoryIfNotExists();
     }
 

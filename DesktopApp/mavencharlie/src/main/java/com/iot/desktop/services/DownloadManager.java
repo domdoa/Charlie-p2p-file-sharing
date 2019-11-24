@@ -34,6 +34,10 @@ public class DownloadManager extends Thread{
         this.remainingSegments = new ArrayList<>();
         this.sockets = new ArrayList<>();
 
+        DownloadFileModel dm = new DownloadFileModel(file.getFileName(), file.getSize(),"0%" ," - " );
+        FileSerializer.downloadedFiles.add(file);
+        RootController.downloadedFiles.add(dm);
+
         System.out.println("Download manager constructor called.");
         long bound = fileMetadata.getSize() % FileProviderForPeers.DOWNLOAD_UNIT == 0
                 ? fileMetadata.getSize() / FileProviderForPeers.DOWNLOAD_UNIT
@@ -53,10 +57,6 @@ public class DownloadManager extends Thread{
             socket.start();
             System.out.println("Socket started on:"+ socket.getClientSocket().getInetAddress() + " and port: " + socket.getClientSocket().getPort());
         }
-
-        DownloadFileModel dm = new DownloadFileModel(file.getFileName(), file.getSize(),"0%" ," - " );
-        RootController.downloadedFiles.add(dm);
-        FileSerializer.downloadedFiles.add(file);
     }
 
     @Override
@@ -84,13 +84,12 @@ public class DownloadManager extends Thread{
                             if(dm.getProgress().equals("100.00%")){
                                 dm.setSpeed(" - ");
                             }else{
-                                dm.setSpeed(speed + " kB/s");
+                                dm.setSpeed(String.format("%.2f", speed) + " kB/s");
                             }
                             RootController.downloadedFiles.add(i, dm);
                             break;
                         }
                     }
-
                 }
             }catch (Exception e){
                 e.printStackTrace();
