@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-public class FileSharingMain extends Application implements Runnable {
+public class FileSharingMain extends Application {
 
     private static String URL = "ws://localhost:8080/desktop";
 
@@ -58,20 +58,23 @@ public class FileSharingMain extends Application implements Runnable {
         System.out.println("Peer port: " + peers.get(0).getPort());
         new DownloadManager(file,peers).start();
 
-        //Websocket and stom client
-        WebSocketClient client = new StandardWebSocketClient();
-        WebSocketStompClient stompClient = new WebSocketStompClient(client);
-        //Convert to string
-        stompClient.setMessageConverter(new StringMessageConverter());
-        //Used for converting models
-        //stompClient.setMessageConverter(new MappingJackson2MessageConverter());
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // code goes here.
+                WebSocketClient client = new StandardWebSocketClient();
+                WebSocketStompClient stompClient = new WebSocketStompClient(client);
+                //Convert to string
+                stompClient.setMessageConverter(new StringMessageConverter());
+                //Used for converting models
+                //stompClient.setMessageConverter(new MappingJackson2MessageConverter());
 
-        StompSessionHandler sessionHandler = new MyStompSessionHandler();
-        stompClient.connect(URL, sessionHandler);;
-        new Scanner(System.in).nextLine(); // Don't close immediately.
-
-        List<File> filelist = (List<File>) FileUtils.listFiles(new File(FileSerializer.metaDatas.get("defaultDir")), null, true);
-
+                StompSessionHandler sessionHandler = new MyStompSessionHandler();
+                stompClient.connect(URL, sessionHandler);;
+                new Scanner(System.in).nextLine(); // Don't close immediately.
+            }
+        });
+        t1.start();
     }
 
     @Override
@@ -81,14 +84,10 @@ public class FileSharingMain extends Application implements Runnable {
         new FileSerializer().writeToFile();
         // TODO: Notify the backend that this peer is not available anymore
         //new ServerConnection().notifyActualPeerIsOffline();
+
     }
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-    @Override
-    public void run() {
-        main(null);
     }
 }
