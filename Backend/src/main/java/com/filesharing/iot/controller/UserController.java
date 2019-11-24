@@ -41,5 +41,4 @@ public class UserController {
         return new ResponseEntity<>(userRepository.findByUserId(user_id).getGroups(), HttpStatus.OK);
     }
 
-
 }

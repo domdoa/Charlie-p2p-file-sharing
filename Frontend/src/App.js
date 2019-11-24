@@ -12,18 +12,14 @@ import {isLoggedIn} from "./components/utils/Authorization";
 
 
 function App() {
-    const [message, setMessage] = useState("");
-
     useEffect(() => {
-        // const socket = socketIOClient(localhostSocket);
-        // socket.on("FromAPI", data => setMessage(data));
+
 
         isLoggedIn();
     }, []);
 
     return (
         <Router>
-            <p>{message ? message : 'Loading...'}</p>
             <Navbar/>
             <Switch>
                 <Route exact path="/" component={Frontpage}/>

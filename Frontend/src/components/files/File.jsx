@@ -1,13 +1,29 @@
 import React from "react";
+import peerService from '../../services/Peer';
+import { getUserId } from "../utils/Authorization";
 
-const File = () => {
+const File = ({file}, key) => {
+  const downloadFile = (file) => {
+    //Check if current user is a peer
+    console.log(getUserId());
+
+    peerService
+      .getAllPeersWithAFileFromAllServers(file)
+      .then(request => {
+        console.log(request.data);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
   return (
-    <tr>
-      <td>Test file</td>
-      <td>Test size</td>
-      <td>Test type</td>
-      <td>Test seeders</td>
+    <tr key={key}>
+      <td>{file.name}</td>
+      <td>{file.size}</td>
+      <td>{file.ext}</td>
+      <td>{file.seeders}</td>
       <td>Test upload date</td>
+      <td><button onClick={() => downloadFile(file)}>Download</button></td>
     </tr>
   );
 };

@@ -8,7 +8,6 @@ import com.filesharing.iot.models.Peer;
 import com.filesharing.iot.repository.ForeignPcRepository;
 import com.filesharing.iot.repository.PeerRepository;
 import com.filesharing.iot.utils.Utils;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/peers")
+@RequestMapping("/api/peers")
 public class PeerController {
     @Autowired
     PeerRepository peerRepository;
@@ -60,19 +59,15 @@ public class PeerController {
 
     @PostMapping("/getAllPeersWithAFileFromAllServers")
     public ListOfPeers getAllPeersWithAFileFromAllServers(@RequestBody File fileToGet) throws Exception {
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(fileToGet);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-
-
+        
         List<ForeignPC> foreignPCS = Utils.readFromFile(foreignPcRepository.getFileName());
         System.out.println(foreignPCS);
         ListOfPeers peersList = new ListOfPeers();
         for (ForeignPC foreignPC : foreignPCS) {
             String foreignPCAddress = foreignPC.getInetSocketAddress().getHostName();
             foreignPCAddress = foreignPCAddress.substring(1);
-//
             if (!(foreignPCAddress.equals(Constants.localAddress) &&
                     foreignPC.getSpringPort().equals(Constants.currentSpringPort))) {
             ListOfPeers listOfPeersFromServer = restTemplate.postForObject("http://" + foreignPCAddress + ":" + foreignPC.getSpringPort() + "/peers/getAllPeersWithFile", fileToGet, ListOfPeers.class);

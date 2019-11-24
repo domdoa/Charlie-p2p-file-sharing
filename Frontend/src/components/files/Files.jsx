@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Search from "../common/Search";
 import File from "./File";
+import peerService from '../../services/Peer';
 
 var stompClient = null;
 
 const Files = () => {
-  const [files, setFiles] = useState({});
+  const [files, setFiles] = useState([]);
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    connect();
+  }, []);
 
   const connect = () => {
     const Stomp = require("stompjs");
@@ -18,12 +23,12 @@ const Files = () => {
 
   const onConnected = () => {
     // Subscribing to the test topic
-    console.log('connected');
-    stompClient.subscribe("/topic/messages", onMessageReceived);
+    console.log("connected");
+    stompClient.subscribe("/topic/files", onMessageReceived);
   };
 
   const sendMessage = event => {
-    event.preventDefault(); 
+    event.preventDefault();
     if (stompClient) {
       // send public message
       stompClient.send("/app/sendMessage", {}, "test message from client");
@@ -31,8 +36,26 @@ const Files = () => {
   };
 
   const onMessageReceived = payload => {
-    console.log(payload.body);
+    if(payload.body !== "No files"){
+      var files = JSON.parse(payload.body)
+      setFiles(files);
+      getSeeders(files);
+    }
   };
+
+  const getSeeders = files => {
+    for(const file of files){
+      peerService
+        .getAllPeersWithAFileFromAllServers(file)
+        .then(request => {
+          file.seeders = request.peers.length;
+          setFiles([...files,file])
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      }
+  }
 
   const onError = error => {
     console.log(error);
@@ -54,14 +77,15 @@ const Files = () => {
                 <th scope="col">Type</th>
                 <th scope="col">Seeders</th>
                 <th scope="col">Upload date</th>
+                <th scope="col">Download</th>
               </tr>
             </thead>
             <tbody>
-              <File />
+              {files.map(file => (
+                <File file={file} key={file.md5Sign} />
+              ))}
             </tbody>
           </table>
-          <button onClick={connect}>Connect</button>
-          <button onClick={sendMessage}>Send message</button>
         </div>
       </div>
     </div>

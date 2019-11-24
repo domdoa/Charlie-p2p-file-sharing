@@ -69,3 +69,5 @@ export const registerUser = (data, resolve, reject) => {
         .then(response => resolve())
         .catch(e => {reject()}); // error
 };
+
+export default {getUserId}
