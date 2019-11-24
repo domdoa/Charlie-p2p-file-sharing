@@ -1,7 +1,6 @@
 package com.filesharing.iot;
 
 import com.filesharing.iot.Chord.Chord;
-import com.filesharing.iot.utils.Utils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -16,8 +15,8 @@ import java.util.Arrays;
 public class IotApplication {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(IotApplication.class, args);
-        if(args.length > 1){
-            if(args[0].toUpperCase().equals("CHORD")){
+        if (args.length > 1) {
+            if (args[0].toUpperCase().equals("CHORD")) {
                 Chord.main(Arrays.copyOfRange(args, 1, args.length));
             }
         }
