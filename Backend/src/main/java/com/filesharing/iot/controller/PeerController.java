@@ -1,18 +1,13 @@
 package com.filesharing.iot.controller;
 
 import com.filesharing.iot.Chord.Constants;
-import com.filesharing.iot.models.File;
-import com.filesharing.iot.models.ForeignPC;
-import com.filesharing.iot.models.ListOfPeers;
-import com.filesharing.iot.models.Peer;
+import com.filesharing.iot.models.*;
 import com.filesharing.iot.repository.ForeignPcRepository;
 import com.filesharing.iot.repository.PeerRepository;
+import com.filesharing.iot.repository.UserRepository;
 import com.filesharing.iot.utils.Utils;
-import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -28,15 +23,21 @@ public class PeerController {
     @Autowired
     ForeignPcRepository foreignPcRepository;
     @Autowired
+    UserRepository userRepository;
+    @Autowired
     RestTemplate restTemplate;
-
-    List<Peer> peersList = new ArrayList<>();
 
     @PostMapping
     public ResponseEntity addPeer(@RequestBody Peer peer) {
         peerRepository.save(peer);
 
-        peersList.add(peer);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping
+    public ResponseEntity deletePeer(@RequestBody Peer peer) {
+        peerRepository.remove(peer);
+
         return ResponseEntity.ok().build();
     }
 
@@ -47,8 +48,8 @@ public class PeerController {
         List<Peer> peers = peerRepository.getPeers();
         for (Peer p : peers) {
             List<File> filesOfThePeer = p.getFileList();
-            for(File f : filesOfThePeer){
-                if(f.equals(fileToGet)) {
+            for (File f : filesOfThePeer) {
+                if (f.equals(fileToGet)) {
                     listToReturnWithPeers.getPeers().add(p);
                     break;
                 }
@@ -60,23 +61,18 @@ public class PeerController {
 
     @PostMapping("/getAllPeersWithAFileFromAllServers")
     public ListOfPeers getAllPeersWithAFileFromAllServers(@RequestBody File fileToGet) throws Exception {
-        Gson gson = new Gson();
-        String jsonString = gson.toJson(fileToGet);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-
         List<ForeignPC> foreignPCS = Utils.readFromFile(foreignPcRepository.getFileName());
         System.out.println(foreignPCS);
         ListOfPeers peersList = new ListOfPeers();
         for (ForeignPC foreignPC : foreignPCS) {
             String foreignPCAddress = foreignPC.getInetSocketAddress().getHostName();
             foreignPCAddress = foreignPCAddress.substring(1);
-//
+
             if (!(foreignPCAddress.equals(Constants.localAddress) &&
                     foreignPC.getSpringPort().equals(Constants.currentSpringPort))) {
-            ListOfPeers listOfPeersFromServer = restTemplate.postForObject("http://" + foreignPCAddress + ":" + foreignPC.getSpringPort() + "/peers/getAllPeersWithFile", fileToGet, ListOfPeers.class);
-            peersList.getPeers().addAll(listOfPeersFromServer.getPeers());
+                ListOfPeers listOfPeersFromServer = restTemplate.postForObject("http://" + foreignPCAddress + ":" + foreignPC.getSpringPort() + "/peers/getAllPeersWithFile", fileToGet, ListOfPeers.class);
+                if (listOfPeersFromServer != null)
+                    peersList.getPeers().addAll(listOfPeersFromServer.getPeers());
             }
         }
         peersList.getPeers().addAll(this.getAllPeersWithFile(fileToGet).getPeers());
@@ -84,15 +80,34 @@ public class PeerController {
     }
 
     @GetMapping("/files")
-    public ResponseEntity<List<File>> getAllFileMetaDatas() {
+    public ResponseEntity<List<File>> getAllFileMetadatas(@RequestParam long user_id) {
+        List<File> allFiles = new ArrayList<>();
+        List<File> availableFiles = new ArrayList<>();
 
-        List<File> files = new ArrayList<>();
-        peerRepository.getPeers().forEach(el -> files.addAll(el.getFileList()));
-        return new ResponseEntity<>(files, HttpStatus.OK);
+        User user = userRepository.findByUserId(user_id);
+        if (user == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        List<Group> groupList = user.getGroups();
+
+        peerRepository.getPeers().forEach(el -> allFiles.addAll(el.getFileList()));
+
+        for (File file : allFiles) {
+            Group group = file.getGroup();
+
+            if (group == null) availableFiles.add(file);
+            else {
+                Group james = groupList.stream()
+                        .filter(p -> p.getName().equals(group.getName()))
+                        .findAny()
+                        .orElse(null);
+                if (james != null) availableFiles.add(file);
+            }
+        }
+
+        return new ResponseEntity<>(availableFiles, HttpStatus.OK);
     }
 
     @GetMapping("/file")
-    public ResponseEntity<File> getAllFileMetadata(@RequestParam long file_id) {
+    public ResponseEntity<File> getFileMetadata(@RequestParam long file_id) {
         File file = new File();
         List<File> files = new ArrayList<>();
 
