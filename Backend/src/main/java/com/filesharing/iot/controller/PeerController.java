@@ -108,11 +108,11 @@ public class PeerController {
     }
 
     @GetMapping("/files")
-    public ResponseEntity<List<File>> getAllFileMetadatas(@RequestParam long user_id) {
+    public ResponseEntity<List<File>> getAllFileMetadatas(@RequestParam String email) {
         List<File> allFiles = new ArrayList<>();
         List<File> availableFiles = new ArrayList<>();
 
-        User user = userRepository.findByUserId(user_id);
+        User user = userRepository.findByEmail(email);
         if (user == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         List<Group> groupList = user.getGroups();
 
@@ -135,13 +135,13 @@ public class PeerController {
     }
 
     @GetMapping("/file")
-    public ResponseEntity<File> getFileMetadata(@RequestParam long file_id) {
+    public ResponseEntity<File> getFileMetadata(@RequestParam String md5) {
         File file = new File();
         List<File> files = new ArrayList<>();
 
         peerRepository.getPeers().forEach(el -> files.addAll(el.getFileList()));
         for (File f : files) {
-            if (f.getId() == file_id)
+            if (f.getMd5Sign().equals(md5))
                 file = f;
         }
         return new ResponseEntity<>(file, HttpStatus.OK);
@@ -150,9 +150,9 @@ public class PeerController {
 
     // C U D files
     @PostMapping("/files")
-    public ResponseEntity addFilesToPeer(@RequestBody List<File> files, @RequestParam long peer_id) {
+    public ResponseEntity addFilesToPeer(@RequestBody List<File> files, @RequestParam String email) {
         Peer peer = peerRepository.getPeers().stream()
-                .filter(el -> el.getUser_id().equals(peer_id))
+                .filter(el -> el.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
         if (peer != null) {
@@ -164,9 +164,9 @@ public class PeerController {
     }
 
     @DeleteMapping("/files")
-    public ResponseEntity removeFileFromPeer(@RequestBody File file, @RequestParam long peer_id) {
+    public ResponseEntity removeFileFromPeer(@RequestBody File file, @RequestParam String email) {
         Peer peer = peerRepository.getPeers().stream()
-                .filter(el -> el.getUser_id().equals(peer_id))
+                .filter(el -> el.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
         if (peer != null) {
@@ -178,9 +178,9 @@ public class PeerController {
     }
 
     @PutMapping("/file")
-    public ResponseEntity updateFileOfPeer(@RequestBody File file, @RequestBody String fileName, @RequestParam long peer_id) {
+    public ResponseEntity updateFileOfPeer(@RequestBody File file, @RequestBody String fileName, @RequestParam String email) {
         Peer peer = peerRepository.getPeers().stream()
-                .filter(el -> el.getUser_id().equals(peer_id))
+                .filter(el -> el.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
         if (peer != null) {
