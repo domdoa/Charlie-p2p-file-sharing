@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import TextFieldGroup from "../common/TextFieldGroup";
 import {registerUser} from "../utils/Authorization";
-import ReactSnackBar from "react-js-snackbar";
 
 const Checkbox = props => (
     <input type="checkbox" {...props} />
@@ -16,11 +15,6 @@ const Register = (props) => {
     });
     const [inviteCheckbox, setInviteCheckbox] = useState({
         checked: false
-    });
-    const [snackBar, setSnackBar] = useState({
-        Show: false,
-        Showing: false,
-        Text: ""
     });
 
     const checkboxOnChange = (e) => {
@@ -56,7 +50,7 @@ const Register = (props) => {
                 props.show("Invite code: " + response.InviteString, 20000)
             }
             props.history.push("/")
-        })
+        });
         promise.catch((reject) => {
             props.show("An error occured. Please try again", 5000)
         })
@@ -114,9 +108,6 @@ const Register = (props) => {
                                 className="btn btn-info btn-block mt-4"
                                 value="Register"
                             />
-                            <ReactSnackBar Icon={<span>🦄</span>} Show={snackBar.Show}>
-                                {snackBar.Text}
-                            </ReactSnackBar>
                         </form>
                     </div>
                 </div>
