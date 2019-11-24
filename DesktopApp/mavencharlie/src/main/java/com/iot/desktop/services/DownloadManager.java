@@ -56,6 +56,7 @@ public class DownloadManager extends Thread{
 
         DownloadFileModel dm = new DownloadFileModel(file.getFileName(), file.getSize(),"0%" ," - " );
         RootController.downloadedFiles.add(dm);
+        FileSerializer.downloadedFiles.add(file);
     }
 
     @Override
