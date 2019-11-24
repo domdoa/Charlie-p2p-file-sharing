@@ -3,6 +3,7 @@ package com.filesharing.iot.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -28,6 +29,9 @@ public class User {
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "group_id")}
     )
-    List<Group> groups;
+    List<Group> groups = new ArrayList<>();
 
+    public void addGroup(Group group){
+        groups.add(group);
+    }
 }

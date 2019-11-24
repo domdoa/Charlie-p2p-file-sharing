@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,10 +19,16 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(unique = true, nullable = false, name = "group_id")
     private long group_id;
-    @Column(name = "password", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "invite")
+    public String inviteString;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "groups", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<User> users;
+    private List<User> users = new ArrayList<>();
+
+    public void addUser(User user){
+        users.add(user);
+    }
 }
