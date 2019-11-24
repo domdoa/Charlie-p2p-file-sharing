@@ -5,14 +5,14 @@ export const getAuthToken = () => localStorage.Authorization ? localStorage.Auth
 
 export const logOut = () => localStorage.clear();
 
-export const getUserId = () => {
+export const getEmail = () => {
     let token = getAuthToken();
-    let userId;
+    let email;
     if(token){
         const decoded = jwt_decode(token);
-        userId = decoded.sub;
+        email = decoded.sub;
     }
-    return userId;
+    return email;
 };
 
 export const isLoggedIn = () => {
