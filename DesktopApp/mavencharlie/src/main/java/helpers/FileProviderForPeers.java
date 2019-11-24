@@ -1,6 +1,5 @@
 package helpers;
 
-
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
@@ -17,7 +16,7 @@ public class FileProviderForPeers {
     public FileProviderForPeers(){}
 
     public byte[] ReadSpecificPositionOfFile(String fileName, int segment) {
-        try (RandomAccessFile reader = new RandomAccessFile(System.getProperty("user.dir") + fileName, "r");
+        try (RandomAccessFile reader = new RandomAccessFile((System.getProperty("user.dir") + "/"+ fileName), "r");
              FileChannel channel = reader.getChannel()) {
 
             // get real file path
@@ -44,17 +43,21 @@ public class FileProviderForPeers {
         return null;
     }
 
+    //TODO: Pass the metadata also as parameter
     public  void writeSpecificPositionOfFile(String fileName, int segment, byte[] bytes) throws Exception{
-        // TODO: If the file not exist then create a new file and allocate 'size' space for that, then write the specific positions
-        try (RandomAccessFile writer = new RandomAccessFile(fileName, "rw");
-             FileChannel channel = writer.getChannel()){
-            ByteBuffer buff = ByteBuffer.wrap(bytes);
+        String defaultDir = FileSerializer.metaDatas.getOrDefault("defaultDir" , "");
+        if(!defaultDir.equals("")){
+            String fullPath = defaultDir + "/" + fileName + "/" + fileName + ".jpg"; //+ "." + fileMetadata.getExtension()
+            try (RandomAccessFile writer = new RandomAccessFile(fullPath, "rw");
+                 FileChannel channel = writer.getChannel()){
+                ByteBuffer buff = ByteBuffer.wrap(bytes);
 
-            channel.force(true);
-            channel.write(buff, segment*DOWNLOAD_UNIT);
-        }
-        catch (Exception e){
-            e.printStackTrace();
+                channel.force(true);
+                channel.write(buff, segment*DOWNLOAD_UNIT);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

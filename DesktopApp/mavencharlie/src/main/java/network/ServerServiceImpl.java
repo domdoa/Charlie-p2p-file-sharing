@@ -1,11 +1,22 @@
 package network;
 
 
+import dtos.File;
 import helpers.FileSerializer;
 import models.Peer;
-import okhttp3.OkHttpClient;
+import network.interfaces.ServerServiceInterface;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-import java.io.*;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -13,17 +24,24 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ServerConnection {
+public class ServerServiceImpl {
 
     private static List<String> BASE_URL;
+    private ServerServiceInterface serverService;
 
-    public ServerConnection(){
+    public ServerServiceImpl(){
         List<String> urls = new ArrayList<>();
         for (Map.Entry<String , String> entry : FileSerializer.metaDatas.entrySet()) {
             if(entry.getKey().contains("BASE_URL"))
                 urls.add(entry.getValue());
         }
         BASE_URL = new ArrayList<>(urls);
+
+        serverService = new Retrofit.Builder()
+                        .baseUrl(BASE_URL.get(0))
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
+                        .create(ServerServiceInterface.class);
     }
 
     public List<Peer> getAvailableSeeders(String filename, String md5Signature){
@@ -67,7 +85,6 @@ public class ServerConnection {
         }
         return availablePeers;
     }
-
 
     public void notifyActualPeerIsOnline(String ipAddress, int port) throws Exception {
         HttpURLConnection con = null;
@@ -130,5 +147,30 @@ public class ServerConnection {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void addFilesToPeer(List<File> files, long peer_id){
+        Call<ResponseBody> req = serverService.addFilesToPeer(files, peer_id);
+        req.enqueue(new Callback<ResponseBody>(){
+            @Override
+            public void onResponse(Call call, Response response) {
+                if (response.isSuccessful()){
+                    System.out.println("File upload was successful.");
+                }
+                System.out.println("File upload was not successful.");
+            }
+            @Override
+            public void onFailure(Call call, Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        });
+    }
+
+    public void updateFileOfPeer(File file, String fileName, long peer_id){
+
+    }
+
+    public void removeFileFromPeer(File file, long peer_id){
+
     }
 }

@@ -1,5 +1,7 @@
 package controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -9,10 +11,7 @@ import models.DownloadFileModel;
 
 import java.lang.reflect.Parameter;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class RootController implements Initializable {
 
@@ -20,7 +19,8 @@ public class RootController implements Initializable {
     @FXML private TableColumn<DownloadFileModel,String> downloadSize;
     @FXML private TableColumn<DownloadFileModel,String> downloadProgress;
     @FXML private TableColumn<DownloadFileModel,String> downloadSpeed;
-    @FXML private TableView<DownloadFileModel> downloadTable;
+    @FXML public TableView<DownloadFileModel> downloadTable;
+    ObservableList<DownloadFileModel> observableList;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -28,10 +28,11 @@ public class RootController implements Initializable {
         downloadSize.setCellValueFactory(new PropertyValueFactory<>("size"));
         downloadProgress.setCellValueFactory(new PropertyValueFactory<>("progress"));
         downloadSpeed.setCellValueFactory(new PropertyValueFactory<>("speed"));
-        downloadTable.getItems().setAll(createFiles());
+        observableList = FXCollections.observableList(createFiles());
+        downloadTable.setItems(observableList);
     }
 
-    private List<DownloadFileModel> createFiles(){
+    private List<DownloadFileModel> createFiles() {
         List<DownloadFileModel> res = new ArrayList<>();
         Random rng = new Random();
         for (int i = 0; i < 15; i++){

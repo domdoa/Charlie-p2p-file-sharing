@@ -1,31 +1,28 @@
-import helpers.PublicIPAddressResolver;
+import helpers.FileSerializer;
+import helpers.FileSystemWatcher;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import helpers.FileSerializer;
 import models.FileMetadata;
 import models.Peer;
 import network.FileServer;
-import network.PeerSocket;
-import network.ServerConnection;
+import org.apache.commons.io.FileUtils;
 import services.DownloadManager;
 
 import java.io.File;
 import java.net.InetAddress;
-import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class FileSharingMain extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/rootView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
         primaryStage.setTitle("P2PBit");
         primaryStage.setScene(new Scene(root, 600, 550));
         primaryStage.show();
@@ -35,22 +32,24 @@ public class FileSharingMain extends Application {
 
         // TODO: Start the local fileserver to serve those peers who want to download
         FileServer fileServer = new FileServer();
-        /*Thread t =*/  new Thread(fileServer).start();
-        //t.start();
+        new Thread(fileServer).start();
+
+        new Thread(new FileSystemWatcher(Paths.get("C:/Users/totha/TEST"), true)).start();
 
         // Create a peer which can "download" test.txt from the fileserver
         FileMetadata file = new FileMetadata();
-        file.setFileName("test");
-        file.setExtension("txt");
-        file.setSize(3495);
+        file.setFileName("photo");
+        file.setExtension("jpg");
+        file.setSize(1583860);
         List<Peer> peers = new ArrayList<>();
         peers.add(new Peer(InetAddress.getLocalHost().getHostAddress(),fileServer.getServerSocket().getLocalPort()));
         System.out.println("Peer address: " + peers.get(0).getIpAddress());
         System.out.println("Peer port: " + peers.get(0).getPort());
         new DownloadManager(file,peers).start();
 
-    }
+        List<File> filelist = (List<File>) FileUtils.listFiles(new File(FileSerializer.metaDatas.get("defaultDir")), null, true);
 
+    }
 
     @Override
     public void stop() throws Exception {

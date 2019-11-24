@@ -18,6 +18,7 @@ public class PeerSocket extends Thread {
     private DataInputStream in;
     private String message;
     private DownloadManager downloadManager;
+    private long arrivedBytes;
     private static final Object LOCK = new Object();
 
     public PeerSocket(String ip, int port, DownloadManager manager) {
@@ -33,16 +34,17 @@ public class PeerSocket extends Thread {
 
     @Override
     public void run() {
-        int newSegment;
-        while ((newSegment = getNewRandomSegment()) != Integer.MIN_VALUE ){
-            String  filename = downloadManager.getFileMetadata().getFileName();
-            message = "DOWNLOAD " + filename+ " " + newSegment;
-            System.out.println("Message send by peersocket: " + message);
+        int newSegmentIndex;
+        while ((newSegmentIndex = getNewRandomSegmentIndex()) != Integer.MIN_VALUE ){
+            String  filenameWithExt = downloadManager.getFileMetadata().getFileName()+ "." +downloadManager.getFileMetadata().getExtension();
+            int newSegment = downloadManager.getRemainingSegments().get(newSegmentIndex);
+            message = "DOWNLOAD " + filenameWithExt+ " " + newSegment;
+            //System.out.println("Message send by peersocket: " + message);
             try{
                 byte[] result = sendMessage(message);
                 if(result != null){
-                    removeReceivedSegmentSafely(newSegment);
-                    new FileProviderForPeers().writeSpecificPositionOfFile(filename, newSegment, result);
+                    removeReceivedSegmentSafely(newSegmentIndex);
+                    new FileProviderForPeers().writeSpecificPositionOfFile(downloadManager.getFileMetadata().getFileName(), newSegment, result);
                 }
             }catch (Exception e){
                 e.printStackTrace();
@@ -51,16 +53,17 @@ public class PeerSocket extends Thread {
         }
         stopConnection();
         System.out.println("Peer socket stopped.");
+        System.out.println("Number of remaining segments: " + this.downloadManager.getRemainingSegments().size());
     }
 
     public byte[] sendMessage(String msg) throws Exception {
-        out.write(msg);
-        out.flush();
+        out.println(msg);
         int length = in.readInt();
         byte[] result = null;
         if(length > 0){
-            result = new byte[2048];
+            result = new byte[length];
             in.readFully(result);
+            arrivedBytes += result.length;
         }
         return result;
     }
@@ -75,17 +78,24 @@ public class PeerSocket extends Thread {
         }
     }
 
-    private Integer getNewRandomSegment() {
-        if(downloadManager.getOfficialSegmentSize() != 0)
-            return ThreadLocalRandom.current().nextInt(downloadManager.getOfficialSegmentSize());
+    private Integer getNewRandomSegmentIndex() {
+        if(downloadManager.getRemainingSegments().size() > 0)
+            return ThreadLocalRandom.current().nextInt(downloadManager.getRemainingSegments().size() /*-1*/);
         else
             return Integer.MIN_VALUE;
     }
 
-    private synchronized void removeReceivedSegmentSafely(int segment){
+    private synchronized void removeReceivedSegmentSafely(int segmentIndex){
         synchronized (LOCK){
-            downloadManager.getRemainingSegments().remove(segment);
+            downloadManager.getRemainingSegments().remove(segmentIndex);
         }
     }
 
+    public long getArrivedBytes() {
+        return arrivedBytes;
+    }
+
+    public void setArrivedBytes(long arrivedBytes) {
+        this.arrivedBytes = arrivedBytes;
+    }
 }

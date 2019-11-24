@@ -27,6 +27,7 @@ public class DownloadManager extends Thread{
     private int officialSegmentSize;
     private List<Integer> remainingSegments;
     private List<PeerSocket> sockets;
+    private static final Object LOCK = new Object();
 
     public DownloadManager(FileMetadata file, List<Peer> peers) {
         this.fileMetadata = file;
@@ -58,17 +59,21 @@ public class DownloadManager extends Thread{
     @Override
     public void run() {
         while (remainingSegments.size() != 0){
-
+            try{
+                Thread.sleep(1000);
+                long sumOfArrivedBytes = 0;
+                synchronized (LOCK){
+                    for (PeerSocket peerSocket: sockets){
+                        sumOfArrivedBytes += peerSocket.getArrivedBytes();
+                        peerSocket.setArrivedBytes(0);
+                    }
+                    System.out.println("Download speed: " + (double)(sumOfArrivedBytes / 1000) + "kB/s");
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
         System.out.println("All segments arrived. DownloadManager will be stopped.");
-    }
-
-    public void startNewSocketForDownload(){
-
-    }
-
-    public void processNewReadingRequest(){
-        
     }
 
     private void createFileWithSubdirectoryAndAllocateSpace(){

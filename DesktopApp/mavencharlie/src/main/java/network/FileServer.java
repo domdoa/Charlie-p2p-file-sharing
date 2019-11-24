@@ -25,11 +25,8 @@ public class FileServer implements Runnable /*extends Thread*/ {
     public void start(int port) throws Exception {
         try{
             serverSocket = new ServerSocket(port/*, 0, InetAddress.getLocalHost()*/);
-            //System.out.println("FileServer InetAddress: " + serverSocket.getInetAddress().getHostAddress());
-            //System.out.println("FileServer LocalSocketAddress: " + serverSocket.getLocalSocketAddress());
             System.out.println("Local address: " + InetAddress.getLocalHost().getHostAddress());
             System.out.println("FileServer listening on the port: "+ serverSocket.getLocalPort());
-            //System.out.println("Public IP address: "+ PublicIPAddressResolver.GetPublicIPAddress());
             // Notify the backend that this peer become available
             //new ServerConnection().notifyActualPeerIsOnline(InetAddress.getLocalHost().getHostAddress(),serverSocket.getLocalPort());
 
@@ -72,9 +69,9 @@ public class FileServer implements Runnable /*extends Thread*/ {
                         new InputStreamReader(clientSocket.getInputStream()));
 
                 String inputLine;
-                System.out.println("Connected socket: "+ clientSocket.getInetAddress() +"\t" + clientSocket.getPort());
+                System.out.println("Connected socket: "+ clientSocket.getInetAddress() + "\t" + clientSocket.getPort());
                 while ((inputLine = in.readLine()) != null) {
-                    System.out.println("FileServer input message: " + inputLine);
+                    //System.out.println("FileServer input message: " + inputLine);
                     if (inputLine.contains("DOWNLOAD")) {
                         String[] parts = inputLine.split(" ");
                         // TODO: send byte array
@@ -89,6 +86,7 @@ public class FileServer implements Runnable /*extends Thread*/ {
                 in.close();
                 out.close();
                 clientSocket.close();
+                System.out.println("FileServer closed the socket because the inputline is null.");
             } catch (Exception e) {
                 //TODO: Log exception to file
                 e.printStackTrace();
