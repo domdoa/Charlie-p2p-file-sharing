@@ -1,17 +1,25 @@
 package com.filesharing.iot.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.filesharing.iot.Chord.Constants;
 import com.filesharing.iot.models.*;
 import com.filesharing.iot.repository.ForeignPcRepository;
 import com.filesharing.iot.repository.PeerRepository;
 import com.filesharing.iot.repository.UserRepository;
 import com.filesharing.iot.utils.Utils;
+import com.google.gson.Gson;
+import okhttp3.*;
+import okhttp3.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,7 +68,11 @@ public class PeerController {
     }
 
     @PostMapping("/getAllPeersWithAFileFromAllServers")
-    public ListOfPeers getAllPeersWithAFileFromAllServers(@RequestBody File fileToGet) throws Exception {
+    public ListOfPeers getAllPeersWithAFileFromAllServers(HttpServletRequest httpRequest, @RequestBody File fileToGet) throws Exception {
+
+        String authorization = httpRequest.getHeader("Authorization");
+        String contentType = httpRequest.getHeader("Content-Type");
+
         List<ForeignPC> foreignPCS = Utils.readFromFile(foreignPcRepository.getFileName());
         System.out.println(foreignPCS);
         ListOfPeers peersList = new ListOfPeers();
@@ -70,7 +82,23 @@ public class PeerController {
 
             if (!(foreignPCAddress.equals(Constants.localAddress) &&
                     foreignPC.getSpringPort().equals(Constants.currentSpringPort))) {
-                ListOfPeers listOfPeersFromServer = restTemplate.postForObject("http://" + foreignPCAddress + ":" + foreignPC.getSpringPort() + "/peers/getAllPeersWithFile", fileToGet, ListOfPeers.class);
+                ObjectMapper mapper = new ObjectMapper();
+
+
+                String URL = "http://" + foreignPCAddress + ":" + foreignPC.getSpringPort() + "/peers/getAllPeersWithFile";
+                Request request = new Request.Builder()
+                        .url(URL)
+                        .addHeader("Authorization", authorization)
+                        .addHeader("Content-Type", contentType)
+                        .post(okhttp3.RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mapper.writeValueAsString(fileToGet)))
+                        .build();
+                OkHttpClient client = new OkHttpClient();
+                Call call = client.newCall(request);
+                Response response = call.execute();
+                Gson gson = new Gson();
+                ResponseBody responseBody = response.body();
+                ListOfPeers listOfPeersFromServer = gson.fromJson(responseBody.string(),ListOfPeers.class);
+
                 if (listOfPeersFromServer != null)
                     peersList.getPeers().addAll(listOfPeersFromServer.getPeers());
             }
