@@ -39,11 +39,11 @@ const Files = () => {
     if (payload.body !== "No files") {
       let files = JSON.parse(payload.body);
       files.forEach(file => {
-        peerService.getAllPeersWithAFileFromAllServers(file).then(res =>{
+        peerService.getAllPeersWithAFileFromAllServers(file).then(res => {
           file.seeders = res.peers.length;
-          setFiles([...files])
-        })
-      })
+          setFiles([...files]);
+        });
+      });
     }
   };
 
@@ -56,26 +56,34 @@ const Files = () => {
       <div className="row">
         <div className="col-md-8 m-auto">
           <h1 className="display-4 text-center">Files</h1>
-          <div>
+          <div className="d-flex justify-content-center">
             <Search searchString={search} setSearchString={setSearch} />
           </div>
-          <table className="table">
-            <thead className="thead-light">
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Size</th>
-                <th scope="col">Type</th>
-                <th scope="col">Seeders</th>
-                <th scope="col">Upload date</th>
-                <th scope="col">Download</th>
-              </tr>
-            </thead>
-            <tbody>
-              {files.map(file => (
-                <File file={file} key={file.md5Sign} />
-              ))}
-            </tbody>
-          </table>
+          <div className="row mt-3">
+            <div className="col-12">
+              <table className="table">
+                <thead className="thead-light">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Size</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Seeders</th>
+                    <th scope="col">Upload date</th>
+                    <th scope="col">Download</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {files
+                    .filter(file =>
+                      file.name.toLowerCase().includes(search.toLowerCase())
+                    )
+                    .map(file => (
+                      <File file={file} key={file.md5Sign} />
+                    ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>

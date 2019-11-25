@@ -18,8 +18,6 @@ function App() {
         Text: ""
     });
     useEffect(() => {
-
-
         isLoggedIn();
     }, []);
 
