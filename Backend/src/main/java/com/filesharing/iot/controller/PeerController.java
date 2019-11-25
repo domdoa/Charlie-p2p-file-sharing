@@ -51,13 +51,12 @@ public class PeerController {
 
     @PostMapping("/getAllPeersWithFile")
     public ListOfPeers getAllPeersWithFile(@RequestBody File fileToGet) {
-
         ListOfPeers listToReturnWithPeers = new ListOfPeers();
         List<Peer> peers = peerRepository.getPeers();
         for (Peer p : peers) {
             List<File> filesOfThePeer = p.getFileList();
-            for (File f : filesOfThePeer) {
-                if (f.equals(fileToGet)) {
+            for(File f : filesOfThePeer){
+                if(f.getMd5Sign().equals(fileToGet.getMd5Sign())) {
                     listToReturnWithPeers.getPeers().add(p);
                     break;
                 }
@@ -79,7 +78,6 @@ public class PeerController {
         for (ForeignPC foreignPC : foreignPCS) {
             String foreignPCAddress = foreignPC.getInetSocketAddress().getHostName();
             foreignPCAddress = foreignPCAddress.substring(1);
-
             if (!(foreignPCAddress.equals(Constants.localAddress) &&
                     foreignPC.getSpringPort().equals(Constants.currentSpringPort))) {
                 ObjectMapper mapper = new ObjectMapper();

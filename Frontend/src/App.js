@@ -20,8 +20,7 @@ function App() {
         Text: ""
     });
     useEffect(() => {
-        // const socket = socketIOClient(localhostSocket);
-        // socket.on("FromAPI", data => setMessage(data));
+
 
         isLoggedIn();
     }, []);
@@ -37,7 +36,6 @@ function App() {
 
     return (
         <Router>
-            <p>{message ? message : 'Loading...'}</p>
             <Navbar/>
             <Switch>
                 <Route exact path="/" component={Frontpage}/>
