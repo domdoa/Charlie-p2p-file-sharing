@@ -23,7 +23,7 @@ public class SchedulerConfig {
     List<File> files = new ArrayList<>();
     Integer filesSize = 0;
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 10000)
     @SendTo("/topic/files")
     public void sendMessage() {
         files = fileRepository.getFiles();

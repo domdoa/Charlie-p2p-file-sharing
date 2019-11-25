@@ -1,11 +1,11 @@
 import React from "react";
 import peerService from '../../services/Peer';
-import { getUserId } from "../utils/Authorization";
+import { getEmail } from "../utils/Authorization";
 
 const File = ({file}, key) => {
   const downloadFile = (file) => {
     //Check if current user is a peer
-    console.log(getUserId());
+    console.log(getEmail());
 
     peerService
       .getAllPeersWithAFileFromAllServers(file)

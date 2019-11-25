@@ -11,9 +11,7 @@ import Files from "./components/files/Files";
 import {isLoggedIn} from "./components/utils/Authorization";
 import ReactSnackBar from "react-js-snackbar";
 
-
 function App() {
-    const [message, setMessage] = useState("");
     const [snackBar, setSnackBar] = useState({
         Show: false,
         Showing: false,
