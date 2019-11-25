@@ -10,4 +10,9 @@ const getAllPeersWithAFileFromAllServers = file => {
   return promise.then(response => response.data);
 };
 
-export default { getAllPeersWithAFileFromAllServers };
+const findPeerByEmail = email => {
+  const promise = axios.get(`${baseUrl}/findPeerByEmail?email=${email}`,config);
+  return promise.then(response => response.data);
+};
+
+export default { getAllPeersWithAFileFromAllServers, findPeerByEmail };

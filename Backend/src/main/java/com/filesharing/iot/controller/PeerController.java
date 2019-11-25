@@ -105,6 +105,19 @@ public class PeerController {
         return peersList;
     }
 
+    @GetMapping("/findPeerByEmail")
+    public ResponseEntity<Peer> findPeerByEmail(@RequestParam String email) {
+        Long userId = userRepository.findByEmail(email).getUser_id();
+        List<Peer> peers = peerRepository.getPeers();
+
+        for(Peer peer : peers){
+            if(userId == peer.getUser_id()) {
+                return new ResponseEntity<>(peer, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/files")
     public ResponseEntity<List<File>> getAllFileMetadatas(@RequestParam String email) {
         List<File> allFiles = new ArrayList<>();

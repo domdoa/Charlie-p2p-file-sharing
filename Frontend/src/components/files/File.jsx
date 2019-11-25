@@ -1,19 +1,20 @@
 import React from "react";
-import peerService from '../../services/Peer';
+import peerService from "../../services/Peer";
 import { getEmail } from "../utils/Authorization";
 
-const File = ({file}, key) => {
-  const downloadFile = (file) => {
+const File = ({ file }, key) => {
+  const downloadFile = file => {
     //Check if current user is a peer
-    console.log(getEmail());
-
     peerService
-      .getAllPeersWithAFileFromAllServers(file)
-      .then(request => {
-        console.log(request.data);
+      .findPeerByEmail(getEmail())
+      .then(response => {
+        if(typeof(response) === "object"){
+          console.log("Start download");
+        }
       })
-      .catch(err => {
-        console.log(err);
+      .catch(error => {
+        console.log(error);
+        alert('Please start desktop client to start your download')
       });
   };
   return (
@@ -23,7 +24,9 @@ const File = ({file}, key) => {
       <td>{file.ext}</td>
       <td>{file.seeders}</td>
       <td>Test upload date</td>
-      <td><button onClick={() => downloadFile(file)}>Download</button></td>
+      <td>
+        <button onClick={() => downloadFile(file)}>Download</button>
+      </td>
     </tr>
   );
 };
