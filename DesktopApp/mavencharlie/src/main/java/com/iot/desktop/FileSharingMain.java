@@ -1,6 +1,7 @@
 package com.iot.desktop;
 
 import com.iot.desktop.controllers.MyStompSessionHandler;
+import com.iot.desktop.helpers.FileSystemWatcher;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,8 +17,11 @@ import org.springframework.messaging.simp.stomp.StompSessionHandler;
 import org.springframework.web.socket.client.WebSocketClient;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
+import org.apache.commons.io.FileUtils;
 
+import java.io.File;
 import java.net.InetAddress;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,6 +30,7 @@ import java.util.Scanner;
 public class FileSharingMain extends Application {
 
     private static String URL = "ws://localhost:8080/desktop";
+    public static int serverSocketPort;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -33,41 +38,37 @@ public class FileSharingMain extends Application {
         Thread t =  new Thread(fileServer);
         t.start();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/rootView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/login.fxml"));
         primaryStage.setTitle("P2PBit");
         primaryStage.setScene(new Scene(root, 600, 550));
         primaryStage.show();
 
-        // TODO: Deserialize metadatas from the file
+        // Deserialize metadatas from the file
         HashMap<String,String> metadatas = new FileSerializer().readFromFile();
 
-        // TODO: Start the local fileserver to serve those peers who want to download
+        // Observe the default directory for changes
+        new Thread(new FileSystemWatcher(Paths.get(FileSerializer.metaDatas.get("defaultDir")), true)).start();
 
+        Thread t1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // code goes here.
+                WebSocketClient client = new StandardWebSocketClient();
+                WebSocketStompClient stompClient = new WebSocketStompClient(client);
+                //Convert to string
+                stompClient.setMessageConverter(new StringMessageConverter());
+                //Used for converting models
+                //stompClient.setMessageConverter(new MappingJackson2MessageConverter());
 
-        // Create a peer which can "download" test.txt from the fileserver
-        FileMetadata file = new FileMetadata();
-        file.setFileName("test");
-        file.setExtension("txt");
-        file.setSize(3495);
-        List<Peer> peers = new ArrayList<>();
-        peers.add(new Peer(InetAddress.getLocalHost().getHostAddress(),fileServer.getServerSocket().getLocalPort()));
-        System.out.println("Peer address: " + peers.get(0).getIpAddress());
-        System.out.println("Peer port: " + peers.get(0).getPort());
-        new DownloadManager(file,peers).start();
+                StompSessionHandler sessionHandler = new MyStompSessionHandler();
+                stompClient.connect(URL, sessionHandler);;
+                new Scanner(System.in).nextLine(); // Don't close immediately.
+            }
+        });
+        t1.start();
 
-        //Websocket and stom client
-        WebSocketClient client = new StandardWebSocketClient();
-        WebSocketStompClient stompClient = new WebSocketStompClient(client);
-        //Convert to string
-        stompClient.setMessageConverter(new StringMessageConverter());
-        //Used for converting models
-        //stompClient.setMessageConverter(new MappingJackson2MessageConverter());
-
-        StompSessionHandler sessionHandler = new MyStompSessionHandler();
-        stompClient.connect(URL, sessionHandler);;
-        new Scanner(System.in).nextLine(); // Don't close immediately.
+        serverSocketPort = fileServer.getServerSocket().getLocalPort();
     }
-
 
     @Override
     public void stop() throws Exception {

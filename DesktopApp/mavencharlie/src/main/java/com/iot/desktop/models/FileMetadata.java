@@ -12,7 +12,7 @@ public class FileMetadata {
 
     public FileMetadata() {}
 
-    public FileMetadata(String id, String userId, String groupId, String fileName, String extension, int size, String MD5Signature) {
+    public FileMetadata(String id, String userId, String groupId, String fileName, String extension, long size, String MD5Signature) {
         this.id = id;
         this.userId = userId;
         this.groupId = groupId;
