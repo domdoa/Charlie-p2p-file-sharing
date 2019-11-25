@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Search from "../common/Search";
 import File from "./File";
-import peerService from '../../services/Peer';
+import peerService from "../../services/Peer";
 
 var stompClient = null;
 
@@ -22,7 +22,7 @@ const Files = () => {
   };
 
   const onConnected = () => {
-    // Subscribing to the test topic
+    // Subscribing to the topic
     console.log("connected");
     stompClient.subscribe("/topic/files", onMessageReceived);
   };
@@ -36,26 +36,16 @@ const Files = () => {
   };
 
   const onMessageReceived = payload => {
-    if(payload.body !== "No files"){
-      var files = JSON.parse(payload.body)
-      setFiles(files);
-      getSeeders(files);
+    if (payload.body !== "No files") {
+      let files = JSON.parse(payload.body);
+      files.forEach(file => {
+        peerService.getAllPeersWithAFileFromAllServers(file).then(res =>{
+          file.seeders = res.peers.length;
+          setFiles([...files])
+        })
+      })
     }
   };
-
-  const getSeeders = files => {
-    for(const file of files){
-      peerService
-        .getAllPeersWithAFileFromAllServers(file)
-        .then(request => {
-          file.seeders = request.peers.length;
-          setFiles([...files,file])
-        })
-        .catch(err => {
-          console.log(err);
-        })
-      }
-  }
 
   const onError = error => {
     console.log(error);

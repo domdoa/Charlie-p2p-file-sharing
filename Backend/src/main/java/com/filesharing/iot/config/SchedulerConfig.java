@@ -1,6 +1,7 @@
 package com.filesharing.iot.config;
 
 import com.filesharing.iot.models.File;
+import com.filesharing.iot.repository.FileRepository;
 import com.filesharing.iot.repository.PeerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -18,20 +19,19 @@ public class SchedulerConfig {
     @Autowired
     SimpMessagingTemplate template;
     @Autowired
-    PeerRepository peerRepository;
+    FileRepository fileRepository;
     List<File> files = new ArrayList<>();
     Integer filesSize = 0;
 
-    @Scheduled(fixedDelay = 10000)
+    @Scheduled(fixedDelay = 5000)
     @SendTo("/topic/files")
     public void sendMessage() {
-        peerRepository.getPeers().forEach(el -> files.addAll(el.getFileList()));
+        files = fileRepository.getFiles();
         if (files.size() != filesSize){
             filesSize = files.size();
             template.convertAndSend("/topic/files", files);
         } else if (files.size() == 0){
             template.convertAndSend("/topic/files", "No files");
         }
-        files.clear();
     }
 }

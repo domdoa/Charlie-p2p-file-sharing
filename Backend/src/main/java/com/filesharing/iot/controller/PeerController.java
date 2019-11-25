@@ -5,9 +5,11 @@ import com.filesharing.iot.models.File;
 import com.filesharing.iot.models.ForeignPC;
 import com.filesharing.iot.models.ListOfPeers;
 import com.filesharing.iot.models.Peer;
+import com.filesharing.iot.repository.FileRepository;
 import com.filesharing.iot.repository.ForeignPcRepository;
 import com.filesharing.iot.repository.PeerRepository;
 import com.filesharing.iot.utils.Utils;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/peers")
+@RequestMapping("/peers")
 public class PeerController {
     @Autowired
     PeerRepository peerRepository;
@@ -34,20 +36,18 @@ public class PeerController {
     @PostMapping
     public ResponseEntity addPeer(@RequestBody Peer peer) {
         peerRepository.save(peer);
-
         peersList.add(peer);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/getAllPeersWithFile")
     public ListOfPeers getAllPeersWithFile(@RequestBody File fileToGet) {
-
         ListOfPeers listToReturnWithPeers = new ListOfPeers();
         List<Peer> peers = peerRepository.getPeers();
         for (Peer p : peers) {
             List<File> filesOfThePeer = p.getFileList();
             for(File f : filesOfThePeer){
-                if(f.equals(fileToGet)) {
+                if(f.getMd5Sign().equals(fileToGet.getMd5Sign())) {
                     listToReturnWithPeers.getPeers().add(p);
                     break;
                 }
@@ -61,7 +61,7 @@ public class PeerController {
     public ListOfPeers getAllPeersWithAFileFromAllServers(@RequestBody File fileToGet) throws Exception {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        
+
         List<ForeignPC> foreignPCS = Utils.readFromFile(foreignPcRepository.getFileName());
         System.out.println(foreignPCS);
         ListOfPeers peersList = new ListOfPeers();

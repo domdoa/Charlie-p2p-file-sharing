@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://localhost:8080/api/peers";
+const baseUrl = "http://localhost:8080/peers";
 
 var config = {
   headers: { Authorization: localStorage.Authorization }
