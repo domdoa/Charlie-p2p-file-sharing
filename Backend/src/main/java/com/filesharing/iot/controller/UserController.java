@@ -18,11 +18,14 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 @RestController
 @RequestMapping("/")
 public class UserController {
+    private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -36,6 +39,7 @@ public class UserController {
 
     @PostMapping("/sign-up")
     public ResponseEntity signUp(@RequestBody User user, @RequestParam @Nullable String inviteString, @RequestParam @Nullable String groupName) throws Exception {
+        LOGGER.log( Level.INFO, "Registering");
         if (userRepository.findByEmail(user.getEmail()) != null) {
             return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON_UTF8).body("{\"" + "Error" + "\":\"" + "Invalid email" + "\"}");
         }
@@ -77,31 +81,37 @@ public class UserController {
 
     @GetMapping("/findByEmail")
     public ResponseEntity<User> findByEmail(@RequestParam String email) {
+        LOGGER.log( Level.INFO, "Finding user by email");
         User user = userRepository.findByEmail(email);
-
-        if (user == null)
+        if (user == null) {
+            LOGGER.log(Level.WARNING, "User not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+        }
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @GetMapping("/getGroupsForUser")
     public ResponseEntity<List<Group>> getGroupsForUser(@RequestParam String email) {
+        LOGGER.log( Level.INFO, "Getting user groups");
         List<Group> groups = userRepository.findByEmail(email).getGroups();
 
-        if (groups == null || groups.size() == 0)
+        if (groups == null || groups.size() == 0){
+            LOGGER.log( Level.WARNING, "User does not belong to any group");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+        }
         return new ResponseEntity<>(groups, HttpStatus.OK);
     }
 
     @PostMapping("/addUserGroup")
     public ResponseEntity addUserGroup(@RequestParam String email, @RequestParam String groupName) {
+        LOGGER.log( Level.INFO, "Adding user group");
         User user = userRepository.findByEmail(email);
         Group group = groupRepository.findByName(groupName);
 
-        if (user == null)
+        if (user == null) {
+            LOGGER.log(Level.WARNING, "User not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
 
         if (group == null) {
             group = new Group();
@@ -115,7 +125,6 @@ public class UserController {
     }
 
     private String generateRandomString() {
-
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
         int targetStringLength = 10;
@@ -145,5 +154,4 @@ public class UserController {
             }
         }
     }
-
 }
