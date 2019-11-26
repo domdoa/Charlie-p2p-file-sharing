@@ -10,12 +10,11 @@ import java.util.Objects;
 @AllArgsConstructor
 @Builder
 public class File {
-    private long id;
-    private long user_id;
+    private String email;
     private String name;
     private String ext;
     private String md5Sign;
-    private String size;
+    private long size;
     private Group group;
 
     @Override
@@ -23,15 +22,16 @@ public class File {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         File file = (File) o;
-        return  Objects.equals(name, file.name) &&
+        return size == file.size &&
+                Objects.equals(name, file.name) &&
                 Objects.equals(ext, file.ext) &&
                 Objects.equals(md5Sign, file.md5Sign) &&
-                Objects.equals(size, file.size);
+                Objects.equals(group, file.group);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, user_id, name, ext, md5Sign, size);
+        return Objects.hash(email, name, ext, md5Sign, size);
     }
 
 
