@@ -23,7 +23,6 @@ public class PeerRepository {
             peers.add(peer);
             peer.getFileList().forEach(file -> fileRepository.save(file));
         }
-
     }
 
     public List<Peer> getPeers(){
@@ -34,7 +33,5 @@ public class PeerRepository {
         peers = peers.stream()
                 .filter(p -> p.getUser_id().longValue() != peer.getUser_id().longValue())
                 .collect(Collectors.toList());
-
     }
-
 }

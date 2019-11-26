@@ -11,8 +11,6 @@ import com.google.gson.Gson;
 import okhttp3.*;
 import okhttp3.ResponseBody;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +20,13 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/peers")
 public class PeerController {
+    private static final Logger LOGGER = Logger.getLogger(PeerController.class.getName());
     @Autowired
     PeerRepository peerRepository;
     @Autowired
@@ -37,12 +38,15 @@ public class PeerController {
 
     @PostMapping
     public ResponseEntity addPeer(@RequestBody Peer peer) {
+        LOGGER.log( Level.INFO, "Creating new peer", peer );
+
         peerRepository.save(peer);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping
     public ResponseEntity deletePeer(@RequestBody Peer peer) {
+        LOGGER.log( Level.INFO, "Deleting peer", peer );
         peerRepository.remove(peer);
 
         return ResponseEntity.ok().build();
@@ -50,6 +54,7 @@ public class PeerController {
 
     @PostMapping("/getAllPeersWithFile")
     public ListOfPeers getAllPeersWithFile(@RequestBody File fileToGet) {
+        LOGGER.log( Level.INFO, "Getting all peers with file");
         ListOfPeers listToReturnWithPeers = new ListOfPeers();
         List<Peer> peers = peerRepository.getPeers();
         for (Peer p : peers) {
@@ -67,7 +72,7 @@ public class PeerController {
 
     @PostMapping("/getAllPeersWithAFileFromAllServers")
     public ListOfPeers getAllPeersWithAFileFromAllServers(HttpServletRequest httpRequest, @RequestBody File fileToGet) throws Exception {
-
+        LOGGER.log( Level.INFO, "Getting all peers with file from all servers");
         String authorization = httpRequest.getHeader("Authorization");
         String contentType = httpRequest.getHeader("Content-Type");
 
@@ -106,6 +111,7 @@ public class PeerController {
 
     @GetMapping("/findPeerByEmail")
     public ResponseEntity<Peer> findPeerByEmail(@RequestParam String email) {
+        LOGGER.log( Level.INFO, "Finding peer by email");
         Long userId = userRepository.findByEmail(email).getUser_id();
         List<Peer> peers = peerRepository.getPeers();
 
@@ -114,16 +120,21 @@ public class PeerController {
                 return new ResponseEntity<>(peer, HttpStatus.OK);
             }
         }
+        LOGGER.log( Level.WARNING, "Peer is not online");
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/files")
     public ResponseEntity<List<File>> getAllFileMetadatas(@RequestParam String email) {
+        LOGGER.log( Level.INFO, "Getting all files");
         List<File> allFiles = new ArrayList<>();
         List<File> availableFiles = new ArrayList<>();
 
         User user = userRepository.findByEmail(email);
-        if (user == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        if (user == null) {
+            LOGGER.log( Level.WARNING, "User not found");
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         List<Group> groupList = user.getGroups();
 
         peerRepository.getPeers().forEach(el -> allFiles.addAll(el.getFileList()));
@@ -146,6 +157,7 @@ public class PeerController {
 
     @GetMapping("/file")
     public ResponseEntity<File> getFileMetadata(@RequestParam String md5) {
+        LOGGER.log( Level.INFO, "Getting file");
         File file = new File();
         List<File> files = new ArrayList<>();
 
@@ -161,6 +173,7 @@ public class PeerController {
     // C U D files
     @PostMapping("/files")
     public ResponseEntity addFilesToPeer(@RequestBody List<File> files, @RequestParam String email) {
+        LOGGER.log( Level.INFO, "Adding files to peer");
         Peer peer = peerRepository.getPeers().stream()
                 .filter(el -> el.getEmail().equals(email))
                 .findFirst()
@@ -169,12 +182,14 @@ public class PeerController {
             peer.addFiles(files);
             return ResponseEntity.ok().build();
         } else {
+            LOGGER.log( Level.WARNING, "Peer not found");
             return ResponseEntity.notFound().build();
         }
     }
 
     @DeleteMapping("/files")
     public ResponseEntity removeFileFromPeer(@RequestBody File file, @RequestParam String email) {
+        LOGGER.log( Level.INFO, "Deleting file from peer");
         Peer peer = peerRepository.getPeers().stream()
                 .filter(el -> el.getEmail().equals(email))
                 .findFirst()
@@ -183,12 +198,14 @@ public class PeerController {
             peer.removeFile(file);
             return ResponseEntity.ok().build();
         } else {
+            LOGGER.log( Level.WARNING, "Peer not found");
             return ResponseEntity.notFound().build();
         }
     }
 
     @PutMapping("/file")
     public ResponseEntity updateFileOfPeer(@RequestBody File file, @RequestBody String fileName, @RequestParam String email) {
+        LOGGER.log( Level.INFO, "Updating peer file");
         Peer peer = peerRepository.getPeers().stream()
                 .filter(el -> el.getEmail().equals(email))
                 .findFirst()
@@ -197,9 +214,8 @@ public class PeerController {
             peer.updateFile(fileName, file);
             return ResponseEntity.ok().build();
         } else {
+            LOGGER.log( Level.WARNING, "Peer not found");
             return ResponseEntity.notFound().build();
         }
     }
-
-
 }
