@@ -19,7 +19,6 @@
                 <TableColumn fx:id="downloadSize" prefWidth="53.0" text="Size" />
                   <TableColumn fx:id="downloadProgress" prefWidth="74.0" text="Progress" />
                   <TableColumn fx:id="downloadSpeed" prefWidth="77.0" text="Speed" />
-                  <TableColumn fx:id="downloadPeers" prefWidth="98.0" text="Available peers" />
               </columns>
             </TableView>
             <Label layoutX="52.0" layoutY="14.0" prefHeight="17.0" prefWidth="142.0" text="Downloaded files">

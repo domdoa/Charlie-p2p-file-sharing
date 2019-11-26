@@ -133,10 +133,10 @@ public class FileSystemWatcher implements Runnable {
                         FileSerializer.uploadedFiles.add(fm);
                         UploadFileModel ufm = new UploadFileModel(uploaded.getName(), Long.toString(uploaded.length()), new Date(System.currentTimeMillis()));
                         RootController.uploadedFiles.add(ufm);
+                        // Necessary peer Id somehow get it
+                        com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(0,0, nameExt[0], nameExt[1], null, Long.toString(uploaded.length()));
+                        new ServerServiceImpl().addFilesToPeer(Collections.singletonList(file), 1);
                     }
-                    // Necessary peer Id somehow get it
-                    com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(0,0, nameExt[0], nameExt[1], null, Long.toString(uploaded.length()));
-                    new ServerServiceImpl().addFilesToPeer(Collections.singletonList(file), 1);
                 } else if (ENTRY_MODIFY.equals(kind)) {
 
                 } else if (ENTRY_DELETE.equals(kind)) {
