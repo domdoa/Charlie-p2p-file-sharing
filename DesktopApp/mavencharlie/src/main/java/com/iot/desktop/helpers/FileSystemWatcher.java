@@ -134,6 +134,7 @@ public class FileSystemWatcher implements Runnable {
                         UploadFileModel ufm = new UploadFileModel(uploaded.getName(), Long.toString(uploaded.length()), new Date(System.currentTimeMillis()));
                         RootController.uploadedFiles.add(ufm);
                         // Necessary peer Id somehow get it
+                        // TODO: compute MD5 signature
                         com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(0,0, nameExt[0], nameExt[1], null, Long.toString(uploaded.length()));
                         new ServerServiceImpl().addFilesToPeer(Collections.singletonList(file), 1);
                     }

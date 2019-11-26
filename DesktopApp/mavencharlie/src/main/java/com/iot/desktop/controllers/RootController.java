@@ -62,7 +62,7 @@ public class RootController implements Initializable {
         }
         System.out.println("Peer address: " + peers.get(0).getIpAddress());
         System.out.println("Peer port: " + peers.get(0).getPort());
-        new DownloadManager(file,peers).start();
+        //new DownloadManager(file,peers).start();
     }
 
 

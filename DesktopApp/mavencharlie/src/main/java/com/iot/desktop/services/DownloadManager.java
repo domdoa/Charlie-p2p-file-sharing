@@ -11,8 +11,10 @@ import com.iot.desktop.network.PeerSocket;
 
 import java.io.File;
 import java.io.RandomAccessFile;
+import java.nio.file.FileSystemException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * This class responsible to manage the file downloading request
@@ -35,8 +37,22 @@ public class DownloadManager extends Thread{
         this.sockets = new ArrayList<>();
 
         DownloadFileModel dm = new DownloadFileModel(file.getFileName(), file.getSize(),"0%" ," - " );
-        FileSerializer.downloadedFiles.add(file);
-        RootController.downloadedFiles.add(dm);
+        if(FileSerializer.downloadedFiles.size() == 0){
+            FileSerializer.downloadedFiles.add(file);
+            RootController.downloadedFiles.add(dm);
+        }
+        for (int i = 0; i< FileSerializer.downloadedFiles.size(); i++){
+            if(FileSerializer.downloadedFiles.get(i).getFileName().equals(dm.getFileName())){
+                FileSerializer.downloadedFiles.remove(file);
+                RootController.downloadedFiles.removeIf( (fi)  -> fi.getFileName().equals(dm.getFileName()));
+                FileSerializer.downloadedFiles.add(file);
+                RootController.downloadedFiles.add(dm);
+            }
+            else if(i == FileSerializer.downloadedFiles.size()){
+                FileSerializer.downloadedFiles.add(file);
+                RootController.downloadedFiles.add(dm);
+            }
+        }
 
         System.out.println("Download manager constructor called.");
         long bound = fileMetadata.getSize() % FileProviderForPeers.DOWNLOAD_UNIT == 0
