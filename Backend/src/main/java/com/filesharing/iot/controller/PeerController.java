@@ -38,8 +38,11 @@ public class PeerController {
 
     @PostMapping
     public ResponseEntity addPeer(@RequestBody Peer peer) {
+<<<<<<< HEAD
         LOGGER.log( Level.INFO, "Creating new peer", peer );
 
+=======
+>>>>>>> 0df6659d243534864944735e6804403f139b146b
         peerRepository.save(peer);
         return ResponseEntity.ok().build();
     }
