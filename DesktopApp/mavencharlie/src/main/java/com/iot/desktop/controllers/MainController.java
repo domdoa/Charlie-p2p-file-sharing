@@ -1,6 +1,11 @@
 package com.iot.desktop.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.iot.desktop.FileSharingMain;
+import com.iot.desktop.helpers.FileSerializer;
+import com.iot.desktop.models.FileMetadata;
+import com.iot.desktop.models.Peer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +18,13 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import okhttp3.*;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainController {
     public String JWTToken;
-    private String serverURL = "http://localhost:8080/login";
     private String contentType = "application/json";
     @FXML
     private TextField usernameField;
@@ -32,7 +41,7 @@ public class MainController {
         String body = "{\"email\"" + ":" + "\"" + username + "\"," + "\"password\": " + "\"" + password + "\"" + "}";
 
         Request request = new Request.Builder()
-                .url(serverURL)
+                .url(Constants.serverURL + Constants.loginEndpoint)
                 .addHeader("Content-Type", contentType)
                 .post(okhttp3.RequestBody.create(MediaType.parse("application/json; charset=utf-8"), body))
                 .build();
@@ -42,10 +51,12 @@ public class MainController {
         Gson gson = new Gson();
         ResponseBody responseBody = response.body();
 
-        JWTToken = responseBody.string();
-
-
-
+        if (responseBody != null) {
+            JWTToken = responseBody.string();
+            String bearer = JWTToken.split(":")[1];
+            JWTToken = bearer.substring(1,bearer.length()-2);
+            notifyPeerIsOnline(username,JWTToken);
+        }
         actionTarget.setText("Sign in button pressed");
         Node node = (Node) event.getSource();
         Stage stage = (Stage) node.getScene().getWindow();
@@ -54,4 +65,30 @@ public class MainController {
         stage.setScene(scene);
         stage.show();
     }
+
+    private void notifyPeerIsOnline(String userEmail,String authorization) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<FileMetadata> peerFiles = new ArrayList<>(FileSerializer.downloadedFiles);
+        peerFiles.addAll(FileSerializer.uploadedFiles);
+        Peer peer = new Peer(Constants.localAddress, FileSharingMain.serverSocketPort);
+        peer.setFileList(peerFiles);
+        peer.setEmail(userEmail);
+
+        Request request = new Request.Builder()
+                .url(Constants.serverURL + Constants.notifyPeerIsOnline)
+                .addHeader("Authorization",authorization)
+                .addHeader("Content-Type", contentType)
+                .post(okhttp3.RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mapper.writeValueAsString(peer)))
+                .build();
+        OkHttpClient client = new OkHttpClient();
+        Call call = client.newCall(request);
+        Response response = call.execute();
+        int responseCode = response.code();
+        if(responseCode!=200){
+            System.err.println("Something went wrong!");
+        }
+    }
+
+
 }

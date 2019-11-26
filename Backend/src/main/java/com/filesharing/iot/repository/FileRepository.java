@@ -25,10 +25,10 @@ public class FileRepository {
 
     public List<File> getFiles(){return files;}
 
-    public void remove(File file){
-        files = files.stream()
-                .filter(f -> f.getId() != file.getId())
-                .collect(Collectors.toList());
-    }
+//    public void remove(File file){
+//        files = files.stream()
+//                .filter(f -> f.getId() != file.getId())
+//                .collect(Collectors.toList());
+//    }
 
 }

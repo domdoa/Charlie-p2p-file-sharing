@@ -3,6 +3,7 @@ package com.filesharing.iot.models;
 import lombok.*;
 
 import javax.persistence.Entity;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 public class Peer extends User {
     private String ipAddress;
     private int port;
-    private List<File> fileList;
+    private List<File> fileList = new ArrayList<>();
 
     public void addFiles(List<File> files) {
         fileList.addAll(files);
@@ -22,7 +23,7 @@ public class Peer extends User {
     public void removeFile(File file) {
         fileList = fileList.stream().filter(el ->
                 !el.getName().equals(file.getName()) &&
-                        !el.getSize().equals(file.getSize())).collect(Collectors.toList());
+                        el.getSize()!=(file.getSize())).collect(Collectors.toList());
     }
 
     public void updateFile(String fileName , File file) {

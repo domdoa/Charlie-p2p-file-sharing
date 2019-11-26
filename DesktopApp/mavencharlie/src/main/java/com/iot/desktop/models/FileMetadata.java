@@ -1,40 +1,31 @@
 package com.iot.desktop.models;
 
 public class FileMetadata {
-
-    private String id;
-    private String userId; //owner, uploader
+    private String email;//owner, uploader
     private String groupId; // if null, then the file is public
     private String fileName;
     private String extension;
     private long size;
     private String MD5Signature;
 
-    public FileMetadata() {}
+    public FileMetadata() {
+    }
 
-    public FileMetadata(String id, String userId, String groupId, String fileName, String extension, long size, String MD5Signature) {
-        this.id = id;
-        this.userId = userId;
+    public FileMetadata(String email, String groupId, String fileName, String extension, long size, String MD5Signature) {
+        this.email = email;
         this.groupId = groupId;
         this.fileName = fileName;
         this.extension = extension;
         this.size = size;
         this.MD5Signature = MD5Signature;
     }
-    public String getId() {
-        return id;
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getGroupId() {

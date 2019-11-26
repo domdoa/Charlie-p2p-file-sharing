@@ -129,7 +129,7 @@ public class FileSystemWatcher implements Runnable {
                     String names = name.toString();
                     String[] nameExt = names.split("\\.");
                     if (unique && nameExt.length == 2){
-                        FileMetadata fm = new FileMetadata(null, null,null,nameExt[0], nameExt[1], uploaded.length(),null);
+                        FileMetadata fm = new FileMetadata(null, null,nameExt[0], nameExt[1], uploaded.length(),null);
                         FileSerializer.uploadedFiles.add(fm);
                         UploadFileModel ufm = new UploadFileModel(uploaded.getName(), Long.toString(uploaded.length()), new Date(System.currentTimeMillis()));
                         RootController.uploadedFiles.add(ufm);
