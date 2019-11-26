@@ -1,9 +1,15 @@
 package com.iot.desktop.models;
 
-public class Peer {
+import com.iot.desktop.dtos.File;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Peer extends User{
 
     private String ipAddress;
     private int port;
+    private List<FileMetadata> fileList = new ArrayList<>();
 
     public Peer() {}
 
@@ -26,5 +32,13 @@ public class Peer {
 
     public void setPort(int port) {
         this.port = port;
+    }
+
+    public List<FileMetadata> getFileList() {
+        return fileList;
+    }
+
+    public void setFileList(List<FileMetadata> fileList) {
+        this.fileList = fileList;
     }
 }

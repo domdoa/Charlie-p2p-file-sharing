@@ -38,7 +38,6 @@ public class PeerController {
     @PostMapping
     public ResponseEntity addPeer(@RequestBody Peer peer) {
         peerRepository.save(peer);
-
         return ResponseEntity.ok().build();
     }
 
