@@ -20,8 +20,6 @@ public class IotApplication {
                 Chord.main(Arrays.copyOfRange(args, 1, args.length));
             }
         }
-
-
     }
 
     @Bean

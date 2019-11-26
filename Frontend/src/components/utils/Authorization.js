@@ -81,3 +81,5 @@ export const registerUser = (data, resolve, reject) => {
             reject()
         }); // error
 };
+
+export default {getEmail}

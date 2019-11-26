@@ -19,7 +19,6 @@ public class Peer extends User {
         fileList.addAll(files);
     }
 
-
     public void removeFile(File file) {
         fileList = fileList.stream().filter(el ->
                 !el.getName().equals(file.getName()) &&

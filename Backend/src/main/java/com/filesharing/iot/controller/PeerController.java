@@ -51,13 +51,12 @@ public class PeerController {
 
     @PostMapping("/getAllPeersWithFile")
     public ListOfPeers getAllPeersWithFile(@RequestBody File fileToGet) {
-
         ListOfPeers listToReturnWithPeers = new ListOfPeers();
         List<Peer> peers = peerRepository.getPeers();
         for (Peer p : peers) {
             List<File> filesOfThePeer = p.getFileList();
-            for (File f : filesOfThePeer) {
-                if (f.equals(fileToGet)) {
+            for(File f : filesOfThePeer){
+                if(f.getMd5Sign().equals(fileToGet.getMd5Sign())) {
                     listToReturnWithPeers.getPeers().add(p);
                     break;
                 }
@@ -79,7 +78,6 @@ public class PeerController {
         for (ForeignPC foreignPC : foreignPCS) {
             String foreignPCAddress = foreignPC.getInetSocketAddress().getHostName();
             foreignPCAddress = foreignPCAddress.substring(1);
-
             if (!(foreignPCAddress.equals(Constants.localAddress) &&
                     foreignPC.getSpringPort().equals(Constants.currentSpringPort))) {
                 ObjectMapper mapper = new ObjectMapper();
@@ -107,12 +105,25 @@ public class PeerController {
         return peersList;
     }
 
+    @GetMapping("/findPeerByEmail")
+    public ResponseEntity<Peer> findPeerByEmail(@RequestParam String email) {
+        Long userId = userRepository.findByEmail(email).getUser_id();
+        List<Peer> peers = peerRepository.getPeers();
+
+        for(Peer peer : peers){
+            if(userId == peer.getUser_id()) {
+                return new ResponseEntity<>(peer, HttpStatus.OK);
+            }
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("/files")
-    public ResponseEntity<List<File>> getAllFileMetadatas(@RequestParam long user_id) {
+    public ResponseEntity<List<File>> getAllFileMetadatas(@RequestParam String email) {
         List<File> allFiles = new ArrayList<>();
         List<File> availableFiles = new ArrayList<>();
 
-        User user = userRepository.findByUserId(user_id);
+        User user = userRepository.findByEmail(email);
         if (user == null) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         List<Group> groupList = user.getGroups();
 
@@ -135,13 +146,13 @@ public class PeerController {
     }
 
     @GetMapping("/file")
-    public ResponseEntity<File> getFileMetadata(@RequestParam long file_id) {
+    public ResponseEntity<File> getFileMetadata(@RequestParam String md5) {
         File file = new File();
         List<File> files = new ArrayList<>();
 
         peerRepository.getPeers().forEach(el -> files.addAll(el.getFileList()));
         for (File f : files) {
-            if (f.getId() == file_id)
+            if (f.getMd5Sign().equals(md5))
                 file = f;
         }
         return new ResponseEntity<>(file, HttpStatus.OK);
@@ -150,9 +161,9 @@ public class PeerController {
 
     // C U D files
     @PostMapping("/files")
-    public ResponseEntity addFilesToPeer(@RequestBody List<File> files, @RequestParam long peer_id) {
+    public ResponseEntity addFilesToPeer(@RequestBody List<File> files, @RequestParam String email) {
         Peer peer = peerRepository.getPeers().stream()
-                .filter(el -> el.getUser_id().equals(peer_id))
+                .filter(el -> el.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
         if (peer != null) {
@@ -164,9 +175,9 @@ public class PeerController {
     }
 
     @DeleteMapping("/files")
-    public ResponseEntity removeFileFromPeer(@RequestBody File file, @RequestParam long peer_id) {
+    public ResponseEntity removeFileFromPeer(@RequestBody File file, @RequestParam String email) {
         Peer peer = peerRepository.getPeers().stream()
-                .filter(el -> el.getUser_id().equals(peer_id))
+                .filter(el -> el.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
         if (peer != null) {
@@ -178,9 +189,9 @@ public class PeerController {
     }
 
     @PutMapping("/file")
-    public ResponseEntity updateFileOfPeer(@RequestBody File file, @RequestBody String fileName, @RequestParam long peer_id) {
+    public ResponseEntity updateFileOfPeer(@RequestBody File file, @RequestBody String fileName, @RequestParam String email) {
         Peer peer = peerRepository.getPeers().stream()
-                .filter(el -> el.getUser_id().equals(peer_id))
+                .filter(el -> el.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
         if (peer != null) {
