@@ -34,4 +34,11 @@ public class PeerRepository {
                 .filter(p -> p.getUser_id().longValue() != peer.getUser_id().longValue())
                 .collect(Collectors.toList());
     }
+
+    public Peer findByEmail(String email){
+        return peers.stream()
+                .filter(p -> p.getEmail().equals(email))
+                .findAny()
+                .orElse(null);
+    }
 }
