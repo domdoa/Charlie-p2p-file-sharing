@@ -76,7 +76,7 @@ public class PeerController {
     }
 
     @PostMapping("/getAllPeersWithAFileFromAllServers")
-    public ListOfPeers getAllPeersWithAFileFromAllServers(HttpServletRequest httpRequest, @RequestBody File fileToGet) throws Exception {
+    public ResponseEntity getAllPeersWithAFileFromAllServers(HttpServletRequest httpRequest, @RequestBody File fileToGet, @RequestParam String email) throws Exception {
         LOGGER.log( Level.INFO, getCurrentUTC() + " Getting all peers with file from all servers");
         String authorization = httpRequest.getHeader("Authorization");
         String contentType = httpRequest.getHeader("Content-Type");
@@ -111,7 +111,17 @@ public class PeerController {
             }
         }
         peersList.getPeers().addAll(this.getAllPeersWithFile(fileToGet).getPeers());
-        return peersList;
+
+        // we have all the information about the peers
+        Peer peer = peerRepository.findByEmail(email);
+        if(peer == null)
+            return ResponseEntity.notFound().build(); // the requested peer does not exist
+
+        FilePeers filePeers = new FilePeers(fileToGet, peersList.getPeers());
+
+        restTemplate.postForObject("http://" + peer.getIpAddress() + ":" + peer.getPort() + "/", filePeers, ResponseEntity.class);
+
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/findPeerByEmail")

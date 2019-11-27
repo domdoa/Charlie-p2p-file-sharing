@@ -21,11 +21,6 @@ import java.util.List;
 @RequestMapping("/")
 public class EndpointController {
 
-    @GetMapping()
-    public ResponseEntity sampleGet() {
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
     @PostMapping
     public ResponseEntity receiveFileAndPeerDetails(@RequestBody FilePeers filePeers){
 
