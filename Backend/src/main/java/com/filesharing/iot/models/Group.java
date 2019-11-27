@@ -19,7 +19,7 @@ public class Group {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(unique = true, nullable = false, name = "group_id")
     private long group_id;
-    @Column(name = "name", nullable = false)
+    @Column(unique = true, name = "name", nullable = false)
     private String name;
     @Column(name = "invite")
     public String inviteString;
