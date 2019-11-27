@@ -2,9 +2,11 @@ package com.iot.desktop.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.iot.desktop.FileSharingMain;
 import com.iot.desktop.helpers.FileSerializer;
 import com.iot.desktop.models.FileMetadata;
+import com.iot.desktop.models.Group;
 import com.iot.desktop.models.Peer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import okhttp3.*;
+import org.apache.tomcat.util.bcel.Const;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -37,6 +40,7 @@ public class MainController {
     protected void handleSubmitButtonAction(ActionEvent event) throws Exception {
 
         String username = usernameField.getText();
+        Constants.emailAddress = username;
         String password = passwordField.getText();
         String body = "{\"email\"" + ":" + "\"" + username + "\"," + "\"password\": " + "\"" + password + "\"" + "}";
 
@@ -56,6 +60,8 @@ public class MainController {
             String bearer = JWTToken.split(":")[1];
             JWTToken = bearer.substring(1,bearer.length()-2);
             notifyPeerIsOnline(username,JWTToken);
+            //List<Group> usersGroups = getGroupOfTheUser(username);
+            Constants.userGroups = getGroupOfTheUser(username);
         }
         actionTarget.setText("Sign in button pressed");
         Node node = (Node) event.getSource();
@@ -76,7 +82,7 @@ public class MainController {
         peer.setEmail(userEmail);
 
         Request request = new Request.Builder()
-                .url(Constants.serverURL + Constants.notifyPeerIsOnline)
+                .url(Constants.serverURL + Constants.notifyPeerIsOnlineEndpoint)
                 .addHeader("Authorization",authorization)
                 .addHeader("Content-Type", contentType)
                 .post(okhttp3.RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mapper.writeValueAsString(peer)))
@@ -88,6 +94,22 @@ public class MainController {
         if(responseCode!=200){
             System.err.println("Something went wrong!");
         }
+    }
+
+    public List<Group> getGroupOfTheUser(String emailAddress) throws IOException {
+        Request request = new Request.Builder()
+                .url(Constants.serverURL + Constants.getGroupsForUserEndpoint+"?email="+emailAddress)
+                .addHeader("Authorization",JWTToken)
+                .addHeader("Content-Type", contentType)
+                .build();
+        OkHttpClient client = new OkHttpClient();
+        Call call = client.newCall(request);
+        Response response = call.execute();
+        ResponseBody responseBody = response.body();
+        Gson gson = new Gson();
+        List<Group> listOfGroups = gson.fromJson(responseBody.string(),new TypeToken<List<Group>>(){}.getType());
+
+        return listOfGroups;
     }
 
 

@@ -8,13 +8,13 @@ import com.filesharing.iot.repository.PeerRepository;
 import com.filesharing.iot.repository.UserRepository;
 import com.filesharing.iot.utils.Utils;
 import com.google.gson.Gson;
-import okhttp3.*;
 import okhttp3.ResponseBody;
+import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;

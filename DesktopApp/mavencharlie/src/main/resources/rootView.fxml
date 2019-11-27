@@ -40,10 +40,10 @@
                   <TableColumn fx:id="uploadNumberOfDownloads" prefWidth="75.0" text="Nr. downloads" />
               </columns>
             </TableView>
-            <Label layoutX="301.0" layoutY="282.0" prefHeight="25.0" prefWidth="88.0" text="Group name:" />
-            <TextField editable="false" layoutX="375.0" layoutY="282.0" prefHeight="25.0" prefWidth="170.0" />
-            <Label layoutX="301.0" layoutY="311.0" prefHeight="24.0" prefWidth="80.0" text="Invite string:" />
-            <TextField editable="false" layoutX="375.0" layoutY="311.0" prefHeight="25.0" prefWidth="168.0" />
+            <Label fx:id="groupNameLabel" layoutX="301.0" layoutY="282.0" prefHeight="25.0" prefWidth="88.0" text="Group name:" />
+            <TextField fx:id="groupTextField" editable="false" layoutX="375.0" layoutY="282.0" prefHeight="25.0" prefWidth="170.0" />
+            <Label fx:id="inviteStringLabel" layoutX="301.0" layoutY="311.0" prefHeight="24.0" prefWidth="80.0" text="Invite string:" />
+            <TextField fx:id="inviteStringField" editable="false" layoutX="375.0" layoutY="311.0" prefHeight="25.0" prefWidth="168.0" />
          </children></AnchorPane>
   </content>
 </ScrollPane>

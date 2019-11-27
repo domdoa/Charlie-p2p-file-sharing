@@ -9,8 +9,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import com.iot.desktop.models.DownloadFileModel;
 
@@ -27,6 +29,12 @@ public class RootController implements Initializable {
     @FXML public TableColumn<UploadFileModel, Date> uploadDate;
     public static ObservableList<UploadFileModel> uploadedFiles;
 
+    @FXML public Label groupNameLabel;
+    @FXML public TextField groupTextField;
+
+    @FXML public TextField inviteStringField;
+    @FXML public Label inviteStringLabel;
+
     @FXML private TableColumn<DownloadFileModel,String> downloadFile;
     @FXML private TableColumn<DownloadFileModel,String> downloadSize;
     @FXML private TableColumn<DownloadFileModel,String> downloadProgress;
@@ -36,6 +44,17 @@ public class RootController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if(Constants.userGroups.size()>1){
+            groupTextField.setText(Constants.userGroups.get(1).getName());
+            inviteStringField.setText(Constants.userGroups.get(1).getInviteString());
+        }
+        else{
+            groupNameLabel.setVisible(false);
+            groupTextField.setVisible(false);
+            inviteStringField.setVisible(false);
+            inviteStringLabel.setVisible(false);
+        }
+
         uploadFile.setCellValueFactory(new PropertyValueFactory<>("fileName"));
         uploadSize.setCellValueFactory(new PropertyValueFactory<>("size"));
         uploadDate.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -77,4 +96,5 @@ public class RootController implements Initializable {
         }
         return res;
     }
+
 }
