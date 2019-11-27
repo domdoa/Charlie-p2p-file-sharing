@@ -60,6 +60,7 @@ public class MainController {
             String bearer = JWTToken.split(":")[1];
             JWTToken = bearer.substring(1,bearer.length()-2);
             notifyPeerIsOnline(username,JWTToken);
+            Constants.JWTToken = JWTToken;
             //List<Group> usersGroups = getGroupOfTheUser(username);
             Constants.userGroups = getGroupOfTheUser(username);
         }
@@ -92,7 +93,7 @@ public class MainController {
         Response response = call.execute();
         int responseCode = response.code();
         if(responseCode!=200){
-            System.err.println("Something went wrong!");
+            System.err.println("Notify Peer Is Online went wrong");
         }
     }
 

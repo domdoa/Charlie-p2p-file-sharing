@@ -37,7 +37,6 @@
                 <TableColumn fx:id="uploadFile" prefWidth="75.0" text="File name" />
                 <TableColumn fx:id="uploadSize" prefWidth="75.0" text="Size" />
                 <TableColumn fx:id="uploadDate" prefWidth="75.0" text="Date" />
-                  <TableColumn fx:id="uploadNumberOfDownloads" prefWidth="75.0" text="Nr. downloads" />
               </columns>
             </TableView>
             <Label fx:id="groupNameLabel" layoutX="301.0" layoutY="282.0" prefHeight="25.0" prefWidth="88.0" text="Group name:" />
