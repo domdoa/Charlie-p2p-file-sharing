@@ -186,14 +186,14 @@ public class PeerController {
 
     // C U D files
     @PostMapping("/files")
-    public ResponseEntity addFilesToPeer(@RequestBody List<File> files, @RequestParam String email) {
+    public ResponseEntity addFilesToPeer(@RequestBody File file, @RequestParam String email) {
         LOGGER.log( Level.INFO, getCurrentUTC() + " Adding files to peer");
         Peer peer = peerRepository.getPeers().stream()
                 .filter(el -> el.getEmail().equals(email))
                 .findFirst()
                 .orElse(null);
         if (peer != null) {
-            peer.addFile(files);
+            peer.addFile(file);
             return ResponseEntity.ok().build();
         } else {
             LOGGER.log( Level.WARNING, getCurrentUTC() + " Peer not found");
