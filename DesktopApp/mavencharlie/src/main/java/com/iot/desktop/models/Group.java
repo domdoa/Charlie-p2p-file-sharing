@@ -7,6 +7,7 @@ public class Group {
     private String id;
     private String name;
     private List<User> users;
+    private String inviteString;
 
     public Group() {}
 
@@ -38,5 +39,13 @@ public class Group {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    public String getInviteString() {
+        return inviteString;
+    }
+
+    public void setInviteString(String inviteString) {
+        this.inviteString = inviteString;
     }
 }

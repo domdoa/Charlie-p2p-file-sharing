@@ -8,13 +8,13 @@ import com.filesharing.iot.repository.PeerRepository;
 import com.filesharing.iot.repository.UserRepository;
 import com.filesharing.iot.utils.Utils;
 import com.google.gson.Gson;
-import okhttp3.*;
 import okhttp3.ResponseBody;
+import okhttp3.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,11 +38,7 @@ public class PeerController {
 
     @PostMapping
     public ResponseEntity addPeer(@RequestBody Peer peer) {
-<<<<<<< HEAD
         LOGGER.log( Level.INFO, "Creating new peer", peer );
-
-=======
->>>>>>> 0df6659d243534864944735e6804403f139b146b
         peerRepository.save(peer);
         return ResponseEntity.ok().build();
     }
