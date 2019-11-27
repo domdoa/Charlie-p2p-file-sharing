@@ -1,6 +1,6 @@
 package com.filesharing.iot;
 
-import com.filesharing.iot.Chord.Chord;
+import com.filesharing.iot.chord.Chord;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

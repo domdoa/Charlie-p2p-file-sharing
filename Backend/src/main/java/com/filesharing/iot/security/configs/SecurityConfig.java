@@ -42,13 +42,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers(HttpMethod.POST, jwtConfig.getUri()).permitAll()
                 .antMatchers(HttpMethod.POST, "/sign-up").permitAll()
-                //.antMatchers(HttpMethod.POST, "/peers/getAllPeersWithFile").permitAll()
-                //.antMatchers(HttpMethod.POST, "/peers/getAllPeersWithAFileFromAllServers").permitAll()
                 .and()
                 .addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfig))
                 .authorizeRequests()
-                // allow all POST requests
-
                 // any other requests must be authenticated
                 .anyRequest().authenticated()
                 .and()

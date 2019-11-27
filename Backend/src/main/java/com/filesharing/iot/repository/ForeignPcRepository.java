@@ -1,6 +1,6 @@
 package com.filesharing.iot.repository;
 
-import com.filesharing.iot.Chord.Constants;
+import com.filesharing.iot.utils.Constants;
 import com.filesharing.iot.models.ForeignPC;
 import com.filesharing.iot.utils.Utils;
 import org.springframework.stereotype.Repository;

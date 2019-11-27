@@ -25,8 +25,7 @@ public class File {
         return size == file.size &&
                 Objects.equals(name, file.name) &&
                 Objects.equals(ext, file.ext) &&
-                Objects.equals(md5Sign, file.md5Sign) &&
-                Objects.equals(group, file.group);
+                Objects.equals(md5Sign, file.md5Sign);
     }
 
     @Override
