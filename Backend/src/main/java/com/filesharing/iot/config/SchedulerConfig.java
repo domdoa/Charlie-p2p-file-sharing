@@ -2,7 +2,6 @@ package com.filesharing.iot.config;
 
 import com.filesharing.iot.models.File;
 import com.filesharing.iot.repository.FileRepository;
-import com.filesharing.iot.repository.PeerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.annotation.SendTo;

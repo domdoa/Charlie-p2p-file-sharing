@@ -16,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
@@ -26,6 +27,10 @@ import java.util.logging.Logger;
 @RequestMapping("/")
 public class UserController {
     private static final Logger LOGGER = Logger.getLogger(UserController.class.getName());
+    private Instant getCurrentUTC(){
+        Instant instant = Instant.now();
+        return instant;
+    }
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -39,7 +44,7 @@ public class UserController {
 
     @PostMapping("/sign-up")
     public ResponseEntity signUp(@RequestBody User user, @RequestParam @Nullable String inviteString, @RequestParam @Nullable String groupName) throws Exception {
-        LOGGER.log( Level.INFO, "Registering");
+        LOGGER.log( Level.INFO, getCurrentUTC() + " Registering");
         if (userRepository.findByEmail(user.getEmail()) != null) {
             return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON_UTF8).body("{\"" + "Error" + "\":\"" + "Invalid email" + "\"}");
         }
@@ -81,10 +86,10 @@ public class UserController {
 
     @GetMapping("/findByEmail")
     public ResponseEntity<User> findByEmail(@RequestParam String email) {
-        LOGGER.log( Level.INFO, "Finding user by email");
+        LOGGER.log( Level.INFO, getCurrentUTC() + " Finding user by email");
         User user = userRepository.findByEmail(email);
         if (user == null) {
-            LOGGER.log(Level.WARNING, "User not found");
+            LOGGER.log(Level.WARNING, getCurrentUTC() + " User not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(user, HttpStatus.OK);
@@ -92,11 +97,11 @@ public class UserController {
 
     @GetMapping("/getGroupsForUser")
     public ResponseEntity<List<Group>> getGroupsForUser(@RequestParam String email) {
-        LOGGER.log( Level.INFO, "Getting user groups");
+        LOGGER.log( Level.INFO, getCurrentUTC() + " Getting user groups");
         List<Group> groups = userRepository.findByEmail(email).getGroups();
 
         if (groups == null || groups.size() == 0){
-            LOGGER.log( Level.WARNING, "User does not belong to any group");
+            LOGGER.log( Level.WARNING, getCurrentUTC() + " User does not belong to any group");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(groups, HttpStatus.OK);
@@ -104,12 +109,12 @@ public class UserController {
 
     @PostMapping("/addUserGroup")
     public ResponseEntity addUserGroup(@RequestParam String email, @RequestParam String groupName) {
-        LOGGER.log( Level.INFO, "Adding user group");
+        LOGGER.log( Level.INFO, getCurrentUTC() + " Adding user group");
         User user = userRepository.findByEmail(email);
         Group group = groupRepository.findByName(groupName);
 
         if (user == null) {
-            LOGGER.log(Level.WARNING, "User not found");
+            LOGGER.log(Level.WARNING, getCurrentUTC() + " User not found");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
@@ -132,7 +137,7 @@ public class UserController {
         StringBuilder buffer = new StringBuilder(targetStringLength);
         for (int i = 0; i < targetStringLength; i++) {
             int randomLimitedInt = leftLimit + (int)
-                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+                (random.nextFloat() * (rightLimit - leftLimit + 1));
             buffer.append((char) randomLimitedInt);
         }
         return buffer.toString();
@@ -150,7 +155,6 @@ public class UserController {
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
             }
         }
     }
