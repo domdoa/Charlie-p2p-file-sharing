@@ -1,7 +1,7 @@
 package com.filesharing.iot.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.filesharing.iot.Chord.Constants;
+import com.filesharing.iot.utils.Constants;
 import com.filesharing.iot.models.*;
 import com.filesharing.iot.repository.ForeignPcRepository;
 import com.filesharing.iot.repository.PeerRepository;
@@ -59,7 +59,7 @@ public class PeerController {
         for (Peer p : peers) {
             List<File> filesOfThePeer = p.getFileList();
             for(File f : filesOfThePeer){
-                if(f.getMd5Sign().equals(fileToGet.getMd5Sign())) {
+                if(f.equals(fileToGet)) {
                     listToReturnWithPeers.getPeers().add(p);
                     break;
                 }
@@ -111,11 +111,10 @@ public class PeerController {
     @GetMapping("/findPeerByEmail")
     public ResponseEntity<Peer> findPeerByEmail(@RequestParam String email) {
         LOGGER.log( Level.INFO, "Finding peer by email");
-        Long userId = userRepository.findByEmail(email).getUser_id();
         List<Peer> peers = peerRepository.getPeers();
 
         for(Peer peer : peers){
-            if(userId == peer.getUser_id()) {
+            if(peer.getEmail().equals(email)) {
                 return new ResponseEntity<>(peer, HttpStatus.OK);
             }
         }

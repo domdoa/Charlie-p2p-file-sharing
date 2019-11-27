@@ -1,9 +1,7 @@
-package com.filesharing.iot.Chord;
+package com.filesharing.iot.chord;
 
 import com.filesharing.iot.models.ForeignPC;
 import com.filesharing.iot.repository.ForeignPcRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 

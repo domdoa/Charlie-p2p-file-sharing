@@ -1,6 +1,6 @@
 package com.filesharing.iot.controller;
 
-import com.filesharing.iot.Chord.Constants;
+import com.filesharing.iot.utils.Constants;
 import com.filesharing.iot.models.ForeignPC;
 import com.filesharing.iot.models.Group;
 import com.filesharing.iot.models.User;

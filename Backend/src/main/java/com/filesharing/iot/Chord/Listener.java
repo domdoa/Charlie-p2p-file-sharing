@@ -1,4 +1,4 @@
-package com.filesharing.iot.Chord;
+package com.filesharing.iot.chord;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

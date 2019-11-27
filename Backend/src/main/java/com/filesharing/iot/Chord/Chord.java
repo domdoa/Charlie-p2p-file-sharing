@@ -1,13 +1,14 @@
-package com.filesharing.iot.Chord;
+package com.filesharing.iot.chord;
 
 import com.filesharing.iot.models.ForeignPC;
+import com.filesharing.iot.utils.Constants;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Scanner;
 
 /**
- * Chord class that offers the UI to create chord node
+ * chord class that offers the UI to create chord node
  * and join a existing chord ring.
  *
  * @author Chuan Xia
@@ -66,7 +67,7 @@ public class Chord {
         }
 
         // print join info
-        System.out.println("Joining the Chord ring.");
+        System.out.println("Joining the chord ring.");
         System.out.println("Local IP: " + local_ip);
         m_node.printNeighbors();
 
