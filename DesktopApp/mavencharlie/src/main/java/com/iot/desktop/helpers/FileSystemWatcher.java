@@ -6,9 +6,13 @@ import com.iot.desktop.models.UploadFileModel;
 import com.iot.desktop.network.ServerServiceImpl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
@@ -135,7 +139,13 @@ public class FileSystemWatcher implements Runnable {
                         RootController.uploadedFiles.add(ufm);
                         // Necessary peer Id somehow get it
                         // TODO: compute MD5 signature
-                        com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(0,0, nameExt[0], nameExt[1], null, Long.toString(uploaded.length()));
+                        String md5 = "";
+                        try {
+                            md5 = checksum(child.toFile().toString());
+                        } catch ( Exception e ) {
+                            e.printStackTrace();
+                        }
+                        com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(0,0, nameExt[0], nameExt[1], md5, Long.toString(uploaded.length()));
                         new ServerServiceImpl().addFilesToPeer(Collections.singletonList(file), 1);
                     }
                 } else if (ENTRY_MODIFY.equals(kind)) {
@@ -174,5 +184,23 @@ public class FileSystemWatcher implements Runnable {
     @Override
     public void run() {
         processEvents();
+    }
+
+    private static String checksum(String filepath) throws IOException, NoSuchAlgorithmException {
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        // file hashing with DigestInputStream
+        try (DigestInputStream dis = new DigestInputStream(new FileInputStream(filepath), md)) {
+            while (dis.read() != -1) ; //empty loop to clear the data
+            md = dis.getMessageDigest();
+        }
+
+        // bytes to hex
+        StringBuilder result = new StringBuilder();
+        for (byte b : md.digest()) {
+            result.append(String.format("%02x", b));
+        }
+        return result.toString();
+
     }
 }
