@@ -11,6 +11,11 @@ public class Group {
 
     public Group() {}
 
+    public Group(String name, String inviteString) {
+        this.name = name;
+        this.inviteString = inviteString;
+    }
+
     public Group(String id, String name, List<User> users) {
         this.id = id;
         this.name = name;

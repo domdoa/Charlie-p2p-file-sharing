@@ -1,9 +1,14 @@
 package com.iot.desktop.helpers;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.iot.desktop.controllers.Constants;
 import com.iot.desktop.controllers.RootController;
 import com.iot.desktop.models.FileMetadata;
+import com.iot.desktop.models.Group;
 import com.iot.desktop.models.UploadFileModel;
 import com.iot.desktop.network.ServerServiceImpl;
+import okhttp3.*;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -87,7 +92,7 @@ public class FileSystemWatcher implements Runnable {
     /**
      * Process all events for keys queued to the watcher
      */
-    public void processEvents() {
+    public void processEvents() throws Exception {
         for (; ; ) {
 
             // wait for key to be signalled
@@ -145,8 +150,8 @@ public class FileSystemWatcher implements Runnable {
                         } catch ( Exception e ) {
                             e.printStackTrace();
                         }
-                        com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(0,0, nameExt[0], nameExt[1], md5, Long.toString(uploaded.length()));
-                        new ServerServiceImpl().addFilesToPeer(Collections.singletonList(file), 1);
+                        com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(Constants.emailAddress, nameExt[0], nameExt[1], md5, Long.toString(uploaded.length()),new Group(Constants.groupNameOfTheUser,Constants.emailAddress));
+                        new ServerServiceImpl().addFileToPeer(Constants.emailAddress,(file));
                     }
                 } else if (ENTRY_MODIFY.equals(kind)) {
 
@@ -183,7 +188,11 @@ public class FileSystemWatcher implements Runnable {
 
     @Override
     public void run() {
-        processEvents();
+        try {
+            processEvents();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private static String checksum(String filepath) throws IOException, NoSuchAlgorithmException {
@@ -203,4 +212,5 @@ public class FileSystemWatcher implements Runnable {
         return result.toString();
 
     }
+
 }

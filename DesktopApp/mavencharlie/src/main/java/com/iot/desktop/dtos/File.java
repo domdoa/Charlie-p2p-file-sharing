@@ -1,38 +1,32 @@
 package com.iot.desktop.dtos;
 
+import com.iot.desktop.models.Group;
+
 public class File {
-    private long id;
-    private long user_id;
+    private String email;
     private String name;
     private String ext;
     private String md5Sign;
     private String size;
+    private Group group;
 
     public File() {}
 
-    public File(long id, long user_id, String name, String ext, String md5Sign, String size) {
-        this.id = id;
-        this.user_id = user_id;
+    public File(String email, String name, String ext, String md5Sign, String size, Group group) {
+        this.email = email;
         this.name = name;
         this.ext = ext;
         this.md5Sign = md5Sign;
         this.size = size;
+        this.group = group;
     }
 
-    public long getId() {
-        return id;
+    public String getEmail() {
+        return email;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public long getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(long user_id) {
-        this.user_id = user_id;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -65,5 +59,13 @@ public class File {
 
     public void setSize(String size) {
         this.size = size;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }

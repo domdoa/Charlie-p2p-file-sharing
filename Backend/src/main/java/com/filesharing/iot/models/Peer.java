@@ -16,8 +16,8 @@ public class Peer extends User {
     private int port;
     private List<File> fileList = new ArrayList<>();
 
-    public void addFiles(List<File> files) {
-        fileList.addAll(files);
+    public void addFile(File files) {
+        fileList.add(files);
     }
 
     public void removeFile(File file) {

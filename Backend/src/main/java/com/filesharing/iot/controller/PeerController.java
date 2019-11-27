@@ -183,7 +183,7 @@ public class PeerController {
                 .findFirst()
                 .orElse(null);
         if (peer != null) {
-            peer.addFiles(files);
+            peer.addFile(files);
             return ResponseEntity.ok().build();
         } else {
             LOGGER.log( Level.WARNING, getCurrentUTC() + " Peer not found");

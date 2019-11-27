@@ -11,10 +11,15 @@ public final class Constants {
     public static final String serverURL = "http://localhost:8080/";
     public static final String loginEndpoint = "login";
     public static final String notifyPeerIsOnlineEndpoint = "peers";
+    public static final String addFileToUserEndpoint = "peers/files";
     public static String getGroupsForUserEndpoint = "getGroupsForUser";
     public static String localAddress = "";
     public static String emailAddress = "";
-    public static List<Group>  userGroups = new ArrayList<>();
+    public static String groupNameOfTheUser = "";
+    public static List<Group> userGroups = new ArrayList<>();
+    public static String currentDirectory = System.getProperty("user.dir");
+    public static String charlieP2PFolder = "/CharlieP2PDownloads";
+    public static String JWTToken = "";
 
 
     static {

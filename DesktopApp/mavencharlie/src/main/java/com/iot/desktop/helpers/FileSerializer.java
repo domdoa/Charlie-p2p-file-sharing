@@ -1,8 +1,7 @@
 package com.iot.desktop.helpers;
 
-import com.iot.desktop.models.DownloadFileModel;
+import com.iot.desktop.controllers.Constants;
 import com.iot.desktop.models.FileMetadata;
-import com.iot.desktop.models.UploadFileModel;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -17,8 +16,8 @@ public class FileSerializer {
     public static List<FileMetadata> uploadedFiles = new ArrayList<>();
 
     public FileSerializer() {
-        metaDatas.put("path", System.getProperty("user.dir") + "//metadata.ser");
-        metaDatas.put("defaultDir", System.getProperty("user.dir")+ "/CharlieP2PDownloads");
+        metaDatas.put("path", Constants.currentDirectory + "//metadata.ser");
+        metaDatas.put("defaultDir", Constants.currentDirectory + Constants.charlieP2PFolder);
         metaDatas.put("BASE_URL", "http://localhost:8080");
         createDefaultDirectoryIfNotExists();
     }
@@ -39,7 +38,7 @@ public class FileSerializer {
     public HashMap<String, String> readFromFile() {
         HashMap<String, String> map = null;
         try {
-            FileInputStream fileIn = new FileInputStream(System.getProperty("user.dir") + "//metadata.ser");
+            FileInputStream fileIn = new FileInputStream(Constants.currentDirectory + "//metadata.ser");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             map = (HashMap<String, String>) in.readObject();
             in.close();
