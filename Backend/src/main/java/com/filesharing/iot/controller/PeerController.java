@@ -43,14 +43,9 @@ public class PeerController {
 
     @PostMapping
     public ResponseEntity addPeer(@RequestBody Peer peer) {
-<<<<<<< HEAD
         LOGGER.log( Level.INFO, getCurrentUTC() + " Creating new peer", peer );
-        peerRepository.save(peer);
-=======
-        LOGGER.log( Level.INFO, "Creating new peer", peer );
         if(peerRepository.findByEmail(peer.getEmail()) == null)
             peerRepository.save(peer);
->>>>>>> d3712b17cdcb7c86354b1575d78743550f821d74
         return ResponseEntity.ok().build();
     }
 
@@ -121,12 +116,7 @@ public class PeerController {
 
     @GetMapping("/findPeerByEmail")
     public ResponseEntity<Peer> findPeerByEmail(@RequestParam String email) {
-<<<<<<< HEAD
         LOGGER.log( Level.INFO, getCurrentUTC() + " Finding peer by email");
-        Long userId = userRepository.findByEmail(email).getUser_id();
-=======
-        LOGGER.log( Level.INFO, "Finding peer by email");
->>>>>>> d3712b17cdcb7c86354b1575d78743550f821d74
         List<Peer> peers = peerRepository.getPeers();
 
         for(Peer peer : peers){
