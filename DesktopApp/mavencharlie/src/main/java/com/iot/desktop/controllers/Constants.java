@@ -12,6 +12,7 @@ public final class Constants {
     public static final String loginEndpoint = "login";
     public static final String notifyPeerIsOnlineEndpoint = "peers";
     public static final String addFileToUserEndpoint = "peers/files";
+    public static final String removeFileFromUserEndpoint = "peers/files";
     public static String getGroupsForUserEndpoint = "getGroupsForUser";
     public static String localAddress = "";
     public static String emailAddress = "";

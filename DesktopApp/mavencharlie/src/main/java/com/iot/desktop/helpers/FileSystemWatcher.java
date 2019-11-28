@@ -92,7 +92,7 @@ public class FileSystemWatcher implements Runnable {
     /**
      * Process all events for keys queued to the watcher
      */
-    public void processEvents() throws Exception {
+    public void processEvents()  {
         for (; ; ) {
 
             // wait for key to be signalled
@@ -146,17 +146,60 @@ public class FileSystemWatcher implements Runnable {
                         // TODO: compute MD5 signature
                         String md5 = "";
                         try {
-                            md5 = checksum(child.toFile().toString());
+                            md5 = checksum(uploaded.toString());
                         } catch ( Exception e ) {
                             e.printStackTrace();
                         }
-                        com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(Constants.emailAddress, nameExt[0], nameExt[1], md5, Long.toString(uploaded.length()),new Group(Constants.groupNameOfTheUser,Constants.emailAddress));
-                        new ServerServiceImpl().addFileToPeer(Constants.emailAddress,(file));
+                        Group group = createGroupByProcessPath(child);
+                        com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(Constants.emailAddress, nameExt[0], nameExt[1], md5, Long.toString(uploaded.length()),group);
+                        try {
+                            new ServerServiceImpl().addFileToPeer(Constants.emailAddress,(file));
+                        } catch (Exception e){
+                            e.printStackTrace();
+                        }
                     }
                 } else if (ENTRY_MODIFY.equals(kind)) {
 
                 } else if (ENTRY_DELETE.equals(kind)) {
+                    String names = name.toString();
+                    String[] nameExt = names.split("\\.");
+                    if (nameExt.length == 2){
 
+                        boolean isExists = false;
+                        FileMetadata deleted = null;
+                        for (int i = 0;i < FileSerializer.downloadedFiles.size(); i++){
+                            FileMetadata temp = FileSerializer.downloadedFiles.get(i);
+                            if((temp.getFileName()+"."+temp.getExtension()).equals(name.toString())){
+                                isExists = true;
+                                deleted = temp;
+                                RootController.downloadedFiles.remove(i);
+                                FileSerializer.downloadedFiles.remove(i);
+                                break;
+                            }
+                        }
+                        if(!isExists){
+                            for (int i = 0;i < FileSerializer.uploadedFiles.size(); i++){
+                                FileMetadata temp = FileSerializer.uploadedFiles.get(i);
+                                if((temp.getFileName()+"."+temp.getExtension()).equals(name.toString())){
+                                    deleted = temp;
+                                    RootController.uploadedFiles.remove(i);
+                                    FileSerializer.uploadedFiles.remove(i);
+                                    break;
+                                }
+                            }
+                        }
+                        com.iot.desktop.dtos.File file = null;
+                        if (deleted != null){
+                            Group group = createGroupByProcessPath(child);
+                            file = new com.iot.desktop.dtos.File(Constants.emailAddress,nameExt[0], nameExt[1], deleted.getMD5Signature(), Long.toString(deleted.getSize()),group );
+                        }
+                        try{
+                            if(file != null)
+                                new ServerServiceImpl().removeFileFromPeer(file, Constants.emailAddress);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
                 }
 
 
@@ -184,6 +227,20 @@ public class FileSystemWatcher implements Runnable {
                 }
             }
         }
+    }
+
+    private Group createGroupByProcessPath(Path child) {
+        String[] filePathWithGroupName = child.toString().split("/");
+        Group group = null;
+        for (String temp : filePathWithGroupName){
+            if(temp.equals("public")){
+                group = new Group("public", "");
+            }
+            else if (temp.equals(Constants.groupNameOfTheUser)){
+                group = new Group(Constants.groupNameOfTheUser,Constants.userGroups.get(1).getInviteString());
+            }
+        }
+        return group;
     }
 
     @Override

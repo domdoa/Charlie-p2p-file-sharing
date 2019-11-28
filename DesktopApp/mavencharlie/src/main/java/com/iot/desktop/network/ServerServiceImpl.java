@@ -168,15 +168,25 @@ public class ServerServiceImpl {
        if(response.code()!=200){
            System.err.println("Failed to add the file to the peer");
        }
-
-
     }
 
-    public void updateFileOfPeer(File file, String fileName, long peer_id) {
+    public void updateFileOfPeer(File file, String fileName, String emailAddress) { }
 
-    }
+    public void removeFileFromPeer(File file, String emailAddress) throws Exception {
+        ObjectMapper mapper = new ObjectMapper();
 
-    public void removeFileFromPeer(File file, long peer_id) {
+        Request request = new Request.Builder()
+                .url(Constants.serverURL + Constants.removeFileFromUserEndpoint + "?email=" + emailAddress)
+                .addHeader("Authorization", Constants.JWTToken)
+                .addHeader("Content-Type", "application/json")
+                .delete(okhttp3.RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mapper.writeValueAsString(file)))
+                .build();
 
+        OkHttpClient client = new OkHttpClient();
+        Call call = client.newCall(request);
+        Response response = call.execute();
+        if(response.code()!=200){
+            System.err.println("Failed to remove the file from the peer");
+        }
     }
 }
