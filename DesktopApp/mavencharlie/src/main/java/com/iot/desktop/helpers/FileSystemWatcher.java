@@ -168,10 +168,10 @@ public class FileSystemWatcher implements Runnable {
                     if (nameExt.length == 2){
 
                         boolean isExists = false;
-                        FileMetadata deleted = null;
+                        com.iot.desktop.dtos.File deleted = null;
                         for (int i = 0;i < FileSerializer.downloadedFiles.size(); i++){
-                            FileMetadata temp = FileSerializer.downloadedFiles.get(i);
-                            if((temp.getFileName()+"."+temp.getExtension()).equals(name.toString())){
+                            com.iot.desktop.dtos.File temp = FileSerializer.downloadedFiles.get(i);
+                            if((temp.getName()+"."+temp.getExt()).equals(name.toString())){
                                 isExists = true;
                                 deleted = temp;
                                 RootController.downloadedFiles.remove(i);
@@ -181,8 +181,8 @@ public class FileSystemWatcher implements Runnable {
                         }
                         if(!isExists){
                             for (int i = 0;i < FileSerializer.uploadedFiles.size(); i++){
-                                FileMetadata temp = FileSerializer.uploadedFiles.get(i);
-                                if((temp.getFileName()+"."+temp.getExtension()).equals(name.toString())){
+                                com.iot.desktop.dtos.File temp = FileSerializer.uploadedFiles.get(i);
+                                if((temp.getName()+"."+temp.getExt()).equals(name.toString())){
                                     deleted = temp;
                                     RootController.uploadedFiles.remove(i);
                                     FileSerializer.uploadedFiles.remove(i);
@@ -193,7 +193,7 @@ public class FileSystemWatcher implements Runnable {
                         com.iot.desktop.dtos.File file = null;
                         if (deleted != null){
                             Group group = createGroupByProcessPath(child);
-                            file = new com.iot.desktop.dtos.File(Constants.emailAddress,nameExt[0], nameExt[1], deleted.getMD5Signature(), Long.toString(deleted.getSize()),group );
+                            file = new com.iot.desktop.dtos.File(Constants.emailAddress,nameExt[0], nameExt[1], deleted.getMd5Sign(), deleted.getSize(),group );
                         }
                         try{
                             if(file != null)

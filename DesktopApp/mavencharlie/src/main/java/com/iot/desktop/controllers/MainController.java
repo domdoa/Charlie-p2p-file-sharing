@@ -141,7 +141,7 @@ public class MainController {
     public static void notifyPeerIsOffline(String userEmail,String authorization) {
         ObjectMapper mapper = new ObjectMapper();
 
-        List<FileMetadata> peerFiles = new ArrayList<>(FileSerializer.downloadedFiles);
+        List<File> peerFiles = new ArrayList<>(FileSerializer.downloadedFiles);
         peerFiles.addAll(FileSerializer.uploadedFiles);
         Peer peer = new Peer(Constants.localAddress, FileSharingMain.serverSocketPort);
         peer.setFileList(peerFiles);
