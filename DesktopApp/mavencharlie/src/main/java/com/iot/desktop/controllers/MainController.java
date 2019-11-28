@@ -8,7 +8,9 @@ import com.iot.desktop.helpers.FileSerializer;
 import com.iot.desktop.models.FileMetadata;
 import com.iot.desktop.models.Group;
 import com.iot.desktop.models.Peer;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -18,6 +20,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import okhttp3.*;
 import org.apache.tomcat.util.bcel.Const;
 
@@ -28,7 +31,7 @@ import java.util.List;
 
 public class MainController {
     public String JWTToken;
-    private String contentType = "application/json";
+    private static String contentType = "application/json";
     @FXML
     private TextField usernameField;
     @FXML
@@ -71,6 +74,16 @@ public class MainController {
         Scene scene = new Scene(root, 600, 550);
         stage.setScene(scene);
         stage.show();
+
+
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                notifyPeerIsOffline(Constants.emailAddress, JWTToken);
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
 
     private void notifyPeerIsOnline(String userEmail,String authorization) throws IOException {
@@ -111,6 +124,34 @@ public class MainController {
         List<Group> listOfGroups = gson.fromJson(responseBody.string(),new TypeToken<List<Group>>(){}.getType());
 
         return listOfGroups;
+    }
+
+    public static void notifyPeerIsOffline(String userEmail,String authorization) {
+        ObjectMapper mapper = new ObjectMapper();
+
+        List<FileMetadata> peerFiles = new ArrayList<>(FileSerializer.downloadedFiles);
+        peerFiles.addAll(FileSerializer.uploadedFiles);
+        Peer peer = new Peer(Constants.localAddress, FileSharingMain.serverSocketPort);
+        peer.setFileList(peerFiles);
+        peer.setEmail(userEmail);
+
+        try{
+            Request request = new Request.Builder()
+                    .url(Constants.serverURL + Constants.notifyPeerIsOfflineEndpoint)
+                    .addHeader("Authorization",authorization)
+                    .addHeader("Content-Type", contentType)
+                    .delete(okhttp3.RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mapper.writeValueAsString(peer)))
+                    .build();
+            OkHttpClient client = new OkHttpClient();
+            Call call = client.newCall(request);
+            Response response = call.execute();
+            int responseCode = response.code();
+            if(responseCode!=200){
+                System.err.println("Notify Peer Is Online went wrong");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

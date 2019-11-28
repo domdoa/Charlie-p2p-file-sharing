@@ -1,0 +1,186 @@
+Index: DesktopApp/mavencharlie/src/main/java/com/iot/desktop/controllers/Constants.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DesktopApp/mavencharlie/src/main/java/com/iot/desktop/controllers/Constants.java	(revision 981e4a17fcf614ec5fbde82c527d501ce97392e7)
++++ DesktopApp/mavencharlie/src/main/java/com/iot/desktop/controllers/Constants.java	(date 1574964502080)
+@@ -11,6 +11,7 @@
+     public static final String serverURL = "http://localhost:8080/";
+     public static final String loginEndpoint = "login";
+     public static final String notifyPeerIsOnlineEndpoint = "peers";
++    public static final String notifyPeerIsOfflineEndpoint = "peers";
+     public static final String addFileToUserEndpoint = "peers/files";
+     public static final String removeFileFromUserEndpoint = "peers/files";
+     public static String getGroupsForUserEndpoint = "getGroupsForUser";
+Index: DesktopApp/mavencharlie/src/main/java/com/iot/desktop/controllers/MainController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DesktopApp/mavencharlie/src/main/java/com/iot/desktop/controllers/MainController.java	(revision 981e4a17fcf614ec5fbde82c527d501ce97392e7)
++++ DesktopApp/mavencharlie/src/main/java/com/iot/desktop/controllers/MainController.java	(date 1574964680116)
+@@ -8,7 +8,9 @@
+ import com.iot.desktop.models.FileMetadata;
+ import com.iot.desktop.models.Group;
+ import com.iot.desktop.models.Peer;
++import javafx.application.Platform;
+ import javafx.event.ActionEvent;
++import javafx.event.EventHandler;
+ import javafx.fxml.FXML;
+ import javafx.fxml.FXMLLoader;
+ import javafx.scene.Node;
+@@ -18,6 +20,7 @@
+ import javafx.scene.control.TextField;
+ import javafx.scene.text.Text;
+ import javafx.stage.Stage;
++import javafx.stage.WindowEvent;
+ import okhttp3.*;
+ import org.apache.tomcat.util.bcel.Const;
+ 
+@@ -28,7 +31,7 @@
+ 
+ public class MainController {
+     public String JWTToken;
+-    private String contentType = "application/json";
++    private static String contentType = "application/json";
+     @FXML
+     private TextField usernameField;
+     @FXML
+@@ -71,6 +74,16 @@
+         Scene scene = new Scene(root, 600, 550);
+         stage.setScene(scene);
+         stage.show();
++
++
++        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
++            @Override
++            public void handle(WindowEvent t) {
++                notifyPeerIsOffline(Constants.emailAddress, JWTToken);
++                Platform.exit();
++                System.exit(0);
++            }
++        });
+     }
+ 
+     private void notifyPeerIsOnline(String userEmail,String authorization) throws IOException {
+@@ -113,5 +126,33 @@
+         return listOfGroups;
+     }
+ 
++    public static void notifyPeerIsOffline(String userEmail,String authorization) {
++        ObjectMapper mapper = new ObjectMapper();
++
++        List<FileMetadata> peerFiles = new ArrayList<>(FileSerializer.downloadedFiles);
++        peerFiles.addAll(FileSerializer.uploadedFiles);
++        Peer peer = new Peer(Constants.localAddress, FileSharingMain.serverSocketPort);
++        peer.setFileList(peerFiles);
++        peer.setEmail(userEmail);
++
++        try{
++            Request request = new Request.Builder()
++                    .url(Constants.serverURL + Constants.notifyPeerIsOfflineEndpoint)
++                    .addHeader("Authorization",authorization)
++                    .addHeader("Content-Type", contentType)
++                    .delete(okhttp3.RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mapper.writeValueAsString(peer)))
++                    .build();
++            OkHttpClient client = new OkHttpClient();
++            Call call = client.newCall(request);
++            Response response = call.execute();
++            int responseCode = response.code();
++            if(responseCode!=200){
++                System.err.println("Notify Peer Is Online went wrong");
++            }
++        }catch (Exception e){
++            e.printStackTrace();
++        }
++    }
++
+ 
+ }
+\ No newline at end of file
+Index: DesktopApp/mavencharlie/src/main/java/com/iot/desktop/helpers/FileSystemWatcher.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DesktopApp/mavencharlie/src/main/java/com/iot/desktop/helpers/FileSystemWatcher.java	(revision 981e4a17fcf614ec5fbde82c527d501ce97392e7)
++++ DesktopApp/mavencharlie/src/main/java/com/iot/desktop/helpers/FileSystemWatcher.java	(date 1574965423437)
+@@ -29,6 +29,7 @@
+     private final Map<WatchKey, Path> keys;
+     private final boolean recursive;
+     private boolean trace = false;
++    public static final Object LOCK = new Object();
+ 
+     @SuppressWarnings("unchecked")
+     static <T> WatchEvent<T> cast(WatchEvent<?> event) {
+@@ -146,6 +147,7 @@
+                         // TODO: compute MD5 signature
+                         String md5 = "";
+                         try {
++                            Thread.sleep(200);
+                             md5 = checksum(uploaded.toString());
+                         } catch ( Exception e ) {
+                             e.printStackTrace();
+@@ -252,22 +254,32 @@
+         }
+     }
+ 
+-    private static String checksum(String filepath) throws IOException, NoSuchAlgorithmException {
++    private static String checksum(String filepath) throws IOException {
+ 
+-        MessageDigest md = MessageDigest.getInstance("MD5");
+-        // file hashing with DigestInputStream
+-        try (DigestInputStream dis = new DigestInputStream(new FileInputStream(filepath), md)) {
++        DigestInputStream dis = null;
++        FileInputStream fis = null;
++        try{
++            MessageDigest md = MessageDigest.getInstance("MD5");
++            fis = new FileInputStream(filepath);
++            dis = new DigestInputStream(fis, md);
+             while (dis.read() != -1) ; //empty loop to clear the data
+             md = dis.getMessageDigest();
+-        }
+-
+-        // bytes to hex
+-        StringBuilder result = new StringBuilder();
+-        for (byte b : md.digest()) {
+-            result.append(String.format("%02x", b));
+-        }
+-        return result.toString();
+-
++            // bytes to hex
++            StringBuilder result = new StringBuilder();
++            for (byte b : md.digest()) {
++                result.append(String.format("%02x", b));
++            }
++            return result.toString();
++        }catch (Exception e){
++            e.printStackTrace();
++        }
++        finally {
++            if(dis != null)
++                dis.close();
++            if(fis != null)
++                fis.close();
++        }
++        return "";
+     }
+ 
+ }
+Index: DesktopApp/mavencharlie/src/main/java/com/iot/desktop/FileSharingMain.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- DesktopApp/mavencharlie/src/main/java/com/iot/desktop/FileSharingMain.java	(revision 981e4a17fcf614ec5fbde82c527d501ce97392e7)
++++ DesktopApp/mavencharlie/src/main/java/com/iot/desktop/FileSharingMain.java	(date 1574964589910)
+@@ -76,7 +76,7 @@
+         // TODO: Serialize actualmetadatas to file with custom FileHandler class
+         new FileSerializer().writeToFile();
+         // TODO: Notify the backend that this peer is not available anymore
+-        //new ServerConnection().notifyActualPeerIsOffline();
++
+ 
+     }
+ 

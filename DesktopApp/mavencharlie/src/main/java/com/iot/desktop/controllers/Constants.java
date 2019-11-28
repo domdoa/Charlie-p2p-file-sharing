@@ -11,6 +11,7 @@ public final class Constants {
     public static final String serverURL = "http://localhost:8080/";
     public static final String loginEndpoint = "login";
     public static final String notifyPeerIsOnlineEndpoint = "peers";
+    public static final String notifyPeerIsOfflineEndpoint = "peers";
     public static final String addFileToUserEndpoint = "peers/files";
     public static final String removeFileFromUserEndpoint = "peers/files";
     public static String getGroupsForUserEndpoint = "getGroupsForUser";

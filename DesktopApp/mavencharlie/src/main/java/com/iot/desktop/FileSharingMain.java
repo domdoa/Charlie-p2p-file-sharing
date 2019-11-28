@@ -76,7 +76,7 @@ public class FileSharingMain extends Application {
         // TODO: Serialize actualmetadatas to file with custom FileHandler class
         new FileSerializer().writeToFile();
         // TODO: Notify the backend that this peer is not available anymore
-        //new ServerConnection().notifyActualPeerIsOffline();
+
 
     }
 

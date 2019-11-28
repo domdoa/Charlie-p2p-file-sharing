@@ -29,6 +29,7 @@ public class FileSystemWatcher implements Runnable {
     private final Map<WatchKey, Path> keys;
     private final boolean recursive;
     private boolean trace = false;
+    public static final Object LOCK = new Object();
 
     @SuppressWarnings("unchecked")
     static <T> WatchEvent<T> cast(WatchEvent<?> event) {
@@ -146,6 +147,7 @@ public class FileSystemWatcher implements Runnable {
                         // TODO: compute MD5 signature
                         String md5 = "";
                         try {
+                            Thread.sleep(200);
                             md5 = checksum(uploaded.toString());
                         } catch ( Exception e ) {
                             e.printStackTrace();
@@ -252,22 +254,32 @@ public class FileSystemWatcher implements Runnable {
         }
     }
 
-    private static String checksum(String filepath) throws IOException, NoSuchAlgorithmException {
+    private static String checksum(String filepath) throws IOException {
 
-        MessageDigest md = MessageDigest.getInstance("MD5");
-        // file hashing with DigestInputStream
-        try (DigestInputStream dis = new DigestInputStream(new FileInputStream(filepath), md)) {
+        DigestInputStream dis = null;
+        FileInputStream fis = null;
+        try{
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            fis = new FileInputStream(filepath);
+            dis = new DigestInputStream(fis, md);
             while (dis.read() != -1) ; //empty loop to clear the data
             md = dis.getMessageDigest();
+            // bytes to hex
+            StringBuilder result = new StringBuilder();
+            for (byte b : md.digest()) {
+                result.append(String.format("%02x", b));
+            }
+            return result.toString();
+        }catch (Exception e){
+            e.printStackTrace();
         }
-
-        // bytes to hex
-        StringBuilder result = new StringBuilder();
-        for (byte b : md.digest()) {
-            result.append(String.format("%02x", b));
+        finally {
+            if(dis != null)
+                dis.close();
+            if(fis != null)
+                fis.close();
         }
-        return result.toString();
-
+        return "";
     }
 
 }
