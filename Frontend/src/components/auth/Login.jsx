@@ -25,8 +25,11 @@ const Login = (props) => {
         };
 
         let promise = new Promise((resolve, reject) => logUser(data, resolve, reject));
-        promise.then(() => props.history.push("/files"))
-    }
+        promise.then(() => {
+            props.login();
+            props.history.push("/files")
+        })
+    };
 
     return (
         <div className="login">

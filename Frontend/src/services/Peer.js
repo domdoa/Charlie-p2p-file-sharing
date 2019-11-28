@@ -1,18 +1,13 @@
 import axios from "axios";
-const baseUrl = "http://localhost:8080/peers";
 
-var config = {
+let config = {
   headers: { Authorization: localStorage.Authorization }
 };
 
-const getAllPeersWithAFileFromAllServers = file => {
-  const promise = axios.post(`${baseUrl}/getAllPeersWithAFileFromAllServers`,file,config);
-  return promise.then(response => response.data);
+export const getAllPeersWithAFileFromAllServers = (server, file, email) => {
+  axios.post(`${server}/getAllPeersWithAFileFromAllServers?email=${email}`,file,config).catch(() => alert('Please start desktop client to start your download'));
 };
 
-const findPeerByEmail = email => {
-  const promise = axios.get(`${baseUrl}/findPeerByEmail?email=${email}`,config);
-  return promise.then(response => response.data);
-};
 
-export default { getAllPeersWithAFileFromAllServers, findPeerByEmail };
+
+

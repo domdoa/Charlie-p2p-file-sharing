@@ -10,8 +10,6 @@ import java.util.stream.Collectors;
 
 @Repository
 public class PeerRepository {
-    @Autowired
-    FileRepository fileRepository;
     private List<Peer> peers = new ArrayList<>();
 
     public void save(Peer peer){
@@ -21,7 +19,6 @@ public class PeerRepository {
                 .orElse(null);
         if(james == null) {
             peers.add(peer);
-            peer.getFileList().forEach(file -> fileRepository.save(file));
         }
     }
 

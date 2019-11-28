@@ -23,7 +23,7 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "User_Groups",
             joinColumns = {@JoinColumn(name = "user_id")},

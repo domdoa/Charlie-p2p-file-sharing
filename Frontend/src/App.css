@@ -3,7 +3,7 @@
   background-color: steelblue;
   background-size: cover;
   background-position: center;
-  height: 100vh;
+  height: calc(100vh - 56px)   ;
   margin-top: -24px;
   margin-bottom: -50px;
 }
