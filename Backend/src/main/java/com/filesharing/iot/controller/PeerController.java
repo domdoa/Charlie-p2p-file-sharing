@@ -44,16 +44,20 @@ public class PeerController {
     @PostMapping
     public ResponseEntity addPeer(@RequestBody Peer peer) {
         LOGGER.log( Level.INFO, getCurrentUTC() + " Creating new peer", peer );
-        if(peerRepository.findByEmail(peer.getEmail()) == null)
+        if(peerRepository.findByEmail(peer.getEmail()) == null) {
             peerRepository.save(peer);
-        return ResponseEntity.ok().build();
+            LOGGER.log( Level.INFO, getCurrentUTC() + " New peer successfully added", peer );
+            return ResponseEntity.ok().build();
+        }
+        LOGGER.log( Level.WARNING, getCurrentUTC() + " Failed to add peer. Peer with this email: "+peer.getEmail()+" already exist", peer );
+        return ResponseEntity.badRequest().build();
     }
 
     @DeleteMapping
     public ResponseEntity deletePeer(@RequestBody Peer peer) {
         LOGGER.log( Level.INFO, getCurrentUTC() + " Deleting peer", peer );
         peerRepository.remove(peer);
-
+        LOGGER.log( Level.INFO, getCurrentUTC() + " Peer deleted successfully", peer );
         return ResponseEntity.ok().build();
     }
 
@@ -84,6 +88,7 @@ public class PeerController {
         List<ForeignPC> foreignPCS = Utils.readFromFile(foreignPcRepository.getFileName());
         System.out.println(foreignPCS);
         ListOfPeers peersList = new ListOfPeers();
+        LOGGER.log( Level.INFO, getCurrentUTC() + " Looping through all servers...");
         for (ForeignPC foreignPC : foreignPCS) {
             String foreignPCAddress = foreignPC.getInetSocketAddress().getHostName();
             foreignPCAddress = foreignPCAddress.substring(1);
@@ -107,6 +112,7 @@ public class PeerController {
                 ListOfPeers listOfPeersFromServer = gson.fromJson(responseBody.string(),ListOfPeers.class);
 
                 if (listOfPeersFromServer != null)
+                    LOGGER.log( Level.INFO, getCurrentUTC() + " Added list of peers from server "+foreignPC.getSpringPort());
                     peersList.getPeers().addAll(listOfPeersFromServer.getPeers());
             }
         }
@@ -114,13 +120,15 @@ public class PeerController {
 
         // we have all the information about the peers
         Peer peer = peerRepository.findByEmail(email);
-        if(peer == null)
+        if(peer == null) {
+            LOGGER.log(Level.WARNING, getCurrentUTC() + " Failed to find peer with this email: " + peer.getEmail());
             return ResponseEntity.notFound().build(); // the requested peer does not exist
-
+        }
         FilePeers filePeers = new FilePeers(fileToGet, peersList.getPeers());
 
         restTemplate.postForObject("http://" + peer.getIpAddress() + ":" + peer.getPort() + "/", filePeers, ResponseEntity.class);
 
+        LOGGER.log( Level.INFO, getCurrentUTC() + " Success");
         return ResponseEntity.ok().build();
     }
 
@@ -131,6 +139,7 @@ public class PeerController {
 
         for(Peer peer : peers){
             if(peer.getEmail().equals(email)) {
+                LOGGER.log( Level.INFO, getCurrentUTC() + " Peer found: "+email);
                 return new ResponseEntity<>(peer, HttpStatus.OK);
             }
         }
@@ -165,7 +174,7 @@ public class PeerController {
                 if (james != null) availableFiles.add(file);
             }
         }
-
+        LOGGER.log( Level.INFO, getCurrentUTC() + " All available files returned");
         return new ResponseEntity<>(availableFiles, HttpStatus.OK);
     }
 
@@ -180,6 +189,7 @@ public class PeerController {
             if (f.getMd5Sign().equals(md5))
                 file = f;
         }
+        LOGGER.log( Level.INFO, getCurrentUTC() + " File retrieved");
         return new ResponseEntity<>(file, HttpStatus.OK);
     }
 
@@ -194,6 +204,7 @@ public class PeerController {
                 .orElse(null);
         if (peer != null) {
             peer.addFile(file);
+            LOGGER.log( Level.INFO, getCurrentUTC() + " File added to the peer: "+email);
             return ResponseEntity.ok().build();
         } else {
             LOGGER.log( Level.WARNING, getCurrentUTC() + " Peer not found");
@@ -210,6 +221,7 @@ public class PeerController {
                 .orElse(null);
         if (peer != null) {
             peer.removeFile(file);
+            LOGGER.log( Level.INFO, getCurrentUTC() + " File deleted: "+file.getName());
             return ResponseEntity.ok().build();
         } else {
             LOGGER.log( Level.WARNING, getCurrentUTC() + " Peer not found");
@@ -226,6 +238,7 @@ public class PeerController {
                 .orElse(null);
         if (peer != null) {
             peer.updateFile(fileName, file);
+            LOGGER.log( Level.INFO, getCurrentUTC() + " File updated: "+fileName);
             return ResponseEntity.ok().build();
         } else {
             LOGGER.log( Level.WARNING, getCurrentUTC() + " Peer not found");
