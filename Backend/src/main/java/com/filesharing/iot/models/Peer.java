@@ -15,6 +15,7 @@ public class Peer extends User {
     private String ipAddress;
     private int port;
     private List<File> fileList = new ArrayList<>();
+    private int springPort;
 
     public void addFile(File files) {
         fileList.add(files);

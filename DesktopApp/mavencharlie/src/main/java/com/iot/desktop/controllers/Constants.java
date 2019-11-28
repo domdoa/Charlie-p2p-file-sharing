@@ -1,5 +1,6 @@
 package com.iot.desktop.controllers;
 
+import com.iot.desktop.models.ForeignPC;
 import com.iot.desktop.models.Group;
 
 import java.net.InetAddress;
@@ -22,6 +23,9 @@ public final class Constants {
     public static String currentDirectory = System.getProperty("user.dir");
     public static String charlieP2PFolder = "/CharlieP2PDownloads";
     public static String JWTToken = "";
+    public static final int defaultSpringPort = 8080;
+    public static final int peerSpringPort = System.getProperty("server.port") != null ? Integer.parseInt(System.getProperty("server.port")) : Constants.defaultSpringPort;
+    public static List<ForeignPC> allSuperPeers = new ArrayList<>();
 
 
     static {

@@ -23,26 +23,26 @@ import java.util.UUID;
  */
 public class DownloadManager extends Thread{
 
-    private FileMetadata fileMetadata;
+    private com.iot.desktop.dtos.File fileMetadata;
     private List<Peer> availablePeers;
     private int officialSegmentSize;
     private List<Integer> remainingSegments;
     private List<PeerSocket> sockets;
     private static final Object LOCK = new Object();
 
-    public DownloadManager(FileMetadata file, List<Peer> peers) {
+    public DownloadManager(com.iot.desktop.dtos.File file, List<Peer> peers) {
         this.fileMetadata = file;
         this.availablePeers = peers;
         this.remainingSegments = new ArrayList<>();
         this.sockets = new ArrayList<>();
 
-        DownloadFileModel dm = new DownloadFileModel(file.getFileName(), file.getSize(),"0%" ," - " );
+        DownloadFileModel dm = new DownloadFileModel(file.getName(), file.getSize(),"0%" ," - " );
         if(FileSerializer.downloadedFiles.size() == 0){
             FileSerializer.downloadedFiles.add(file);
             RootController.downloadedFiles.add(dm);
         }
         for (int i = 0; i< FileSerializer.downloadedFiles.size(); i++){
-            if(FileSerializer.downloadedFiles.get(i).getFileName().equals(dm.getFileName())){
+            if(FileSerializer.downloadedFiles.get(i).getName().equals(dm.getFileName())){
                 FileSerializer.downloadedFiles.remove(file);
                 RootController.downloadedFiles.removeIf( (fi)  -> fi.getFileName().equals(dm.getFileName()));
                 FileSerializer.downloadedFiles.add(file);
@@ -61,7 +61,7 @@ public class DownloadManager extends Thread{
         for(int i = 0; i < bound; i++)
             remainingSegments.add(i);
         officialSegmentSize = remainingSegments.size();
-        System.out.println("For "+ fileMetadata.getFileName()+ " there are this many bounds: " + remainingSegments.size());
+        System.out.println("For "+ fileMetadata.getName()+ " there are this many bounds: " + remainingSegments.size());
 
         createFileWithSubdirectoryAndAllocateSpace();
         for (Peer availablePeer : availablePeers){
@@ -93,7 +93,7 @@ public class DownloadManager extends Thread{
                     double progress = (double) arrivedBytesForProgress / fileMetadata.getSize() * 100;
                     System.out.println("Download speed: " + speed + "kB/s");
                     for (int i = 0; i < RootController.downloadedFiles.size(); i++){
-                        if (RootController.downloadedFiles.get(i).getFileName().equals(fileMetadata.getFileName())){
+                        if (RootController.downloadedFiles.get(i).getFileName().equals(fileMetadata.getName())){
                             DownloadFileModel dm = RootController.downloadedFiles.get(i);
                             RootController.downloadedFiles.remove(i);
                             dm.setProgress(String.format("%.2f",progress) + "%");
@@ -120,7 +120,7 @@ public class DownloadManager extends Thread{
         String defaultDir = FileSerializer.metaDatas.getOrDefault("defaultDir" , "");
         if(!defaultDir.equals("")){
             try{
-                File file = new File(defaultDir + "/" + fileMetadata.getFileName() + "/" + fileMetadata.getFileName() + "." + fileMetadata.getExtension());
+                File file = new File(defaultDir + "/" + fileMetadata.getName() + "/" + fileMetadata.getName() + "." + fileMetadata.getExt());
                 file.getParentFile().mkdir();
                 boolean succeed = file.createNewFile();
                 if(succeed){
@@ -140,7 +140,7 @@ public class DownloadManager extends Thread{
         return officialSegmentSize;
     }
 
-    public FileMetadata getFileMetadata() {
+    public com.iot.desktop.dtos.File getFileMetadata() {
         return fileMetadata;
     }
 

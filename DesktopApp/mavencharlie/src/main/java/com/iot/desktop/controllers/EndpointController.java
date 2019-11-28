@@ -27,7 +27,7 @@ public class EndpointController {
         boolean isAlready = false;
         for (int i = 0; i< FileSerializer.downloadedFiles.size(); i++){
             DownloadFileModel temp = RootController.downloadedFiles.get(i);
-            if(temp.getFileName().equals(filePeers.getFileMetadata().getFileName())
+            if(temp.getFileName().equals(filePeers.getFileMetadata().getName())
                 && temp.getProgress().equals("100.00%")){
                 isAlready = true;
                 Platform.runLater(new Runnable() {
@@ -40,7 +40,7 @@ public class EndpointController {
             }
         }
         if(!isAlready){
-            new DownloadManager(filePeers.getFileMetadata(), filePeers.getPeers()).start();
+            new DownloadManager(filePeers.getFileMetadata(), filePeers.getPeerList()).start();
         }
         return new ResponseEntity(HttpStatus.OK);
     }

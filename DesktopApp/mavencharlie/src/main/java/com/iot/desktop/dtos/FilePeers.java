@@ -1,34 +1,19 @@
 package com.iot.desktop.dtos;
 
-import com.iot.desktop.models.FileMetadata;
 import com.iot.desktop.models.Peer;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class FilePeers {
-    FileMetadata fileMetadata;
-    List<Peer> peers;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class FilePeers implements Serializable {
+    File fileMetadata;
+    List<Peer> peerList = new ArrayList<>();
 
-    public  FilePeers() {}
-
-    public FilePeers(FileMetadata fileMetadata, List<Peer> peers) {
-        this.fileMetadata = fileMetadata;
-        this.peers = peers;
-    }
-
-    public FileMetadata getFileMetadata() {
-        return fileMetadata;
-    }
-
-    public void setFileMetadata(FileMetadata fileMetadata) {
-        this.fileMetadata = fileMetadata;
-    }
-
-    public List<Peer> getPeers() {
-        return peers;
-    }
-
-    public void setPeers(List<Peer> peers) {
-        this.peers = peers;
-    }
 }

@@ -135,7 +135,21 @@ public class PeerController {
         FilePeers filePeers = new FilePeers(fileToGet, peersList.getPeers());
 
         try {
-            restTemplate.postForObject("http://" + peer.getIpAddress() + ":" + peer.getPort() + "/", filePeers, ResponseEntity.class);
+            String URL = "http://" + peer.getIpAddress() + ":" + peer.getSpringPort();
+            //restTemplate.postForObject(URL, filePeers, ResponseEntity.class);
+            ObjectMapper mapper = new ObjectMapper();
+            Request request = new Request.Builder()
+                    .url(URL)
+                    .addHeader("Authorization", authorization)
+                    .addHeader("Content-Type", contentType)
+                    .post(okhttp3.RequestBody.create(MediaType.parse("application/json; charset=utf-8"), mapper.writeValueAsString(filePeers)))
+                    .build();
+            OkHttpClient client = new OkHttpClient();
+            Call call = client.newCall(request);
+            Response response = call.execute();
+            if(response.code()!=200){
+                System.err.println("Peer didn't download the file");
+            }
         } catch ( Exception e ) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
@@ -266,4 +280,5 @@ public class PeerController {
             return ResponseEntity.notFound().build();
         }
     }
+
 }
