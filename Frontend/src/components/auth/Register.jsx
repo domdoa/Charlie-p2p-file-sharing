@@ -63,7 +63,7 @@ const Register = (props) => {
                     <div className="col-md-8 m-auto">
                         <h1 className="display-4 text-center">Sign Up</h1>
                         <p className="lead text-center">
-                            Create your IoT dropsharesharedrop account
+                            Create your Charlie P2P account
                         </p>
                         <form onSubmit={registerNewUser}>
                             <TextFieldGroup

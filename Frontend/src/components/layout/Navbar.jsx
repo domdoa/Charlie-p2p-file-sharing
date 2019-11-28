@@ -2,16 +2,11 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {isLoggedIn, logOut} from "../utils/Authorization";
 
-const Navbar = () => {
-  const [user, setUser] = useState({});
+const Navbar = ({isAuthenticated, logOff}) => {
 
   const onLogout = () => {
-    setUser({});
-    logOut();
-    // Logout
-  };
-
-  let isAuthenticated = isLoggedIn();
+      logOff();
+};
 
   const authLinks = (
     <ul className="navbar-nav ml-auto">
@@ -42,7 +37,7 @@ const Navbar = () => {
     <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
       <div className="container">
         <Link className="navbar-brand" to="/">
-          Dropsharesharedrop
+            Charlie P2P
         </Link>
         <button
           className="navbar-toggler"

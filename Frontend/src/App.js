@@ -8,7 +8,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import NotFound from "./components/not-found/NotFound";
 import Files from "./components/files/Files";
-import {isLoggedIn} from "./components/utils/Authorization";
+import {isLoggedIn, logOut} from "./components/utils/Authorization";
 import ReactSnackBar from "react-js-snackbar";
 
 function App() {
@@ -17,27 +17,46 @@ function App() {
         Showing: false,
         Text: ""
     });
+    const [user, setUser] = useState({
+        isLogged: true
+    });
+
     useEffect(() => {
-        isLoggedIn();
+        setUser({
+            isLogged: isLoggedIn()
+        });
     }, []);
+
+    const logOff = () => {
+        logOut();
+        setUser({
+            isLogged: false
+        })
+    };
+
+    const logIn = () => {
+        setUser({
+            isLogged: true
+        })
+    }
 
     const show = (text, time) => {
         if (snackBar.Showing) return;
 
-        setSnackBar({ Show: true, Showing: true, Text: text});
+        setSnackBar({Show: true, Showing: true, Text: text});
         setTimeout(() => {
-            setSnackBar({ Show: false, Showing: false, Text: '' });
+            setSnackBar({Show: false, Showing: false, Text: ''});
         }, time);
     }
 
     return (
         <Router>
-            <Navbar/>
+            <Navbar isAuthenticated={user.isLogged} logOff={logOff}/>
             <Switch>
                 <Route exact path="/" component={Frontpage}/>
                 <Route path="/register" component={(props) => <Register {...props} show={show}/>}/>
                 <Route path="/register" component={Register}/>
-                <Route path="/login" component={Login}/>
+                <Route path="/login" component={(props) => <Login {...props} login={logIn}/>}/>
                 <Route path="/files" component={Files}/>
                 <Route component={NotFound}/>
             </Switch>

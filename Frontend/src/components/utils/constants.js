@@ -1,5 +1,6 @@
 export const LOGIN = "/login";
 export const REGISTER = "/sign-up";
+export const PEERS = "/peers";
 
-export const localhostSocket = "http://127.0.0.1:4001";
-export const localhostHttp = "http://localhost:8080";
+export const localhostHttp = "http://192.168.43.82:8080";
+export const socketList = ["http://192.168.43.82:8080/socket"];
