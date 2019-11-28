@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import Search from "../common/Search";
 import File from "./File";
 import {PEERS, socketList} from "../utils/constants";
-import {getEmail} from "../utils/Authorization";
+import {getEmail, isLoggedIn} from "../utils/Authorization";
 import {getAllPeersWithAFileFromAllServers} from "../../services/Peer";
 
 let stompClients = [];
@@ -26,9 +26,10 @@ const Files = () => {
             sockets.push(x);
             stompClients.push(Stomp.over(x))
         }
-        for (let stompClient of stompClients) {
-            stompClient.connect({}, onConnected, onError);
-        }
+        if (isLoggedIn())
+            for (let stompClient of stompClients) {
+                stompClient.connect({}, onConnected, onError);
+            }
     };
 
     const onConnected = () => {
@@ -54,8 +55,45 @@ const Files = () => {
     const onMessageReceivedFiles = payload => {
         if (payload.body !== "No files") {
             let filesFromServer = JSON.parse(JSON.parse(payload.body).message);
-            setFiles(...files, [...filesFromServer])
+            let array = [...files, ...filesFromServer];
+            setFiles(compressArray(array))
         }
+    };
+
+    const compressArray = (original) => {
+
+        var compressed = [];
+        // make a copy of the input array
+        var copy = original.slice(0);
+
+        // first loop goes over every element
+        for (var i = 0; i < original.length; i++) {
+
+            var myCount = 0;
+            // loop over every element in the copy and see if it's the same
+            for (var w = 0; w < copy.length; w++) {
+                if (original[i].md5Sign === copy[w].md5Sign) {
+                    // increase amount of times duplicate is found
+                    myCount++;
+                    // sets item to undefined
+                    copy.splice(w, 1);
+                }
+            }
+
+            if (myCount > 0) {
+                let a = {...original[i]};
+                a.seeders = myCount + 1;
+                compressed.push(a);
+            }
+        }
+
+
+        return compressed.filter((thing, index) => {
+            const _thing = JSON.stringify(thing);
+            return index === compressed.findIndex(obj => {
+                return JSON.stringify(obj) === _thing;
+            });
+        });
     };
 
     const onMessageReceivedPeers = (payload, serverUrl) => {
@@ -67,8 +105,7 @@ const Files = () => {
 
     const downloadFunc = (file) => {
         let server = "";
-        for (var [key, value] of peerFilesServers) {
-            console.log(key + ' = ' + value);
+        for (let [key, value] of peerFilesServers) {
             for (let peer of value) {
                 if (peer.email === getEmail()) {
                     server = key;

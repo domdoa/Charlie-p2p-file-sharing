@@ -14,7 +14,7 @@ public class PeerRepository {
 
     public void save(Peer peer){
         Peer james = peers.stream()
-                .filter(p -> p.getUser_id().longValue() == peer.getUser_id().longValue())
+                .filter(p -> p.getEmail().equals(peer.getEmail()))
                 .findAny()
                 .orElse(null);
         if(james == null) {
@@ -28,7 +28,7 @@ public class PeerRepository {
 
     public void remove(Peer peer){
         peers = peers.stream()
-                .filter(p -> p.getUser_id().longValue() != peer.getUser_id().longValue())
+                .filter(p -> !p.getEmail().equals(peer.getEmail()))
                 .collect(Collectors.toList());
     }
 
