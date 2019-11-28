@@ -1,9 +1,13 @@
 package com.filesharing.iot.models;
 
+import lombok.Data;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilePeers {
+@Data
+public class FilePeers implements Serializable {
     File fileMetadata;
     List<Peer> peerList = new ArrayList<>();
 

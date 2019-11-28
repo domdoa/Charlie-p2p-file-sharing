@@ -12,8 +12,8 @@ import java.util.Map;
 public class FileSerializer {
 
     public static Map<String, String> metaDatas = new HashMap<>();
-    public static List<FileMetadata> downloadedFiles = new ArrayList<>();
-    public static List<FileMetadata> uploadedFiles = new ArrayList<>();
+    public static List<com.iot.desktop.dtos.File> downloadedFiles = new ArrayList<>();
+    public static List<com.iot.desktop.dtos.File> uploadedFiles = new ArrayList<>();
 
     public FileSerializer() {
         metaDatas.put("path", Constants.currentDirectory + "//metadata.ser");

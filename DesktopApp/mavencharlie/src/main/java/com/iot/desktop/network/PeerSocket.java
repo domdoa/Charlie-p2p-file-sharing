@@ -36,7 +36,7 @@ public class PeerSocket extends Thread {
     public void run() {
         int newSegmentIndex;
         while ((newSegmentIndex = getNewRandomSegmentIndex()) != Integer.MIN_VALUE ){
-            String  filenameWithExt = downloadManager.getFileMetadata().getFileName()+ "." +downloadManager.getFileMetadata().getExtension();
+            String  filenameWithExt = downloadManager.getFileMetadata().getName()+ "." +downloadManager.getFileMetadata().getExt();
             int newSegment = downloadManager.getRemainingSegments().get(newSegmentIndex);
             message = "DOWNLOAD " + filenameWithExt+ " " + newSegment;
             //System.out.println("Message send by peersocket: " + message);
@@ -45,7 +45,7 @@ public class PeerSocket extends Thread {
                 if(result != null){
                     removeReceivedSegmentSafely(newSegmentIndex);
                     new FileProviderForPeers().writeSpecificPositionOfFile(
-                            downloadManager.getFileMetadata().getFileName(),downloadManager.getFileMetadata().getExtension(), newSegment, result);
+                            downloadManager.getFileMetadata().getName(),downloadManager.getFileMetadata().getExt(), newSegment, result);
                 }
             }catch (Exception e){
                 e.printStackTrace();

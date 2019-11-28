@@ -129,8 +129,8 @@ public class FileSystemWatcher implements Runnable {
                     boolean unique = true;
                     File uploaded = child.toFile();
                     for (int i=0; i< FileSerializer.downloadedFiles.size(); i++){
-                        FileMetadata file =FileSerializer.downloadedFiles.get(i);
-                        if ((file.getFileName()+"."+file.getExtension()).equals(name.toString())){
+                        com.iot.desktop.dtos.File file =FileSerializer.downloadedFiles.get(i);
+                        if ((file.getName()+"."+file.getExt()).equals(name.toString())){
                             unique = false;
                             break;
                         }
@@ -138,7 +138,7 @@ public class FileSystemWatcher implements Runnable {
                     String names = name.toString();
                     String[] nameExt = names.split("\\.");
                     if (unique && nameExt.length == 2){
-                        FileMetadata fm = new FileMetadata(null, null,nameExt[0], nameExt[1], uploaded.length(),null);
+                        com.iot.desktop.dtos.File fm = new com.iot.desktop.dtos.File(null, null,nameExt[0], nameExt[1], uploaded.length(),null);
                         FileSerializer.uploadedFiles.add(fm);
                         UploadFileModel ufm = new UploadFileModel(uploaded.getName(), Long.toString(uploaded.length()), new Date(System.currentTimeMillis()));
                         RootController.uploadedFiles.add(ufm);
@@ -151,7 +151,7 @@ public class FileSystemWatcher implements Runnable {
                             e.printStackTrace();
                         }
                         Group group = createGroupByProcessPath(child);
-                        com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(Constants.emailAddress, nameExt[0], nameExt[1], md5, Long.toString(uploaded.length()),group);
+                        com.iot.desktop.dtos.File file = new com.iot.desktop.dtos.File(Constants.emailAddress, nameExt[0], nameExt[1], md5, uploaded.length(),new Group(Constants.groupNameOfTheUser,Constants.emailAddress));
                         try {
                             new ServerServiceImpl().addFileToPeer(Constants.emailAddress,(file));
                         } catch (Exception e){

@@ -7,12 +7,12 @@ public class File {
     private String name;
     private String ext;
     private String md5Sign;
-    private String size;
+    private long size;
     private Group group;
 
     public File() {}
 
-    public File(String email, String name, String ext, String md5Sign, String size, Group group) {
+    public File(String email, String name, String ext, String md5Sign, long size, Group group) {
         this.email = email;
         this.name = name;
         this.ext = ext;
@@ -53,11 +53,11 @@ public class File {
         this.md5Sign = md5Sign;
     }
 
-    public String getSize() {
+    public long getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(long size) {
         this.size = size;
     }
 

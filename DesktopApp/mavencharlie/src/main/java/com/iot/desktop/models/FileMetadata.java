@@ -1,23 +1,23 @@
 package com.iot.desktop.models;
 
 public class FileMetadata {
-    private String email;//owner, uploader
-    private String groupId; // if null, then the file is public
-    private String fileName;
-    private String extension;
+    private String email;
+    private String name;
+    private String ext;
+    private String md5Sign;
     private long size;
-    private String MD5Signature;
+    private Group group;
 
     public FileMetadata() {
     }
 
-    public FileMetadata(String email, String groupId, String fileName, String extension, long size, String MD5Signature) {
+    public FileMetadata(String email, String name, String ext, String md5Sign, long size, Group group) {
         this.email = email;
-        this.groupId = groupId;
-        this.fileName = fileName;
-        this.extension = extension;
+        this.name = name;
+        this.ext = ext;
+        this.md5Sign = md5Sign;
         this.size = size;
-        this.MD5Signature = MD5Signature;
+        this.group = group;
     }
 
     public String getEmail() {
@@ -28,28 +28,20 @@ public class FileMetadata {
         this.email = email;
     }
 
-    public String getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(String groupId) {
-        this.groupId = groupId;
-    }
-
     public String getFileName() {
-        return fileName;
+        return name;
     }
 
     public void setFileName(String fileName) {
-        this.fileName = fileName;
+        this.name = fileName;
     }
 
     public String getExtension() {
-        return extension;
+        return ext;
     }
 
     public void setExtension(String extension) {
-        this.extension = extension;
+        this.ext = extension;
     }
 
     public long getSize() {
@@ -61,10 +53,10 @@ public class FileMetadata {
     }
 
     public String getMD5Signature() {
-        return MD5Signature;
+        return md5Sign;
     }
 
     public void setMD5Signature(String MD5Signature) {
-        this.MD5Signature = MD5Signature;
+        this.md5Sign = MD5Signature;
     }
 }

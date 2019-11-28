@@ -89,7 +89,7 @@ public class RootController implements Initializable {
         file.setSize(11939277);
         List<Peer> peers = new ArrayList<>();
         try {
-            peers.add(new Peer(InetAddress.getLocalHost().getHostAddress(), FileSharingMain.serverSocketPort));
+            peers.add(new Peer(InetAddress.getLocalHost().getHostAddress(), FileSharingMain.serverSocketPort, Constants.peerSpringPort));
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }

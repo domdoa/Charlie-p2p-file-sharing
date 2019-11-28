@@ -4,8 +4,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.iot.desktop.FileSharingMain;
+import com.iot.desktop.dtos.File;
 import com.iot.desktop.helpers.FileSerializer;
 import com.iot.desktop.models.FileMetadata;
+import com.iot.desktop.models.ForeignPC;
 import com.iot.desktop.models.Group;
 import com.iot.desktop.models.Peer;
 import javafx.event.ActionEvent;
@@ -25,6 +27,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainController {
     public String JWTToken;
@@ -57,12 +60,16 @@ public class MainController {
 
         if (responseBody != null) {
             JWTToken = responseBody.string();
-            String bearer = JWTToken.split(":")[1];
-            JWTToken = bearer.substring(1,bearer.length()-2);
-            notifyPeerIsOnline(username,JWTToken);
-            Constants.JWTToken = JWTToken;
-            //List<Group> usersGroups = getGroupOfTheUser(username);
-            Constants.userGroups = getGroupOfTheUser(username);
+            if(!JWTToken.equals("")){
+                String bearer = JWTToken.split(":")[1];
+                JWTToken = bearer.substring(1,bearer.length()-2);
+                //add all the super peers here
+                //Constants.allSuperPeers.addAll(Objects.requireNonNull(notifyPeerIsOnline(username, JWTToken)));
+                notifyPeerIsOnline(username,JWTToken);
+                Constants.JWTToken = JWTToken;
+                Constants.userGroups = getGroupOfTheUser(username);
+            }
+
         }
         actionTarget.setText("Sign in button pressed");
         Node node = (Node) event.getSource();
@@ -76,9 +83,9 @@ public class MainController {
     private void notifyPeerIsOnline(String userEmail,String authorization) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
 
-        List<FileMetadata> peerFiles = new ArrayList<>(FileSerializer.downloadedFiles);
+        List<File> peerFiles = new ArrayList<>(FileSerializer.downloadedFiles);
         peerFiles.addAll(FileSerializer.uploadedFiles);
-        Peer peer = new Peer(Constants.localAddress, FileSharingMain.serverSocketPort);
+        Peer peer = new Peer(Constants.localAddress, FileSharingMain.serverSocketPort,Constants.peerSpringPort);
         peer.setFileList(peerFiles);
         peer.setEmail(userEmail);
 
@@ -91,10 +98,15 @@ public class MainController {
         OkHttpClient client = new OkHttpClient();
         Call call = client.newCall(request);
         Response response = call.execute();
+        ResponseBody responseBody =response.body();
+        Gson gson = new Gson();
+//        assert responseBody != null;
+//        List foreignPCS = gson.fromJson(responseBody.string(),List.class);
         int responseCode = response.code();
         if(responseCode!=200){
             System.err.println("Notify Peer Is Online went wrong");
         }
+
     }
 
     public List<Group> getGroupOfTheUser(String emailAddress) throws IOException {
