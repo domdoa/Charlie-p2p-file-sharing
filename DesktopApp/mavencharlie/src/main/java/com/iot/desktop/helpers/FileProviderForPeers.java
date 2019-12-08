@@ -17,7 +17,7 @@ public class FileProviderForPeers {
     public FileProviderForPeers(){}
 
     public byte[] ReadSpecificPositionOfFile(String fileName, int segment) {
-        try (RandomAccessFile reader = new RandomAccessFile((System.getProperty("user.dir") + "/"+ fileName), "r");
+        try (RandomAccessFile reader = new RandomAccessFile((FileSerializer.metaDatas.get("defaultDir") + "/public/"+ fileName), "r");
              FileChannel channel = reader.getChannel()) {
 
             // get real file path
